@@ -6,7 +6,9 @@ import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/motion/page-transition";
 // Stage 2B: @mt/tokens layered runtime CSS variables (--mt-*). Additive — nothing consumes
 // them yet, so this does not change any existing visual. Imported before globals.css.
+// @ts-expect-error — the package exposes CSS at runtime without a TypeScript declaration.
 import "@mt/tokens/css";
+// @ts-expect-error — the global stylesheet is handled by Next.js at build time.
 import "./globals.css";
 
 const sans = Inter({
@@ -29,9 +31,9 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mernel Tusoy — UI/UX Designer",
+  title: "Mernel Tusoy — Product Designer",
   description:
-    "Portfolio of Mernel Tusoy, a UI/UX designer focused on research-driven, accessible product design. [REPLACE with your real meta description]",
+    "Portfolio of Mernel Tusoy, a Product designer focused on research-driven, accessible product design. [REPLACE with your real meta description]",
 };
 
 export default function RootLayout({

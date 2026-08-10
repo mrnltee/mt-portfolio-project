@@ -45,6 +45,12 @@ body {
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    white-space: normal;
+  }
+
+  @supports (text-wrap: balance) {
+    .text-balance {
+      text-wrap: balance;
+    }
   }
 }
