@@ -1,5 +1,5 @@
 {
-  "$description": "Brand A — balanced radii.",
+  "$description": "Brand A — portfolio radii (control 16 / field 12 / card 20).",
   "brand": {
     "radius": {
       "$type": "dimension",
@@ -10,13 +10,13 @@
         "$value": "{radius.xs}"
       },
       "sm": {
-        "$value": "{radius.sm}"
+        "$value": "{radius.lg}"
       },
       "md": {
-        "$value": "{radius.md}"
+        "$value": "{radius.xl}"
       },
       "lg": {
-        "$value": "{radius.lg}"
+        "$value": "{radius.2xl}"
       },
       "xl": {
         "$value": "{radius.xl}"

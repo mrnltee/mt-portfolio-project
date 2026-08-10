@@ -1,5 +1,5 @@
 {
-  "$description": "Brand A — comfortable density.",
+  "$description": "Brand A — comfortable density; portfolio control heights.",
   "brand": {
     "space": {
       "$type": "dimension",
@@ -32,10 +32,10 @@
       "control": {
         "$type": "dimension",
         "sm": {
-          "$value": "{size.300}"
+          "$value": "{size.350}"
         },
         "md": {
-          "$value": "{size.400}"
+          "$value": "{size.450}"
         },
         "lg": {
           "$value": "{size.500}"

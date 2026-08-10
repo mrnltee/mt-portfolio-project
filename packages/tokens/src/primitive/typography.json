@@ -49,15 +49,33 @@
         "unit": "rem"
       }
     },
+    "850": {
+      "$value": {
+        "value": 2,
+        "unit": "rem"
+      }
+    },
     "900": {
       "$value": {
         "value": 2.25,
         "unit": "rem"
       }
     },
+    "950": {
+      "$value": {
+        "value": 2.5,
+        "unit": "rem"
+      }
+    },
     "1000": {
       "$value": {
         "value": 3,
+        "unit": "rem"
+      }
+    },
+    "1050": {
+      "$value": {
+        "value": 3.5,
         "unit": "rem"
       }
     },

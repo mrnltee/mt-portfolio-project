@@ -20,7 +20,7 @@
       },
       "letter-spacing": {
         "$type": "number",
-        "$value": "{brand.font.tracking.tight}",
+        "$value": "{brand.font.tracking.tighter}",
         "$extensions": {
           "org.mt": {
             "cssUnit": "em",
@@ -141,6 +141,34 @@
         }
       }
     },
+    "body-lg": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.body}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.md-lg}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.regular}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.normal}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
     "body": {
       "font-family": {
         "$type": "fontFamily",
@@ -236,7 +264,7 @@
       },
       "font-weight": {
         "$type": "fontWeight",
-        "$value": "{brand.font.weight.regular}"
+        "$value": "{brand.font.weight.medium}"
       },
       "line-height": {
         "$type": "number",

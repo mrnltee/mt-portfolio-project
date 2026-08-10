@@ -1,12 +1,12 @@
 {
-  "$description": "Brand A — humanist sans, balanced professional scale.",
+  "$description": "Brand A — portfolio identity: Plus Jakarta Sans display / Inter body / IBM Plex mono; portfolio type scale.",
   "brand": {
     "font": {
       "family": {
         "$type": "fontFamily",
         "display": {
           "$value": [
-            "Inter",
+            "Plus Jakarta Sans",
             "system-ui",
             "sans-serif"
           ]
@@ -20,7 +20,7 @@
         },
         "mono": {
           "$value": [
-            "JetBrains Mono",
+            "IBM Plex Mono",
             "ui-monospace",
             "monospace"
           ]
@@ -40,20 +40,23 @@
         "md": {
           "$value": "{font-size.400}"
         },
-        "lg": {
+        "md-lg": {
           "$value": "{font-size.500}"
+        },
+        "lg": {
+          "$value": "{font-size.600}"
         },
         "xl": {
           "$value": "{font-size.700}"
         },
         "2xl": {
-          "$value": "{font-size.800}"
+          "$value": "{font-size.850}"
         },
         "3xl": {
-          "$value": "{font-size.900}"
+          "$value": "{font-size.950}"
         },
         "4xl": {
-          "$value": "{font-size.1000}"
+          "$value": "{font-size.1050}"
         }
       },
       "weight": {
@@ -91,6 +94,15 @@
       },
       "tracking": {
         "$type": "number",
+        "tighter": {
+          "$value": "{letter-spacing.tighter}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        },
         "tight": {
           "$value": "{letter-spacing.tight}",
           "$extensions": {

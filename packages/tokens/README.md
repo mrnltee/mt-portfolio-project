@@ -70,11 +70,47 @@ primitive status ramps (`green`/`amber`/`red`/`blue`). This is declared in
 Overriding this requires a deliberate, accessibility-reviewed change to the manifest — it cannot
 happen by adding a brand.
 
+## Consumer API (Stage 2A)
+
+Consumers import stable subpaths — never the internal `build/` layout:
+
+```ts
+// tailwind.config.ts
+import mtPreset from '@mt/tokens/tailwind';
+export default { presets: [mtPreset], /* … */ };
+```
+```css
+/* globals.css */
+@import '@mt/tokens/css';   /* layered runtime tokens */
+```
+```ts
+import { tokens } from '@mt/tokens'; // tokens.color.action.primary === 'var(--mt-color-action-primary)'
+```
+
+- **`@mt/tokens/css`** → `build/consumer/tokens.css`: layered `--mt-*` variables.
+  - `:root` — primitives, component tokens, non-color semantics (invariant).
+  - `[data-brand="a|b|c"]` — brand foundation overrides. **`a` is the attribute-less default.**
+  - `[data-theme="light|dark"]` — semantic color overrides. **`light` is the default.**
+  - Set `<html data-brand="b" data-theme="dark">` to switch; brand-A/light render with no attributes.
+- **`@mt/tokens/tailwind`** → var-based preset. Colors are emitted as
+  `rgb(var(--mt-…-rgb) / <alpha-value>)`, so opacity modifiers (`bg-action-primary/50`) work;
+  spacing/radius/shadow/fontSize/fontFamily map to `var(--mt-…)`. Alpha tokens
+  (`overlay.scrim`, `shadow.color`, `background.transparent`) map to `var()` directly.
+- **`@mt/tokens`** (default) → typed `tokens` object of CSS-var references (theme/brand-agnostic).
+- **Advanced:** `@mt/tokens/permutations/css/<name>.css` and `/permutations/figma/<name>.json`
+  expose the fully-resolved per-permutation files (for static single-brand builds / Figma).
+
+`prepare` runs the build, so a `file:` dependency generates `build/` on install. Color vars are
+published as **both** `--mt-x` (hex/rgba, for direct CSS use) and `--mt-x-rgb` (channels, for
+Tailwind alpha).
+
 ## Phase status
 
-**Phase 1 (token architecture).** Real primitive/brand/semantic/component values authored;
-6 permutations build to CSS/TS/Tailwind/Figma; full validation (architecture + WCAG AA) passes.
-Not yet consumed by any app (Phase 2) and not yet in Figma (Phase 3).
+**Phase 1 (token architecture).** Complete and committed (`0e437fc`).
+
+**Phase 2A (consumer infrastructure).** Clean package exports, `prepare` build, layered runtime
+CSS, and a var-based Tailwind preset are in place; Tailwind alpha-modifier behavior verified.
+The portfolio is not yet wired (Stage 2B). Not yet in Figma (Phase 3).
 
 ## Figma target (Phase 3)
 

@@ -7,7 +7,7 @@
         "$value": "{brand.radius.md}"
       },
       "field": {
-        "$value": "{brand.radius.md}"
+        "$value": "{brand.radius.sm}"
       },
       "card": {
         "$value": "{brand.radius.lg}"

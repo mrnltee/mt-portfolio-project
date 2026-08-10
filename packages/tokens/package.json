@@ -4,21 +4,35 @@
   "description": "MT Design System — DTCG source tokens and generated CSS/TypeScript/Tailwind/Figma outputs.",
   "license": "UNLICENSED",
   "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "src",
     "resolver",
     "build"
   ],
   "exports": {
-    "./css/*": "./build/css/*",
-    "./ts/*": "./build/ts/*",
-    "./tailwind/*": "./build/tailwind/*",
-    "./src/*": "./src/*"
+    ".": {
+      "types": "./build/consumer/index.d.ts",
+      "default": "./build/consumer/index.js"
+    },
+    "./css": "./build/consumer/tokens.css",
+    "./tailwind": "./build/consumer/tailwind-preset.cjs",
+    "./metadata": "./build/consumer/metadata.json",
+    "./motion": {
+      "types": "./build/consumer/motion.d.ts",
+      "default": "./build/consumer/motion.js"
+    },
+    "./package.json": "./package.json",
+    "./permutations/css/*": "./build/css/*",
+    "./permutations/figma/*": "./build/figma/*"
   },
   "scripts": {
     "build": "tsx scripts/build.ts",
     "validate": "tsx scripts/validate.ts",
-    "clean": "rm -rf build"
+    "clean": "rm -rf build",
+    "prepare": "tsx scripts/build.ts"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",

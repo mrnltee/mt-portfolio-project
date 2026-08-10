@@ -23,10 +23,10 @@
     },
     "accent": {
       "background": {
-        "$value": "{color.action.secondary}"
+        "$value": "{color.action.accent-subtle}"
       },
       "text": {
-        "$value": "{color.action.primary}"
+        "$value": "{color.action.on-accent-subtle}"
       }
     },
     "success": {

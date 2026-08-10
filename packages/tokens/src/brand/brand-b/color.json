@@ -1,5 +1,5 @@
 {
-  "$description": "Brand palette selection — accent=teal, neutral=neutral.",
+  "$description": "Brand palette selection — accent=teal, neutral=neutral. accent-strong = the brand's most accurate accent value that still passes white-text AA (referenced by semantic action.primary + text.link).",
   "brand": {
     "color": {
       "$type": "color",
@@ -34,6 +34,15 @@
         "900": {
           "$value": "{color.teal.900}"
         }
+      },
+      "accent-strong": {
+        "$value": "{color.teal.700}"
+      },
+      "accent-strong-hover": {
+        "$value": "{color.teal.800}"
+      },
+      "accent-strong-pressed": {
+        "$value": "{color.teal.900}"
       },
       "neutral": {
         "0": {

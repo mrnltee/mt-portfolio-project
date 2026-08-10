@@ -1,24 +1,24 @@
 {
-  "$description": "Brand A — soft diffuse shadows.",
+  "$description": "Brand A — portfolio soft shadow geometry.",
   "brand": {
     "shadow": {
       "$type": "dimension",
       "raised": {
         "y": {
           "$value": {
-            "value": 2,
+            "value": 1,
             "unit": "px"
           }
         },
         "blur": {
           "$value": {
-            "value": 8,
+            "value": 2,
             "unit": "px"
           }
         },
         "spread": {
           "$value": {
-            "value": -1,
+            "value": 0,
             "unit": "px"
           }
         }
@@ -26,19 +26,19 @@
       "overlay": {
         "y": {
           "$value": {
-            "value": 8,
+            "value": 4,
             "unit": "px"
           }
         },
         "blur": {
           "$value": {
-            "value": 24,
+            "value": 12,
             "unit": "px"
           }
         },
         "spread": {
           "$value": {
-            "value": -4,
+            "value": 0,
             "unit": "px"
           }
         }
@@ -46,19 +46,19 @@
       "modal": {
         "y": {
           "$value": {
-            "value": 16,
+            "value": 12,
             "unit": "px"
           }
         },
         "blur": {
           "$value": {
-            "value": 40,
+            "value": 32,
             "unit": "px"
           }
         },
         "spread": {
           "$value": {
-            "value": -8,
+            "value": 0,
             "unit": "px"
           }
         }

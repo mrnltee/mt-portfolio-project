@@ -27,7 +27,7 @@
         "$value": "{brand.color.neutral.900}"
       },
       "secondary": {
-        "$value": "{brand.color.neutral.700}"
+        "$value": "{brand.color.neutral.600}"
       },
       "tertiary": {
         "$value": "{brand.color.neutral.600}"
@@ -39,7 +39,7 @@
         "$value": "{brand.color.neutral.0}"
       },
       "link": {
-        "$value": "{brand.color.accent.700}"
+        "$value": "{brand.color.accent-strong}"
       },
       "on-accent": {
         "$value": "{brand.color.neutral.0}"
@@ -64,13 +64,13 @@
     },
     "action": {
       "primary": {
-        "$value": "{brand.color.accent.700}"
+        "$value": "{brand.color.accent-strong}"
       },
       "primary-hover": {
-        "$value": "{brand.color.accent.800}"
+        "$value": "{brand.color.accent-strong-hover}"
       },
       "primary-pressed": {
-        "$value": "{brand.color.accent.900}"
+        "$value": "{brand.color.accent-strong-pressed}"
       },
       "on-primary": {
         "$value": "{brand.color.neutral.0}"
@@ -92,6 +92,12 @@
       },
       "on-destructive": {
         "$value": "{brand.color.neutral.0}"
+      },
+      "accent-subtle": {
+        "$value": "{brand.color.accent.50}"
+      },
+      "on-accent-subtle": {
+        "$value": "{brand.color.accent.700}"
       }
     },
     "feedback": {

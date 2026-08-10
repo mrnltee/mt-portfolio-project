@@ -50,13 +50,13 @@
     },
     "border": {
       "default": {
-        "$value": "{brand.color.neutral.700}"
+        "$value": "{brand.color.neutral.800}"
       },
       "subtle": {
         "$value": "{brand.color.neutral.800}"
       },
       "strong": {
-        "$value": "{brand.color.neutral.600}"
+        "$value": "{brand.color.neutral.700}"
       },
       "focus": {
         "$value": "{brand.color.accent.400}"
@@ -92,6 +92,12 @@
       },
       "on-destructive": {
         "$value": "{brand.color.neutral.950}"
+      },
+      "accent-subtle": {
+        "$value": "{brand.color.accent.900}"
+      },
+      "on-accent-subtle": {
+        "$value": "{brand.color.accent.200}"
       }
     },
     "feedback": {

@@ -10,7 +10,7 @@
         "$value": "{radius.sm}"
       },
       "sm": {
-        "$value": "{radius.md}"
+        "$value": "{radius.lg}"
       },
       "md": {
         "$value": "{radius.lg}"
