@@ -31,6 +31,7 @@ const IDLE_SPIN = 0.004; // slow idle yaw (rad/frame)
 
 const STROKE = 4;
 const DASH = "30 10 30 30 30 20"; // Morse M(—— ) T(—) over pathLength=150 → one per edge
+const MARCH = 0.5; // marching-ants speed (pathLength units/frame)
 
 // 8 vertices, 12 edges
 const VERTS: Array<[number, number, number]> = [
@@ -65,7 +66,7 @@ export function BrandMark() {
   const reduce = useReducedMotion() ?? false;
   const wrapRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(SVGLineElement | null)[]>([]);
-  const s = useRef({ rx: RX0, ry: RY0, vx: 0, vy: 0, px: 0, py: 0, inside: false, fling: false });
+  const s = useRef({ rx: RX0, ry: RY0, vx: 0, vy: 0, px: 0, py: 0, inside: false, fling: false, march: 0 });
 
   useEffect(() => {
     if (reduce) return;
@@ -82,6 +83,7 @@ export function BrandMark() {
         line.setAttribute("y1", a[1].toFixed(2));
         line.setAttribute("x2", b[0].toFixed(2));
         line.setAttribute("y2", b[1].toFixed(2));
+        line.setAttribute("stroke-dashoffset", (-st.march).toFixed(2)); // marching ants
         // Depth cue: nearer edges brighter.
         const z = (a[2] + b[2]) / 2;
         const t = Math.max(0, Math.min(1, (z + HALF * 1.75) / (HALF * 3.5)));
@@ -89,6 +91,7 @@ export function BrandMark() {
       }
     };
     const tick = () => {
+      st.march = (st.march + MARCH) % 150; // morse dashes crawl along the edges
       if (st.fling) {
         st.vx *= FRICTION;
         st.vy *= FRICTION;
