@@ -18,8 +18,8 @@ const CONTACT_LINKS = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/REPLACE",
-    href: "https://www.linkedin.com/in/REPLACE",
+    value: "linkedin.com/in/merneltusoy",
+    href: "https://www.linkedin.com/in/merneltusoy",
     description: "Connect or see full work history.",
   },
 ];
