@@ -1,214 +1,148 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { animate, motion, useMotionValue, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { useReducedMotion } from "framer-motion";
 
 /**
- * Personal brand mark: an isometric 3D box drawn as an OUTLINE whose edges are
- * rendered in Morse code spelling "M T" (M = dash dash, T = dash). Ported from
- * the Figma Make branding; adapted to the @mt indigo tokens (theme-aware) and a
- * bolder stroke. Edges draw themselves in, then the morse dashes "march".
- * Text/legend intentionally omitted — the animated box only. Reduced-motion safe.
+ * Personal brand mark: a true 3D wireframe box (outlined indigo dashed edges,
+ * no fill) with a trackball-style physics interaction.
+ *
+ * - Hover position sets angular VELOCITY: above center → spins downward, below →
+ *   up; left → forward (toward you), right → backward. Speed scales with distance
+ *   from center (edge = fast, dead center = still).
+ * - Click → a velocity burst in the cursor's direction; the box flings and coasts
+ *   with friction before settling.
+ * - Mouse leave → eases back to the default isometric angle with a slow idle spin.
+ *
+ * Transforms are written straight to the DOM each frame (no React re-render).
+ * Reduced-motion safe (static isometric pose, no interaction).
  */
 
-// Morse "M T" encoded as a stroke dash pattern. Unit = 10px.
-const MORSE_DASH = 30;
-const MORSE_INTRA = 10; // gap within a letter
-const MORSE_INTER = 30; // gap between letters
-const MORSE_TRAIL = 20; // gap before the pattern repeats
-const DASH_ARRAY = [MORSE_DASH, MORSE_INTRA, MORSE_DASH, MORSE_INTER, MORSE_DASH, MORSE_TRAIL].join(" ");
-const CYCLE = MORSE_DASH + MORSE_INTRA + MORSE_DASH + MORSE_INTER + MORSE_DASH + MORSE_TRAIL; // 170
+const EDGE = 150; // cube edge (px)
+const HALF = EDGE / 2;
+const RX0 = -22; // default isometric tilt (X)
+const RY0 = -32; // default isometric tilt (Y)
+const MAXV = 4.2; // max deg/frame at the edge of the hit area
+const FRICTION = 0.95; // coast decay per frame
+const EASE_TILT = 0.05; // how fast X eases back to default at idle
+const IDLE_SPIN = 0.25; // slow idle turntable spin (deg/frame)
 
-const STROKE = 5.5; // bolder outline
-
-// Isometric box geometry
-const CX = 200;
-const TOP_Y = 52;
-const A = 120; // edge length
-const DX = A * Math.cos(Math.PI / 6);
-const DY_ISO = A * Math.sin(Math.PI / 6);
-const H = A;
-const SVG_W = 400;
-const SVG_H = TOP_Y + DY_ISO + H + A + 32;
-
-type Vertex = [number, number];
-
-const V: Record<string, Vertex> = {
-  top: [CX, TOP_Y],
-  rMid: [CX + DX, TOP_Y + DY_ISO],
-  lMid: [CX - DX, TOP_Y + DY_ISO],
-  center: [CX, TOP_Y + A],
-  rBot: [CX + DX, TOP_Y + DY_ISO + H],
-  lBot: [CX - DX, TOP_Y + DY_ISO + H],
-  bot: [CX, TOP_Y + A + H],
-};
-
-const edges: Array<{ a: Vertex; b: Vertex; face: "top" | "left" | "right" }> = [
-  // Top face
-  { a: V.top, b: V.rMid, face: "top" },
-  { a: V.top, b: V.lMid, face: "top" },
-  { a: V.rMid, b: V.center, face: "top" },
-  { a: V.lMid, b: V.center, face: "top" },
-  // Left face
-  { a: V.lMid, b: V.lBot, face: "left" },
-  { a: V.center, b: V.bot, face: "left" },
-  { a: V.lBot, b: V.bot, face: "left" },
-  // Right face
-  { a: V.rMid, b: V.rBot, face: "right" },
-  { a: V.rBot, b: V.bot, face: "right" },
+const FACES = [
+  `translateZ(${HALF}px)`, // front
+  `rotateY(180deg) translateZ(${HALF}px)`, // back
+  `rotateY(90deg) translateZ(${HALF}px)`, // right
+  `rotateY(-90deg) translateZ(${HALF}px)`, // left
+  `rotateX(90deg) translateZ(${HALF}px)`, // top
+  `rotateX(-90deg) translateZ(${HALF}px)`, // bottom
 ];
 
-// Face brightness conveys the 3D form; indigo token with per-face alpha (theme-aware).
-const faceColor: Record<"top" | "left" | "right", string> = {
-  top: "rgb(var(--mt-color-indigo-500-rgb) / 1)",
-  right: "rgb(var(--mt-color-indigo-500-rgb) / 0.78)",
-  left: "rgb(var(--mt-color-indigo-500-rgb) / 0.55)",
-};
-
-const edgeLength = (a: Vertex, b: Vertex) => Math.hypot(b[0] - a[0], b[1] - a[1]);
-const edgePath = (a: Vertex, b: Vertex) => `M ${a[0]} ${a[1]} L ${b[0]} ${b[1]}`;
-
-function MorseEdge({
-  a,
-  b,
-  face,
-  drawDelay,
-  marching,
-  reduce,
-}: {
-  a: Vertex;
-  b: Vertex;
-  face: "top" | "left" | "right";
-  drawDelay: number;
-  marching: boolean;
-  reduce: boolean;
-}) {
-  const len = edgeLength(a, b);
-  const [offset, setOffset] = useState(reduce ? 0 : len + CYCLE);
-  const [marchOffset, setMarchOffset] = useState(0);
-  const rafRef = useRef<number>(0);
-  const startRef = useRef<number | null>(null);
-  const marchRef = useRef<number>(0);
-
-  // Draw-in
-  useEffect(() => {
-    if (reduce) return;
-    const timer = setTimeout(() => {
-      const duration = 900;
-      const from = len + CYCLE;
-      const animate = (ts: number) => {
-        if (!startRef.current) startRef.current = ts;
-        const progress = Math.min((ts - startRef.current) / duration, 1);
-        const ease = 1 - Math.pow(1 - progress, 3);
-        setOffset(from + (0 - from) * ease);
-        if (progress < 1) rafRef.current = requestAnimationFrame(animate);
-      };
-      rafRef.current = requestAnimationFrame(animate);
-    }, drawDelay);
-    return () => {
-      clearTimeout(timer);
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, [len, drawDelay, reduce]);
-
-  // Marching ants
-  useEffect(() => {
-    if (!marching || reduce) return;
-    let running = true;
-    const step = () => {
-      if (!running) return;
-      marchRef.current = (marchRef.current + 0.5) % CYCLE;
-      setMarchOffset(marchRef.current);
-      rafRef.current = requestAnimationFrame(step);
-    };
-    rafRef.current = requestAnimationFrame(step);
-    return () => {
-      running = false;
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, [marching, reduce]);
-
-  return (
-    <path
-      d={edgePath(a, b)}
-      stroke={faceColor[face]}
-      strokeWidth={STROKE}
-      strokeLinecap="round"
-      strokeDasharray={DASH_ARRAY}
-      strokeDashoffset={offset + marchOffset}
-      fill="none"
-    />
-  );
-}
-
 export function BrandMark() {
-  const reduceMotion = useReducedMotion() ?? false;
-  const [marching, setMarching] = useState(false);
-  const rotate = useMotionValue(0);
-  const hovering = useRef(false);
-  const spinRef = useRef<ReturnType<typeof animate> | null>(null);
+  const reduce = useReducedMotion() ?? false;
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const cubeRef = useRef<HTMLDivElement>(null);
+  const s = useRef({ rx: RX0, ry: RY0, vx: 0, vy: 0, px: 0, py: 0, inside: false, fling: false });
 
   useEffect(() => {
-    if (reduceMotion) return;
-    const t = setTimeout(() => setMarching(true), 2000);
-    return () => clearTimeout(t);
-  }, [reduceMotion]);
+    if (reduce) {
+      if (cubeRef.current) cubeRef.current.style.transform = `rotateX(${RX0}deg) rotateY(${RY0}deg)`;
+      return;
+    }
+    let raf = 0;
+    const st = s.current;
+    const tick = () => {
+      if (st.fling) {
+        // Coast with friction after a click burst.
+        st.vx *= FRICTION;
+        st.vy *= FRICTION;
+        st.rx += st.vx;
+        st.ry += st.vy;
+        if (Math.abs(st.vx) < 0.04 && Math.abs(st.vy) < 0.04) st.fling = false;
+      } else if (st.inside) {
+        // Cursor position drives target angular velocity (trackball feel).
+        const tvx = -st.py * MAXV; // above center (py<0) → spin downward
+        const tvy = -st.px * MAXV; // left of center (px<0) → spin forward
+        st.vx += (tvx - st.vx) * 0.15;
+        st.vy += (tvy - st.vy) * 0.15;
+        st.rx += st.vx;
+        st.ry += st.vy;
+      } else {
+        // Idle: decay leftover velocity, ease tilt home, keep a slow spin.
+        st.vx *= FRICTION;
+        st.vy *= FRICTION;
+        st.rx += (RX0 - st.rx) * EASE_TILT;
+        st.ry += IDLE_SPIN + st.vy;
+      }
+      if (cubeRef.current) cubeRef.current.style.transform = `rotateX(${st.rx}deg) rotateY(${st.ry}deg)`;
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [reduce]);
 
-  // Continuous, moderate idle spin while hovered (one turn ≈ 7s).
-  const spinLoop = () => {
-    if (reduceMotion) return;
-    spinRef.current = animate(rotate, rotate.get() + 360, {
-      duration: 7,
-      ease: "linear",
-      onComplete: () => {
-        if (hovering.current) spinLoop();
-      },
-    });
+  const norm = (e: { clientX: number; clientY: number }) => {
+    const el = wrapRef.current;
+    if (!el) return { px: 0, py: 0 };
+    const r = el.getBoundingClientRect();
+    return {
+      px: ((e.clientX - r.left) / r.width) * 2 - 1, // -1 (left) .. 1 (right)
+      py: ((e.clientY - r.top) / r.height) * 2 - 1, // -1 (top) .. 1 (bottom)
+    };
   };
-  const onHoverStart = () => {
-    hovering.current = true;
-    spinLoop();
+
+  const onMove = (e: React.MouseEvent) => {
+    const { px, py } = norm(e);
+    s.current.px = px;
+    s.current.py = py;
+    s.current.inside = true;
   };
-  const onHoverEnd = () => {
-    hovering.current = false;
-    spinRef.current?.stop();
+  const onLeave = () => {
+    s.current.inside = false;
   };
-  // A quick, satisfying full-turn flick on click/tap (~1.2s), then resume idle spin if still hovered.
-  const onTap = () => {
-    if (reduceMotion) return;
-    spinRef.current?.stop();
-    spinRef.current = animate(rotate, rotate.get() + 360, {
-      duration: 1.2,
-      ease: [0.22, 1, 0.36, 1],
-      onComplete: () => {
-        if (hovering.current) spinLoop();
-      },
-    });
+  const onClick = (e: React.MouseEvent) => {
+    const { px, py } = norm(e);
+    const dist = Math.min(1, Math.hypot(px, py));
+    const burst = 7 + dist * 16;
+    s.current.vx += -py * burst;
+    s.current.vy += -px * burst;
+    s.current.fling = true;
   };
 
   return (
-    <motion.div
+    <div
+      ref={wrapRef}
       aria-hidden="true"
-      className="relative w-[300px] max-w-full cursor-pointer select-none sm:w-[340px]"
-      style={{ rotate, transformOrigin: "50% 45%" }}
-      onHoverStart={onHoverStart}
-      onHoverEnd={onHoverEnd}
-      onTap={onTap}
-      whileHover={reduceMotion ? undefined : { scale: 1.05 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+      className="relative cursor-pointer select-none"
+      style={{ width: 300, height: 300, maxWidth: "100%", perspective: 720 }}
+      onMouseMove={reduce ? undefined : onMove}
+      onMouseEnter={reduce ? undefined : onMove}
+      onMouseLeave={reduce ? undefined : onLeave}
+      onClick={reduce ? undefined : onClick}
     >
-      <svg
-        width="100%"
-        viewBox={`0 0 ${SVG_W} ${SVG_H}`}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="Isometric box outlined in Morse code for M and T"
+      <div
+        ref={cubeRef}
+        className="absolute left-1/2 top-1/2"
+        style={{
+          width: EDGE,
+          height: EDGE,
+          marginLeft: -HALF,
+          marginTop: -HALF,
+          transformStyle: "preserve-3d",
+          transform: `rotateX(${RX0}deg) rotateY(${RY0}deg)`,
+        }}
       >
-        {edges.map((e, i) => (
-          <MorseEdge key={i} a={e.a} b={e.b} face={e.face} drawDelay={160 + i * 90} marching={marching} reduce={reduceMotion} />
+        {FACES.map((t, i) => (
+          <div
+            key={i}
+            className="absolute inset-0"
+            style={{
+              transform: t,
+              background: "transparent",
+              border: "4px dashed var(--mt-color-indigo-500)",
+              backfaceVisibility: "visible",
+            }}
+          />
         ))}
-      </svg>
-    </motion.div>
+      </div>
+    </div>
   );
 }
