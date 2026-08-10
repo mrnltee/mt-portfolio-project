@@ -1,9 +1,67 @@
 {
-  "$description": "Semantic elevation roles (composite shadow). Phase 1.",
+  "$description": "Semantic elevation roles — composite shadows. Geometry references the brand shadow foundation; color references the theme shadow color. `surface` is flat (no shadow).",
   "elevation": {
-    "$type": "shadow",
-    "flat": {},
-    "raised": {},
-    "overlay": {}
+    "surface": {
+      "$type": "shadow",
+      "$value": {
+        "color": "{color.shadow.color}",
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": {
+          "value": 0,
+          "unit": "px"
+        },
+        "blur": {
+          "value": 0,
+          "unit": "px"
+        },
+        "spread": {
+          "value": 0,
+          "unit": "px"
+        }
+      },
+      "$description": "Flat — no elevation."
+    },
+    "raised": {
+      "$type": "shadow",
+      "$value": {
+        "color": "{color.shadow.color}",
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": "{brand.shadow.raised.y}",
+        "blur": "{brand.shadow.raised.blur}",
+        "spread": "{brand.shadow.raised.spread}"
+      }
+    },
+    "overlay": {
+      "$type": "shadow",
+      "$value": {
+        "color": "{color.shadow.color}",
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": "{brand.shadow.overlay.y}",
+        "blur": "{brand.shadow.overlay.blur}",
+        "spread": "{brand.shadow.overlay.spread}"
+      }
+    },
+    "modal": {
+      "$type": "shadow",
+      "$value": {
+        "color": "{color.shadow.color}",
+        "offsetX": {
+          "value": 0,
+          "unit": "px"
+        },
+        "offsetY": "{brand.shadow.modal.y}",
+        "blur": "{brand.shadow.modal.blur}",
+        "spread": "{brand.shadow.modal.spread}"
+      }
+    }
   }
 }

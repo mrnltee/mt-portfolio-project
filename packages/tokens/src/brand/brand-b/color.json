@@ -1,8 +1,81 @@
 {
-  "$description": "Brand B color foundation — brand ramp + neutral selection. Phase 1.",
+  "$description": "Brand palette selection — accent=teal, neutral=neutral.",
   "brand": {
-    "$type": "color",
-    "ramp": {},
-    "neutral": {}
+    "color": {
+      "$type": "color",
+      "accent": {
+        "50": {
+          "$value": "{color.teal.50}"
+        },
+        "100": {
+          "$value": "{color.teal.100}"
+        },
+        "200": {
+          "$value": "{color.teal.200}"
+        },
+        "300": {
+          "$value": "{color.teal.300}"
+        },
+        "400": {
+          "$value": "{color.teal.400}"
+        },
+        "500": {
+          "$value": "{color.teal.500}"
+        },
+        "600": {
+          "$value": "{color.teal.600}"
+        },
+        "700": {
+          "$value": "{color.teal.700}"
+        },
+        "800": {
+          "$value": "{color.teal.800}"
+        },
+        "900": {
+          "$value": "{color.teal.900}"
+        }
+      },
+      "neutral": {
+        "0": {
+          "$value": "{color.neutral.0}"
+        },
+        "50": {
+          "$value": "{color.neutral.50}"
+        },
+        "100": {
+          "$value": "{color.neutral.100}"
+        },
+        "200": {
+          "$value": "{color.neutral.200}"
+        },
+        "300": {
+          "$value": "{color.neutral.300}"
+        },
+        "400": {
+          "$value": "{color.neutral.400}"
+        },
+        "500": {
+          "$value": "{color.neutral.500}"
+        },
+        "600": {
+          "$value": "{color.neutral.600}"
+        },
+        "700": {
+          "$value": "{color.neutral.700}"
+        },
+        "800": {
+          "$value": "{color.neutral.800}"
+        },
+        "900": {
+          "$value": "{color.neutral.900}"
+        },
+        "950": {
+          "$value": "{color.neutral.950}"
+        },
+        "1000": {
+          "$value": "{color.neutral.1000}"
+        }
+      }
+    }
   }
 }

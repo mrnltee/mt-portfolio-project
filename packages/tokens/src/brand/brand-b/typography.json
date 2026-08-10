@@ -1,9 +1,133 @@
 {
-  "$description": "Brand B typography foundation — font families + scale ratio. Phase 1.",
+  "$description": "Brand B — high-contrast serif display + grotesque body; wide type scale, tight leading/tracking (editorial).",
   "brand": {
-    "font-family": {
-      "$type": "fontFamily"
-    },
-    "scale": {}
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "display": {
+          "$value": [
+            "Fraunces",
+            "Georgia",
+            "serif"
+          ]
+        },
+        "body": {
+          "$value": [
+            "Inter",
+            "system-ui",
+            "sans-serif"
+          ]
+        },
+        "mono": {
+          "$value": [
+            "JetBrains Mono",
+            "ui-monospace",
+            "monospace"
+          ]
+        }
+      },
+      "scale": {
+        "$type": "dimension",
+        "2xs": {
+          "$value": "{font-size.100}"
+        },
+        "xs": {
+          "$value": "{font-size.200}"
+        },
+        "sm": {
+          "$value": "{font-size.300}"
+        },
+        "md": {
+          "$value": "{font-size.400}"
+        },
+        "lg": {
+          "$value": "{font-size.500}"
+        },
+        "xl": {
+          "$value": "{font-size.700}"
+        },
+        "2xl": {
+          "$value": "{font-size.900}"
+        },
+        "3xl": {
+          "$value": "{font-size.1000}"
+        },
+        "4xl": {
+          "$value": "{font-size.1200}"
+        }
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "regular": {
+          "$value": "{font-weight.regular}"
+        },
+        "medium": {
+          "$value": "{font-weight.medium}"
+        },
+        "semibold": {
+          "$value": "{font-weight.semibold}"
+        },
+        "bold": {
+          "$value": "{font-weight.bold}"
+        },
+        "display": {
+          "$value": "{font-weight.semibold}"
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "tight": {
+          "$value": "{line-height.200}"
+        },
+        "snug": {
+          "$value": "{line-height.400}"
+        },
+        "normal": {
+          "$value": "{line-height.700}"
+        },
+        "relaxed": {
+          "$value": "{line-height.900}"
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "tight": {
+          "$value": "{letter-spacing.tighter}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        },
+        "normal": {
+          "$value": "{letter-spacing.tight}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        },
+        "wide": {
+          "$value": "{letter-spacing.wide}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        },
+        "caps": {
+          "$value": "{letter-spacing.widest}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        }
+      }
+    }
   }
 }

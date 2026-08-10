@@ -1,11 +1,169 @@
 {
-  "$description": "Semantic color roles — DARK resolution. References brand ramp + primitives. Phase 1.",
+  "$description": "Semantic color roles — DARK resolution.",
   "color": {
     "$type": "color",
-    "surface": {},
-    "content": {},
-    "border": {},
-    "action": {},
-    "feedback": {}
+    "background": {
+      "canvas": {
+        "$value": "{brand.color.neutral.950}"
+      },
+      "surface": {
+        "$value": "{brand.color.neutral.900}"
+      },
+      "surface-subtle": {
+        "$value": "{brand.color.neutral.800}"
+      },
+      "inverse": {
+        "$value": "{brand.color.neutral.50}"
+      },
+      "disabled": {
+        "$value": "{brand.color.neutral.800}"
+      },
+      "transparent": {
+        "$value": "{color.transparent}"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{brand.color.neutral.50}"
+      },
+      "secondary": {
+        "$value": "{brand.color.neutral.300}"
+      },
+      "tertiary": {
+        "$value": "{brand.color.neutral.400}"
+      },
+      "disabled": {
+        "$value": "{brand.color.neutral.600}"
+      },
+      "inverse": {
+        "$value": "{brand.color.neutral.950}"
+      },
+      "link": {
+        "$value": "{brand.color.accent.400}"
+      },
+      "on-accent": {
+        "$value": "{brand.color.neutral.950}"
+      },
+      "on-inverse": {
+        "$value": "{brand.color.neutral.900}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{brand.color.neutral.700}"
+      },
+      "subtle": {
+        "$value": "{brand.color.neutral.800}"
+      },
+      "strong": {
+        "$value": "{brand.color.neutral.600}"
+      },
+      "focus": {
+        "$value": "{brand.color.accent.400}"
+      }
+    },
+    "action": {
+      "primary": {
+        "$value": "{brand.color.accent.400}"
+      },
+      "primary-hover": {
+        "$value": "{brand.color.accent.300}"
+      },
+      "primary-pressed": {
+        "$value": "{brand.color.accent.200}"
+      },
+      "on-primary": {
+        "$value": "{brand.color.neutral.950}"
+      },
+      "secondary": {
+        "$value": "{brand.color.neutral.800}"
+      },
+      "secondary-hover": {
+        "$value": "{brand.color.neutral.700}"
+      },
+      "on-secondary": {
+        "$value": "{brand.color.neutral.50}"
+      },
+      "destructive": {
+        "$value": "{color.red.400}"
+      },
+      "destructive-hover": {
+        "$value": "{color.red.300}"
+      },
+      "on-destructive": {
+        "$value": "{brand.color.neutral.950}"
+      }
+    },
+    "feedback": {
+      "success": {
+        "$value": "{color.green.400}"
+      },
+      "success-surface": {
+        "$value": "{color.green.900}"
+      },
+      "on-success": {
+        "$value": "{color.green.100}"
+      },
+      "warning": {
+        "$value": "{color.amber.400}"
+      },
+      "warning-surface": {
+        "$value": "{color.amber.900}"
+      },
+      "on-warning": {
+        "$value": "{color.amber.100}"
+      },
+      "error": {
+        "$value": "{color.red.400}"
+      },
+      "error-surface": {
+        "$value": "{color.red.900}"
+      },
+      "on-error": {
+        "$value": "{color.red.100}"
+      },
+      "info": {
+        "$value": "{color.blue.400}"
+      },
+      "info-surface": {
+        "$value": "{color.blue.900}"
+      },
+      "on-info": {
+        "$value": "{color.blue.100}"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{brand.color.accent.400}"
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.7,
+          "hex": "#000000"
+        }
+      }
+    },
+    "shadow": {
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 0.5,
+          "hex": "#000000"
+        }
+      }
+    }
   }
 }

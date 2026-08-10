@@ -1,8 +1,108 @@
 {
-  "$description": "Button component tokens (semantic aliases). Phase 1.",
+  "$description": "Button — reference semantic action/shape/size/space/typography only.",
   "button": {
-    "primary": {},
-    "secondary": {},
-    "ghost": {}
+    "primary": {
+      "background": {
+        "$value": "{color.action.primary}"
+      },
+      "background-hover": {
+        "$value": "{color.action.primary-hover}"
+      },
+      "background-pressed": {
+        "$value": "{color.action.primary-pressed}"
+      },
+      "text": {
+        "$value": "{color.action.on-primary}"
+      },
+      "radius": {
+        "$value": "{shape.radius.control}"
+      },
+      "height": {
+        "$value": "{size.control.md}"
+      },
+      "padding-x": {
+        "$value": "{space.md}"
+      },
+      "gap": {
+        "$value": "{space.sm}"
+      },
+      "font-size": {
+        "$value": "{text.label.font-size}"
+      },
+      "font-weight": {
+        "$value": "{text.label.font-weight}"
+      }
+    },
+    "secondary": {
+      "background": {
+        "$value": "{color.action.secondary}"
+      },
+      "background-hover": {
+        "$value": "{color.action.secondary-hover}"
+      },
+      "text": {
+        "$value": "{color.action.on-secondary}"
+      },
+      "border": {
+        "$value": "{color.border.default}"
+      },
+      "radius": {
+        "$value": "{shape.radius.control}"
+      },
+      "height": {
+        "$value": "{size.control.md}"
+      },
+      "padding-x": {
+        "$value": "{space.md}"
+      }
+    },
+    "ghost": {
+      "background": {
+        "$value": "{color.background.transparent}"
+      },
+      "background-hover": {
+        "$value": "{color.background.surface-subtle}"
+      },
+      "text": {
+        "$value": "{color.action.primary}"
+      },
+      "radius": {
+        "$value": "{shape.radius.control}"
+      },
+      "height": {
+        "$value": "{size.control.md}"
+      },
+      "padding-x": {
+        "$value": "{space.md}"
+      }
+    },
+    "destructive": {
+      "background": {
+        "$value": "{color.action.destructive}"
+      },
+      "background-hover": {
+        "$value": "{color.action.destructive-hover}"
+      },
+      "text": {
+        "$value": "{color.action.on-destructive}"
+      },
+      "radius": {
+        "$value": "{shape.radius.control}"
+      },
+      "height": {
+        "$value": "{size.control.md}"
+      },
+      "padding-x": {
+        "$value": "{space.md}"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{color.focus.ring}"
+      },
+      "width": {
+        "$value": "{shape.border-width.focus}"
+      }
+    }
   }
 }

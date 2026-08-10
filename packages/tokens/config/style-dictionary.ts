@@ -1,84 +1,203 @@
 /**
  * Style Dictionary (v4) wiring for @mt/tokens.
  *
- * One SD build per brand×theme permutation. Custom formats emit the two
- * MT-specific artifacts (Tailwind preset + Figma importer payload); CSS/TS use
- * SD built-ins. In Phase 0 the custom formats are deliberate stubs that produce
- * valid-but-empty skeletons so the whole pipeline is proven before real token
- * values exist (Phase 1).
+ * DTCG 2025.10 source uses structured values (color objects, dimension objects,
+ * duration objects, cubicBezier arrays, fontFamily arrays, shadow composites).
+ * These custom transforms stringify those into CSS/TS/Tailwind, while the Figma
+ * format keeps the resolved structured value plus its alias target.
+ *
+ * One SD build per brand×theme permutation.
  */
 import StyleDictionary from 'style-dictionary';
 import type { Config } from 'style-dictionary/types';
 import type { Permutation } from '../resolver/resolve.js';
 
-let registered = false;
+/* --------------------------------------------------------- value stringifiers */
+type ColorObj = { hex: string; alpha?: number; components: number[] };
+type DimObj = { value: number; unit: string };
 
+function colorToCss(v: unknown): string {
+  if (typeof v === 'string') return v;
+  const c = v as ColorObj;
+  if (c.alpha == null || c.alpha === 1) return c.hex;
+  const [r, g, b] = c.components.map((n) => Math.round(n * 255));
+  return `rgba(${r}, ${g}, ${b}, ${c.alpha})`;
+}
+function dimToCss(v: unknown): string {
+  if (typeof v === 'string') return v;
+  if (typeof v === 'number') return String(v);
+  const d = v as DimObj;
+  return `${d.value}${d.unit}`;
+}
+function shadowToCss(v: unknown): string {
+  const parts = Array.isArray(v) ? v : [v];
+  return parts
+    .map((s: any) => `${dimToCss(s.offsetX)} ${dimToCss(s.offsetY)} ${dimToCss(s.blur)} ${dimToCss(s.spread)} ${colorToCss(s.color)}`.trim())
+    .join(', ');
+}
+const bezToCss = (v: unknown): string => (typeof v === 'string' ? v : `cubic-bezier(${(v as number[]).join(', ')})`);
+const famToCss = (v: unknown): string =>
+  typeof v === 'string' ? v : (v as string[]).map((f) => (/\s/.test(f) ? `"${f}"` : f)).join(', ');
+
+/** Compose a box-shadow string from a (possibly member-transformed) shadow $value. */
+function shadowValue(v: unknown): string {
+  const layers = Array.isArray(v) ? v : [v];
+  const m = (x: any): string => (typeof x === 'string' ? x : x && typeof x === 'object' && 'value' in x ? dimToCss(x) : colorToCss(x));
+  return layers.map((l: any) => `${m(l.offsetX)} ${m(l.offsetY)} ${m(l.blur)} ${m(l.spread)} ${m(l.color)}`).join(', ');
+}
+const isShadow = (t: { $type?: string }) => t.$type === 'shadow';
+const refToVar = (ref: string): string => `--${ref.replace(/[{}]/g, '').split('.').join('-')}`;
+
+/* ------------------------------------------------------------------ registration */
+let registered = false;
 export function registerMtHooks(): void {
   if (registered) return;
   registered = true;
 
-  // Tailwind preset — Phase 0 stub. Phase 2 maps semantic tokens → theme.extend.
+  const val = (name: string, type: string, fn: (v: unknown) => unknown) =>
+    StyleDictionary.registerTransform({
+      name,
+      type: 'value',
+      transitive: false,
+      filter: (t) => (t as { $type?: string }).$type === type,
+      transform: (t) => fn((t as { $value: unknown }).$value),
+    });
+
+  val('mt/color', 'color', colorToCss);
+  val('mt/dimension', 'dimension', dimToCss);
+  val('mt/duration', 'duration', (v) => dimToCss(v));
+  val('mt/cubic', 'cubicBezier', bezToCss);
+  val('mt/family', 'fontFamily', famToCss);
+  val('mt/shadow', 'shadow', shadowToCss);
+
+  // Unitless `number` tokens carrying an org.mt.cssUnit extension (tracking → em) get the unit
+  // appended for CSS/TS. Plain numbers (line-height, opacity) pass through untouched.
+  StyleDictionary.registerTransform({
+    name: 'mt/number-unit',
+    type: 'value',
+    transitive: false,
+    filter: (t) => (t as any).$type === 'number' && Boolean((t as any).$extensions?.['org.mt']?.cssUnit),
+    transform: (t) => {
+      const v = (t as any).$value;
+      return typeof v === 'number' ? `${v}${(t as any).$extensions['org.mt'].cssUnit}` : v;
+    },
+  });
+
+  const valueTransforms = ['mt/color', 'mt/dimension', 'mt/duration', 'mt/cubic', 'mt/family', 'mt/shadow', 'mt/number-unit'];
+  StyleDictionary.registerTransformGroup({ name: 'mt/css', transforms: ['name/kebab', ...valueTransforms] });
+  StyleDictionary.registerTransformGroup({ name: 'mt/js', transforms: ['name/pascal', ...valueTransforms] });
+  StyleDictionary.registerTransformGroup({ name: 'mt/figma', transforms: ['name/kebab'] });
+
+  /* CSS custom properties — DRY var() alias chains, concrete leaves, composed shadows. */
   StyleDictionary.registerFormat({
-    name: 'mt/tailwind-preset',
+    name: 'mt/css-variables',
     format: async ({ dictionary, options }) => {
-      const perm = (options as { mtPermutation?: string }).mtPermutation ?? '';
+      const { selector, mtPermutation } = options as { selector: string; mtPermutation: string };
+      const lines = dictionary.allTokens.map((t) => {
+        const orig = (t.original as { $value?: unknown }).$value;
+        const isAlias = typeof orig === 'string' && orig.startsWith('{');
+        const value = isShadow(t) ? shadowValue((t as any).$value) : isAlias ? `var(${refToVar(orig as string)})` : (t as any).$value;
+        return `  --${t.name}: ${value};`;
+      });
+      return `/** Generated by @mt/tokens (${mtPermutation}). Do not edit. */\n${selector} {\n${lines.join('\n')}\n}\n`;
+    },
+  });
+
+  /* TypeScript — nested, typed token object with concrete values. */
+  StyleDictionary.registerFormat({
+    name: 'mt/typescript',
+    format: async ({ dictionary, options }) => {
+      const root: Record<string, unknown> = {};
+      for (const t of dictionary.allTokens) {
+        let node = root as Record<string, any>;
+        const value = isShadow(t) ? shadowValue((t as any).$value) : (t as any).$value;
+        t.path.forEach((k, i) => {
+          if (i === t.path.length - 1) node[k] = value;
+          else node = node[k] = (node[k] as Record<string, unknown>) ?? {};
+        });
+      }
       return (
-        `/** Generated by @mt/tokens (${perm}) — Phase 0 scaffold. Do not edit by hand. */\n` +
-        `/** ${dictionary.allTokens.length} token(s) resolved. */\n` +
-        `module.exports = {\n  theme: { extend: {} },\n};\n`
+        `// Generated by @mt/tokens (${(options as any).mtPermutation}). Do not edit.\n` +
+        `export const tokens = ${JSON.stringify(root, null, 2)} as const;\n` +
+        `export type Tokens = typeof tokens;\n`
       );
     },
   });
 
-  // Figma Variable importer payload — Phase 0 stub. Phase 3 maps to collections/modes.
+  /* Tailwind preset — maps semantic/brand groups to theme.extend (concrete per-permutation values). */
+  StyleDictionary.registerFormat({
+    name: 'mt/tailwind-preset',
+    format: async ({ dictionary, options }) => {
+      const set = (obj: Record<string, any>, keys: string[], value: unknown) => {
+        let node = obj;
+        keys.forEach((k, i) => (i === keys.length - 1 ? (node[k] = value) : (node = node[k] = node[k] ?? {})));
+      };
+      const colors: Record<string, any> = {};
+      const spacing: Record<string, any> = {};
+      const borderRadius: Record<string, any> = {};
+      const boxShadow: Record<string, any> = {};
+      const fontFamily: Record<string, any> = {};
+      const fontSize: Record<string, any> = {};
+      for (const t of dictionary.allTokens) {
+        const p = t.path;
+        const v = (t as any).$value;
+        if (p[0] === 'color') set(colors, p.slice(1), v);
+        else if (p[0] === 'space') spacing[p.slice(1).join('-')] = v;
+        else if (p[0] === 'shape' && p[1] === 'radius') borderRadius[p[2]] = v;
+        else if (p[0] === 'elevation') boxShadow[p[1]] = shadowValue(v);
+        else if (p[0] === 'brand' && p[1] === 'font' && p[2] === 'family') fontFamily[p[3]] = v;
+        else if (p[0] === 'brand' && p[1] === 'font' && p[2] === 'scale') fontSize[p[3]] = v;
+      }
+      const preset = { theme: { extend: { colors, spacing, borderRadius, boxShadow, fontFamily, fontSize } } };
+      return `/** Generated by @mt/tokens (${(options as any).mtPermutation}). Do not edit. */\nmodule.exports = ${JSON.stringify(preset, null, 2)};\n`;
+    },
+  });
+
+  /* Figma Variable importer payload — resolved structured value + alias target. */
   StyleDictionary.registerFormat({
     name: 'mt/figma-payload',
     format: async ({ dictionary, options }) => {
-      const perm = (options as { mtPermutation?: string }).mtPermutation ?? '';
-      const tokens = dictionary.allTokens.map((t) => ({
-        path: t.path,
-        type: (t as { $type?: string; type?: string }).$type ?? t.type,
-        value: (t as { $value?: unknown }).$value ?? t.value,
-      }));
-      return JSON.stringify({ permutation: perm, version: 0, collections: [], tokens }, null, 2) + '\n';
+      const tokens = dictionary.allTokens.map((t) => {
+        const orig = (t.original as { $value?: unknown }).$value;
+        const reference = typeof orig === 'string' && orig.startsWith('{') ? orig : undefined;
+        return { name: t.name, path: t.path, type: (t as { $type?: string }).$type, value: (t as any).$value, ...(reference ? { reference } : {}) };
+      });
+      return JSON.stringify({ permutation: (options as any).mtPermutation, version: 1, tokens }, null, 2) + '\n';
     },
   });
 }
 
+/* ------------------------------------------------------------------ per-permutation config */
 export function makeConfig(perm: Permutation, buildDir: string): Config {
   const selector = `[data-brand="${perm.brand}"][data-theme="${perm.theme}"]`;
+  const opts = { mtPermutation: perm.name };
   return {
     tokens: perm.tokens,
-    log: { verbosity: 'silent', warnings: 'disabled' },
+    usesDtcg: true,
+    log: { verbosity: 'silent', warnings: 'warn' },
     platforms: {
       css: {
-        transformGroup: 'css',
+        transformGroup: 'mt/css',
         buildPath: `${buildDir}/css/`,
-        options: { mtPermutation: perm.name },
-        files: [
-          {
-            destination: `${perm.name}.css`,
-            format: 'css/variables',
-            options: { selector, outputReferences: true },
-          },
-        ],
+        options: opts,
+        files: [{ destination: `${perm.name}.css`, format: 'mt/css-variables', options: { ...opts, selector } }],
       },
       ts: {
-        transformGroup: 'js',
+        transformGroup: 'mt/js',
         buildPath: `${buildDir}/ts/`,
-        options: { mtPermutation: perm.name },
-        files: [{ destination: `${perm.name}.ts`, format: 'javascript/es6' }],
+        options: opts,
+        files: [{ destination: `${perm.name}.ts`, format: 'mt/typescript' }],
       },
       tailwind: {
-        transformGroup: 'js',
+        transformGroup: 'mt/css',
         buildPath: `${buildDir}/tailwind/`,
-        options: { mtPermutation: perm.name },
+        options: opts,
         files: [{ destination: `${perm.name}.cjs`, format: 'mt/tailwind-preset' }],
       },
       figma: {
-        transformGroup: 'js',
+        transformGroup: 'mt/figma',
         buildPath: `${buildDir}/figma/`,
-        options: { mtPermutation: perm.name },
+        options: opts,
         files: [{ destination: `${perm.name}.json`, format: 'mt/figma-payload' }],
       },
     },

@@ -1,15 +1,189 @@
 {
-  "$description": "Type ramps (family lives in brand). Phase 1.",
+  "$description": "Type primitives — universal ramps. Font family lives in the brand layer.",
   "font-size": {
-    "$type": "dimension"
-  },
-  "line-height": {
-    "$type": "number"
+    "100": {
+      "$value": {
+        "value": 0.75,
+        "unit": "rem"
+      }
+    },
+    "200": {
+      "$value": {
+        "value": 0.8125,
+        "unit": "rem"
+      }
+    },
+    "300": {
+      "$value": {
+        "value": 0.875,
+        "unit": "rem"
+      }
+    },
+    "400": {
+      "$value": {
+        "value": 1,
+        "unit": "rem"
+      }
+    },
+    "500": {
+      "$value": {
+        "value": 1.125,
+        "unit": "rem"
+      }
+    },
+    "600": {
+      "$value": {
+        "value": 1.25,
+        "unit": "rem"
+      }
+    },
+    "700": {
+      "$value": {
+        "value": 1.5,
+        "unit": "rem"
+      }
+    },
+    "800": {
+      "$value": {
+        "value": 1.875,
+        "unit": "rem"
+      }
+    },
+    "900": {
+      "$value": {
+        "value": 2.25,
+        "unit": "rem"
+      }
+    },
+    "1000": {
+      "$value": {
+        "value": 3,
+        "unit": "rem"
+      }
+    },
+    "1100": {
+      "$value": {
+        "value": 3.75,
+        "unit": "rem"
+      }
+    },
+    "1200": {
+      "$value": {
+        "value": 4.5,
+        "unit": "rem"
+      }
+    },
+    "$type": "dimension",
+    "$description": "Modular size ramp (rem)."
   },
   "font-weight": {
-    "$type": "fontWeight"
+    "$type": "fontWeight",
+    "regular": {
+      "$value": 400
+    },
+    "medium": {
+      "$value": 500
+    },
+    "semibold": {
+      "$value": 600
+    },
+    "bold": {
+      "$value": 700
+    },
+    "extrabold": {
+      "$value": 800
+    }
+  },
+  "line-height": {
+    "100": {
+      "$value": 1
+    },
+    "200": {
+      "$value": 1.05
+    },
+    "300": {
+      "$value": 1.1
+    },
+    "400": {
+      "$value": 1.15
+    },
+    "500": {
+      "$value": 1.25
+    },
+    "600": {
+      "$value": 1.35
+    },
+    "700": {
+      "$value": 1.4
+    },
+    "800": {
+      "$value": 1.5
+    },
+    "900": {
+      "$value": 1.6
+    },
+    "1000": {
+      "$value": 1.75
+    },
+    "$type": "number",
+    "$description": "Unitless line-height ramp."
   },
   "letter-spacing": {
-    "$type": "dimension"
+    "$type": "number",
+    "$description": "Tracking ramp — unitless em-multiplier (DTCG number); rendered as em in CSS/TS via the org.mt.cssUnit extension.",
+    "tighter": {
+      "$value": -0.02,
+      "$extensions": {
+        "org.mt": {
+          "cssUnit": "em",
+          "role": "tracking"
+        }
+      }
+    },
+    "tight": {
+      "$value": -0.01,
+      "$extensions": {
+        "org.mt": {
+          "cssUnit": "em",
+          "role": "tracking"
+        }
+      }
+    },
+    "normal": {
+      "$value": 0,
+      "$extensions": {
+        "org.mt": {
+          "cssUnit": "em",
+          "role": "tracking"
+        }
+      }
+    },
+    "wide": {
+      "$value": 0.02,
+      "$extensions": {
+        "org.mt": {
+          "cssUnit": "em",
+          "role": "tracking"
+        }
+      }
+    },
+    "wider": {
+      "$value": 0.04,
+      "$extensions": {
+        "org.mt": {
+          "cssUnit": "em",
+          "role": "tracking"
+        }
+      }
+    },
+    "widest": {
+      "$value": 0.08,
+      "$extensions": {
+        "org.mt": {
+          "cssUnit": "em",
+          "role": "tracking"
+        }
+      }
+    }
   }
 }

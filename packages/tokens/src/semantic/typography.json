@@ -1,13 +1,313 @@
 {
-  "$description": "Composite typography roles (theme-invariant). Phase 1.",
+  "$description": "Semantic typography roles. Sub-tokens (family/size/weight/line-height/letter-spacing) reference the brand type foundation, so type is brand-specific. Modelled as granular tokens rather than the DTCG composite `typography` type — see trade-off note.",
   "text": {
-    "$type": "typography",
-    "display": {},
-    "heading": {},
-    "body": {},
-    "label": {},
-    "caption": {},
-    "overline": {},
-    "code": {}
+    "display": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.display}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.4xl}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.display}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.tight}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.tight}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "h1": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.display}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.3xl}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.bold}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.tight}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.tight}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "h2": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.display}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.2xl}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.bold}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.snug}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.tight}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "h3": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.display}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.xl}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.semibold}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.snug}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "h4": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.display}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.lg}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.semibold}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.snug}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "body": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.body}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.md}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.regular}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.normal}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "body-sm": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.body}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.sm}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.regular}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.normal}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "label": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.body}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.sm}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.medium}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.snug}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "caption": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.body}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.xs}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.regular}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.snug}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "overline": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.body}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.2xs}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.semibold}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.snug}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.caps}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    },
+    "code": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{brand.font.family.mono}"
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{brand.font.scale.sm}"
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{brand.font.weight.regular}"
+      },
+      "line-height": {
+        "$type": "number",
+        "$value": "{brand.font.leading.normal}"
+      },
+      "letter-spacing": {
+        "$type": "number",
+        "$value": "{brand.font.tracking.normal}",
+        "$extensions": {
+          "org.mt": {
+            "cssUnit": "em",
+            "role": "tracking"
+          }
+        }
+      }
+    }
   }
 }

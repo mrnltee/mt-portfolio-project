@@ -1,6 +1,72 @@
 {
-  "$description": "Icon/control size ramp. Phase 1.",
+  "$description": "Sizing primitives — control heights / icon sizes (px).",
   "size": {
+    "100": {
+      "$value": {
+        "value": 16,
+        "unit": "px"
+      }
+    },
+    "150": {
+      "$value": {
+        "value": 20,
+        "unit": "px"
+      }
+    },
+    "200": {
+      "$value": {
+        "value": 24,
+        "unit": "px"
+      }
+    },
+    "250": {
+      "$value": {
+        "value": 28,
+        "unit": "px"
+      }
+    },
+    "300": {
+      "$value": {
+        "value": 32,
+        "unit": "px"
+      }
+    },
+    "350": {
+      "$value": {
+        "value": 36,
+        "unit": "px"
+      }
+    },
+    "400": {
+      "$value": {
+        "value": 40,
+        "unit": "px"
+      }
+    },
+    "450": {
+      "$value": {
+        "value": 44,
+        "unit": "px"
+      }
+    },
+    "500": {
+      "$value": {
+        "value": 48,
+        "unit": "px"
+      }
+    },
+    "600": {
+      "$value": {
+        "value": 56,
+        "unit": "px"
+      }
+    },
+    "700": {
+      "$value": {
+        "value": 64,
+        "unit": "px"
+      }
+    },
     "$type": "dimension"
   }
 }

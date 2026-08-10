@@ -1,11 +1,169 @@
 {
-  "$description": "Semantic color roles — LIGHT resolution. References brand ramp + primitives. Phase 1.",
+  "$description": "Semantic color roles — LIGHT resolution.",
   "color": {
     "$type": "color",
-    "surface": {},
-    "content": {},
-    "border": {},
-    "action": {},
-    "feedback": {}
+    "background": {
+      "canvas": {
+        "$value": "{brand.color.neutral.50}"
+      },
+      "surface": {
+        "$value": "{brand.color.neutral.0}"
+      },
+      "surface-subtle": {
+        "$value": "{brand.color.neutral.100}"
+      },
+      "inverse": {
+        "$value": "{brand.color.neutral.900}"
+      },
+      "disabled": {
+        "$value": "{brand.color.neutral.100}"
+      },
+      "transparent": {
+        "$value": "{color.transparent}"
+      }
+    },
+    "text": {
+      "primary": {
+        "$value": "{brand.color.neutral.900}"
+      },
+      "secondary": {
+        "$value": "{brand.color.neutral.700}"
+      },
+      "tertiary": {
+        "$value": "{brand.color.neutral.600}"
+      },
+      "disabled": {
+        "$value": "{brand.color.neutral.400}"
+      },
+      "inverse": {
+        "$value": "{brand.color.neutral.0}"
+      },
+      "link": {
+        "$value": "{brand.color.accent.700}"
+      },
+      "on-accent": {
+        "$value": "{brand.color.neutral.0}"
+      },
+      "on-inverse": {
+        "$value": "{brand.color.neutral.0}"
+      }
+    },
+    "border": {
+      "default": {
+        "$value": "{brand.color.neutral.200}"
+      },
+      "subtle": {
+        "$value": "{brand.color.neutral.100}"
+      },
+      "strong": {
+        "$value": "{brand.color.neutral.300}"
+      },
+      "focus": {
+        "$value": "{brand.color.accent.500}"
+      }
+    },
+    "action": {
+      "primary": {
+        "$value": "{brand.color.accent.700}"
+      },
+      "primary-hover": {
+        "$value": "{brand.color.accent.800}"
+      },
+      "primary-pressed": {
+        "$value": "{brand.color.accent.900}"
+      },
+      "on-primary": {
+        "$value": "{brand.color.neutral.0}"
+      },
+      "secondary": {
+        "$value": "{brand.color.neutral.100}"
+      },
+      "secondary-hover": {
+        "$value": "{brand.color.neutral.200}"
+      },
+      "on-secondary": {
+        "$value": "{brand.color.neutral.900}"
+      },
+      "destructive": {
+        "$value": "{color.red.700}"
+      },
+      "destructive-hover": {
+        "$value": "{color.red.800}"
+      },
+      "on-destructive": {
+        "$value": "{brand.color.neutral.0}"
+      }
+    },
+    "feedback": {
+      "success": {
+        "$value": "{color.green.700}"
+      },
+      "success-surface": {
+        "$value": "{color.green.100}"
+      },
+      "on-success": {
+        "$value": "{color.green.800}"
+      },
+      "warning": {
+        "$value": "{color.amber.700}"
+      },
+      "warning-surface": {
+        "$value": "{color.amber.100}"
+      },
+      "on-warning": {
+        "$value": "{color.amber.800}"
+      },
+      "error": {
+        "$value": "{color.red.700}"
+      },
+      "error-surface": {
+        "$value": "{color.red.100}"
+      },
+      "on-error": {
+        "$value": "{color.red.800}"
+      },
+      "info": {
+        "$value": "{color.blue.700}"
+      },
+      "info-surface": {
+        "$value": "{color.blue.100}"
+      },
+      "on-info": {
+        "$value": "{color.blue.800}"
+      }
+    },
+    "focus": {
+      "ring": {
+        "$value": "{brand.color.accent.500}"
+      }
+    },
+    "overlay": {
+      "scrim": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0588,
+            0.0902,
+            0.1647
+          ],
+          "alpha": 0.5,
+          "hex": "#0F172A"
+        }
+      }
+    },
+    "shadow": {
+      "color": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0588,
+            0.0902,
+            0.1647
+          ],
+          "alpha": 0.12,
+          "hex": "#0F172A"
+        }
+      }
+    }
   }
 }

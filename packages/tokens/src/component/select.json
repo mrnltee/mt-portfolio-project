@@ -1,0 +1,29 @@
+{
+  "$description": "Select — input contract plus chevron.",
+  "select": {
+    "background": {
+      "$value": "{color.background.surface}"
+    },
+    "text": {
+      "$value": "{color.text.primary}"
+    },
+    "border": {
+      "$value": "{color.border.default}"
+    },
+    "border-focus": {
+      "$value": "{color.border.focus}"
+    },
+    "radius": {
+      "$value": "{shape.radius.field}"
+    },
+    "height": {
+      "$value": "{size.control.md}"
+    },
+    "padding-x": {
+      "$value": "{space.md}"
+    },
+    "chevron": {
+      "$value": "{color.text.tertiary}"
+    }
+  }
+}

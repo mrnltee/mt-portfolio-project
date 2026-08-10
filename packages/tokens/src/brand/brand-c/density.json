@@ -1,8 +1,46 @@
 {
-  "$description": "Brand C density foundation — spacing/control-size multiplier. Phase 1.",
+  "$description": "Brand C — generous density.",
   "brand": {
-    "density": {
-      "$type": "number"
+    "space": {
+      "$type": "dimension",
+      "2xs": {
+        "$value": "{space.75}"
+      },
+      "xs": {
+        "$value": "{space.150}"
+      },
+      "sm": {
+        "$value": "{space.200}"
+      },
+      "md": {
+        "$value": "{space.250}"
+      },
+      "lg": {
+        "$value": "{space.350}"
+      },
+      "xl": {
+        "$value": "{space.500}"
+      },
+      "2xl": {
+        "$value": "{space.700}"
+      },
+      "3xl": {
+        "$value": "{space.1000}"
+      }
+    },
+    "size": {
+      "control": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "{size.350}"
+        },
+        "md": {
+          "$value": "{size.450}"
+        },
+        "lg": {
+          "$value": "{size.600}"
+        }
+      }
     }
   }
 }

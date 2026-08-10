@@ -1,8 +1,32 @@
 {
-  "$description": "Brand A shape foundation — radius base/scale. Phase 1.",
+  "$description": "Brand A — balanced radii.",
   "brand": {
-    "radius-base": {
-      "$type": "dimension"
+    "radius": {
+      "$type": "dimension",
+      "none": {
+        "$value": "{radius.none}"
+      },
+      "xs": {
+        "$value": "{radius.xs}"
+      },
+      "sm": {
+        "$value": "{radius.sm}"
+      },
+      "md": {
+        "$value": "{radius.md}"
+      },
+      "lg": {
+        "$value": "{radius.lg}"
+      },
+      "xl": {
+        "$value": "{radius.xl}"
+      },
+      "2xl": {
+        "$value": "{radius.3xl}"
+      },
+      "full": {
+        "$value": "{radius.full}"
+      }
     }
   }
 }

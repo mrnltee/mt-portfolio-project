@@ -1,7 +1,29 @@
 {
-  "$description": "Semantic size roles (density-driven). Phase 1.",
+  "$description": "Semantic sizing roles — control heights reference the brand density scale; icon sizes reference primitives (brand-invariant).",
   "size": {
-    "$type": "dimension",
-    "control": {}
+    "control": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{brand.size.control.sm}"
+      },
+      "md": {
+        "$value": "{brand.size.control.md}"
+      },
+      "lg": {
+        "$value": "{brand.size.control.lg}"
+      }
+    },
+    "icon": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{size.100}"
+      },
+      "md": {
+        "$value": "{size.150}"
+      },
+      "lg": {
+        "$value": "{size.200}"
+      }
+    }
   }
 }

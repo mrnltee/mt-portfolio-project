@@ -1,0 +1,26 @@
+{
+  "$description": "Radio — circular checkbox.",
+  "radio": {
+    "size": {
+      "$value": "{size.icon.md}"
+    },
+    "radius": {
+      "$value": "{shape.radius.pill}"
+    },
+    "border": {
+      "$value": "{color.border.strong}"
+    },
+    "background": {
+      "$value": "{color.background.surface}"
+    },
+    "checked-background": {
+      "$value": "{color.action.primary}"
+    },
+    "checked-dot": {
+      "$value": "{color.action.on-primary}"
+    },
+    "focus": {
+      "$value": "{color.focus.ring}"
+    }
+  }
+}

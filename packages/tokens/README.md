@@ -37,16 +37,44 @@ tiers, composed by `resolver/manifest.json`:
 
 ```bash
 npm run build      # resolve permutations → build/
-npm run validate   # structural + alias-integrity checks (contrast checks land later)
+npm run validate   # DTCG structure, tier edges, refs, theme symmetry, invariants, WCAG AA
 npm run clean      # remove build/
 ```
 
+## Conventions & invariants
+
+### Letter-spacing (tracking) is a unitless `number`, rendered as `em`
+DTCG 2025.10 restricts the `dimension` unit set to `px`/`rem`, which cannot express tracking that
+scales with font size. So tracking tokens are authored as a **standards-conformant unitless
+`number`** (an em-multiplier) carrying an extension:
+
+```json
+"tighter": { "$value": -0.02, "$extensions": { "org.mt": { "cssUnit": "em", "role": "tracking" } } }
+```
+
+The `mt/number-unit` Style Dictionary transform appends the unit for **CSS/TS** (`-0.02em`),
+preserving the font-size-relative relationship. **Figma** output keeps the raw `number`
+(Phase 3 maps it to Figma's letter-spacing percent = value × 100). The DTCG source never uses a
+non-conformant unit.
+
+### Feedback/status is brand-invariant (system-level)
+Brand identity may vary **accent, neutral, typography, shape, scale, and elevation** foundations.
+`success` / `warning` / `error` / `info` semantics are **brand-invariant** and resolve to the
+primitive status ramps (`green`/`amber`/`red`/`blue`). This is declared in
+[`resolver/manifest.json`](resolver/manifest.json) under `invariants` and **enforced by
+`validate.ts`**:
+
+- semantic `color.feedback.*` may only reference primitive status ramps (never `brand.*`);
+- no brand file may (re)define a feedback/status role.
+
+Overriding this requires a deliberate, accessibility-reviewed change to the manifest — it cannot
+happen by adding a brand.
+
 ## Phase status
 
-**Phase 0 (scaffold).** Structure, pipeline, resolver and validation are in place; token files
-are DTCG **stubs with no values** (taxonomy only) — the build resolves all 6 permutations and
-emits valid, empty scoped outputs. The `mt/tailwind-preset` and `mt/figma-payload` formats are
-Phase-0 stubs. Phase 1 populates real primitive/brand/semantic/component values.
+**Phase 1 (token architecture).** Real primitive/brand/semantic/component values authored;
+6 permutations build to CSS/TS/Tailwind/Figma; full validation (architecture + WCAG AA) passes.
+Not yet consumed by any app (Phase 2) and not yet in Figma (Phase 3).
 
 ## Figma target (Phase 3)
 

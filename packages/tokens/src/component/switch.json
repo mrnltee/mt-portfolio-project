@@ -1,0 +1,20 @@
+{
+  "$description": "Switch.",
+  "switch": {
+    "track-off": {
+      "$value": "{color.border.strong}"
+    },
+    "track-on": {
+      "$value": "{color.action.primary}"
+    },
+    "thumb": {
+      "$value": "{color.background.surface}"
+    },
+    "radius": {
+      "$value": "{shape.radius.pill}"
+    },
+    "focus": {
+      "$value": "{color.focus.ring}"
+    }
+  }
+}

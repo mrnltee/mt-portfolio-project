@@ -1,0 +1,68 @@
+{
+  "$description": "Brand B — minimal/flat shadows (relies on borders).",
+  "brand": {
+    "shadow": {
+      "$type": "dimension",
+      "raised": {
+        "y": {
+          "$value": {
+            "value": 1,
+            "unit": "px"
+          }
+        },
+        "blur": {
+          "$value": {
+            "value": 2,
+            "unit": "px"
+          }
+        },
+        "spread": {
+          "$value": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      },
+      "overlay": {
+        "y": {
+          "$value": {
+            "value": 2,
+            "unit": "px"
+          }
+        },
+        "blur": {
+          "$value": {
+            "value": 6,
+            "unit": "px"
+          }
+        },
+        "spread": {
+          "$value": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      },
+      "modal": {
+        "y": {
+          "$value": {
+            "value": 6,
+            "unit": "px"
+          }
+        },
+        "blur": {
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          }
+        },
+        "spread": {
+          "$value": {
+            "value": -2,
+            "unit": "px"
+          }
+        }
+      }
+    }
+  }
+}

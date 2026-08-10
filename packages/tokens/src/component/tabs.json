@@ -1,0 +1,26 @@
+{
+  "$description": "Tabs.",
+  "tabs": {
+    "text": {
+      "$value": "{color.text.secondary}"
+    },
+    "text-active": {
+      "$value": "{color.text.primary}"
+    },
+    "indicator": {
+      "$value": "{color.action.primary}"
+    },
+    "border": {
+      "$value": "{color.border.default}"
+    },
+    "gap": {
+      "$value": "{space.md}"
+    },
+    "font-size": {
+      "$value": "{text.label.font-size}"
+    },
+    "font-weight": {
+      "$value": "{text.label.font-weight}"
+    }
+  }
+}

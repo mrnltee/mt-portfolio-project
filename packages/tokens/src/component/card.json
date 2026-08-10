@@ -1,4 +1,23 @@
 {
-  "$description": "Card component tokens (semantic aliases). Phase 1.",
-  "card": {}
+  "$description": "Card / surface container.",
+  "card": {
+    "background": {
+      "$value": "{color.background.surface}"
+    },
+    "border": {
+      "$value": "{color.border.subtle}"
+    },
+    "radius": {
+      "$value": "{shape.radius.card}"
+    },
+    "padding": {
+      "$value": "{space.lg}"
+    },
+    "gap": {
+      "$value": "{space.md}"
+    },
+    "shadow": {
+      "$value": "{elevation.raised}"
+    }
+  }
 }

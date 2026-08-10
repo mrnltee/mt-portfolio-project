@@ -1,8 +1,32 @@
 {
-  "$description": "Brand B shape foundation — radius base/scale. Phase 1.",
+  "$description": "Brand B — sharp, restrained radii.",
   "brand": {
-    "radius-base": {
-      "$type": "dimension"
+    "radius": {
+      "$type": "dimension",
+      "none": {
+        "$value": "{radius.none}"
+      },
+      "xs": {
+        "$value": "{radius.none}"
+      },
+      "sm": {
+        "$value": "{radius.xs}"
+      },
+      "md": {
+        "$value": "{radius.xs}"
+      },
+      "lg": {
+        "$value": "{radius.sm}"
+      },
+      "xl": {
+        "$value": "{radius.md}"
+      },
+      "2xl": {
+        "$value": "{radius.lg}"
+      },
+      "full": {
+        "$value": "{radius.full}"
+      }
     }
   }
 }

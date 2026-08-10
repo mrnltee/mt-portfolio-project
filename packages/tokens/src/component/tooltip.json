@@ -1,0 +1,23 @@
+{
+  "$description": "Tooltip.",
+  "tooltip": {
+    "background": {
+      "$value": "{color.background.inverse}"
+    },
+    "text": {
+      "$value": "{color.text.inverse}"
+    },
+    "radius": {
+      "$value": "{shape.radius.control}"
+    },
+    "padding-x": {
+      "$value": "{space.sm}"
+    },
+    "padding-y": {
+      "$value": "{space.2xs}"
+    },
+    "font-size": {
+      "$value": "{text.caption.font-size}"
+    }
+  }
+}

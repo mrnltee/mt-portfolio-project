@@ -1,10 +1,33 @@
 {
-  "$description": "Semantic spacing roles (density-scaled). Phase 1.",
+  "$description": "Semantic spacing roles — reference the brand density scale, so spacing is brand-specific.",
   "space": {
     "$type": "dimension",
-    "inset": {},
-    "stack": {},
-    "inline": {},
-    "gutter": {}
+    "none": {
+      "$value": "{space.0}"
+    },
+    "2xs": {
+      "$value": "{brand.space.2xs}"
+    },
+    "xs": {
+      "$value": "{brand.space.xs}"
+    },
+    "sm": {
+      "$value": "{brand.space.sm}"
+    },
+    "md": {
+      "$value": "{brand.space.md}"
+    },
+    "lg": {
+      "$value": "{brand.space.lg}"
+    },
+    "xl": {
+      "$value": "{brand.space.xl}"
+    },
+    "2xl": {
+      "$value": "{brand.space.2xl}"
+    },
+    "3xl": {
+      "$value": "{brand.space.3xl}"
+    }
   }
 }

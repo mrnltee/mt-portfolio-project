@@ -1,0 +1,29 @@
+{
+  "$description": "Icon button — square control sized by the density scale.",
+  "icon-button": {
+    "size": {
+      "$value": "{size.control.md}"
+    },
+    "icon-size": {
+      "$value": "{size.icon.md}"
+    },
+    "radius": {
+      "$value": "{shape.radius.control}"
+    },
+    "background": {
+      "$value": "{color.background.transparent}"
+    },
+    "background-hover": {
+      "$value": "{color.background.surface-subtle}"
+    },
+    "icon": {
+      "$value": "{color.text.secondary}"
+    },
+    "icon-hover": {
+      "$value": "{color.text.primary}"
+    },
+    "focus": {
+      "$value": "{color.focus.ring}"
+    }
+  }
+}

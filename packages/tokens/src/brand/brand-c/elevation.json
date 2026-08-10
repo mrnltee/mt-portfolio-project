@@ -1,0 +1,68 @@
+{
+  "$description": "Brand C — large soft shadows.",
+  "brand": {
+    "shadow": {
+      "$type": "dimension",
+      "raised": {
+        "y": {
+          "$value": {
+            "value": 2,
+            "unit": "px"
+          }
+        },
+        "blur": {
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          }
+        },
+        "spread": {
+          "$value": {
+            "value": -2,
+            "unit": "px"
+          }
+        }
+      },
+      "overlay": {
+        "y": {
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          }
+        },
+        "blur": {
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          }
+        },
+        "spread": {
+          "$value": {
+            "value": -6,
+            "unit": "px"
+          }
+        }
+      },
+      "modal": {
+        "y": {
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          }
+        },
+        "blur": {
+          "$value": {
+            "value": 48,
+            "unit": "px"
+          }
+        },
+        "spread": {
+          "$value": {
+            "value": -12,
+            "unit": "px"
+          }
+        }
+      }
+    }
+  }
+}

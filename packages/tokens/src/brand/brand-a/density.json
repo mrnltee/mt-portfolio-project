@@ -1,8 +1,46 @@
 {
-  "$description": "Brand A density foundation — spacing/control-size multiplier. Phase 1.",
+  "$description": "Brand A — comfortable density.",
   "brand": {
-    "density": {
-      "$type": "number"
+    "space": {
+      "$type": "dimension",
+      "2xs": {
+        "$value": "{space.50}"
+      },
+      "xs": {
+        "$value": "{space.100}"
+      },
+      "sm": {
+        "$value": "{space.150}"
+      },
+      "md": {
+        "$value": "{space.200}"
+      },
+      "lg": {
+        "$value": "{space.300}"
+      },
+      "xl": {
+        "$value": "{space.400}"
+      },
+      "2xl": {
+        "$value": "{space.600}"
+      },
+      "3xl": {
+        "$value": "{space.800}"
+      }
+    },
+    "size": {
+      "control": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "{size.300}"
+        },
+        "md": {
+          "$value": "{size.400}"
+        },
+        "lg": {
+          "$value": "{size.500}"
+        }
+      }
     }
   }
 }

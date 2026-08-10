@@ -1,8 +1,46 @@
 {
-  "$description": "Brand B density foundation — spacing/control-size multiplier. Phase 1.",
+  "$description": "Brand B — compact density.",
   "brand": {
-    "density": {
-      "$type": "number"
+    "space": {
+      "$type": "dimension",
+      "2xs": {
+        "$value": "{space.25}"
+      },
+      "xs": {
+        "$value": "{space.75}"
+      },
+      "sm": {
+        "$value": "{space.100}"
+      },
+      "md": {
+        "$value": "{space.150}"
+      },
+      "lg": {
+        "$value": "{space.250}"
+      },
+      "xl": {
+        "$value": "{space.350}"
+      },
+      "2xl": {
+        "$value": "{space.500}"
+      },
+      "3xl": {
+        "$value": "{space.700}"
+      }
+    },
+    "size": {
+      "control": {
+        "$type": "dimension",
+        "sm": {
+          "$value": "{size.250}"
+        },
+        "md": {
+          "$value": "{size.350}"
+        },
+        "lg": {
+          "$value": "{size.450}"
+        }
+      }
     }
   }
 }

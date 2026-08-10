@@ -1,6 +1,36 @@
 {
-  "$description": "Border width ramp. Phase 1.",
+  "$description": "Border-width primitives (px).",
   "border-width": {
+    "0": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      }
+    },
+    "100": {
+      "$value": {
+        "value": 1,
+        "unit": "px"
+      }
+    },
+    "200": {
+      "$value": {
+        "value": 1.5,
+        "unit": "px"
+      }
+    },
+    "300": {
+      "$value": {
+        "value": 2,
+        "unit": "px"
+      }
+    },
+    "400": {
+      "$value": {
+        "value": 4,
+        "unit": "px"
+      }
+    },
     "$type": "dimension"
   }
 }

@@ -10,19 +10,17 @@
   "sets": {
     "primitive": ["primitive/*.json"],
     "brand": ["brand/brand-{brand}/*.json"],
-    "semantic-base": [
-      "semantic/typography.json",
-      "semantic/space.json",
-      "semantic/radius.json",
-      "semantic/elevation.json",
-      "semantic/motion.json",
-      "semantic/size.json"
-    ],
+    "semantic-base": ["semantic/*.json", "!semantic/color.*.json"],
     "semantic-theme": ["semantic/color.{theme}.json"],
     "component": ["component/*.json"]
   },
   "compose": ["primitive", "brand", "semantic-base", "semantic-theme", "component"],
   "output": {
     "permutationName": "brand-{brand}-{theme}"
+  },
+  "invariants": {
+    "$description": "System-level invariants enforced by validate.ts. Brand identity may vary accent/neutral/typographic/shape/scale/elevation foundations. Feedback/status semantics are brand-INVARIANT: brands must not redefine them, and they must resolve to the primitive status ramps. Overriding these requires a deliberate, accessibility-reviewed change here — not an incidental brand addition.",
+    "brandInvariantRoles": ["color.feedback"],
+    "statusRampRoots": ["green", "amber", "red", "blue"]
   }
 }

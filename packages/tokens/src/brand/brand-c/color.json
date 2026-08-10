@@ -1,8 +1,81 @@
 {
-  "$description": "Brand C color foundation — brand ramp + neutral selection. Phase 1.",
+  "$description": "Brand palette selection — accent=coral, neutral=sand.",
   "brand": {
-    "$type": "color",
-    "ramp": {},
-    "neutral": {}
+    "color": {
+      "$type": "color",
+      "accent": {
+        "50": {
+          "$value": "{color.coral.50}"
+        },
+        "100": {
+          "$value": "{color.coral.100}"
+        },
+        "200": {
+          "$value": "{color.coral.200}"
+        },
+        "300": {
+          "$value": "{color.coral.300}"
+        },
+        "400": {
+          "$value": "{color.coral.400}"
+        },
+        "500": {
+          "$value": "{color.coral.500}"
+        },
+        "600": {
+          "$value": "{color.coral.600}"
+        },
+        "700": {
+          "$value": "{color.coral.700}"
+        },
+        "800": {
+          "$value": "{color.coral.800}"
+        },
+        "900": {
+          "$value": "{color.coral.900}"
+        }
+      },
+      "neutral": {
+        "0": {
+          "$value": "{color.sand.0}"
+        },
+        "50": {
+          "$value": "{color.sand.50}"
+        },
+        "100": {
+          "$value": "{color.sand.100}"
+        },
+        "200": {
+          "$value": "{color.sand.200}"
+        },
+        "300": {
+          "$value": "{color.sand.300}"
+        },
+        "400": {
+          "$value": "{color.sand.400}"
+        },
+        "500": {
+          "$value": "{color.sand.500}"
+        },
+        "600": {
+          "$value": "{color.sand.600}"
+        },
+        "700": {
+          "$value": "{color.sand.700}"
+        },
+        "800": {
+          "$value": "{color.sand.800}"
+        },
+        "900": {
+          "$value": "{color.sand.900}"
+        },
+        "950": {
+          "$value": "{color.sand.950}"
+        },
+        "1000": {
+          "$value": "{color.sand.1000}"
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,23 @@
+{
+  "$description": "Dialog / modal.",
+  "dialog": {
+    "background": {
+      "$value": "{color.background.surface}"
+    },
+    "radius": {
+      "$value": "{shape.radius.dialog}"
+    },
+    "padding": {
+      "$value": "{space.xl}"
+    },
+    "gap": {
+      "$value": "{space.lg}"
+    },
+    "shadow": {
+      "$value": "{elevation.modal}"
+    },
+    "scrim": {
+      "$value": "{color.overlay.scrim}"
+    }
+  }
+}

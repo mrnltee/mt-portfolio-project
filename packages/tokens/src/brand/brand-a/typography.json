@@ -1,9 +1,133 @@
 {
-  "$description": "Brand A typography foundation — font families + scale ratio. Phase 1.",
+  "$description": "Brand A — humanist sans, balanced professional scale.",
   "brand": {
-    "font-family": {
-      "$type": "fontFamily"
-    },
-    "scale": {}
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "display": {
+          "$value": [
+            "Inter",
+            "system-ui",
+            "sans-serif"
+          ]
+        },
+        "body": {
+          "$value": [
+            "Inter",
+            "system-ui",
+            "sans-serif"
+          ]
+        },
+        "mono": {
+          "$value": [
+            "JetBrains Mono",
+            "ui-monospace",
+            "monospace"
+          ]
+        }
+      },
+      "scale": {
+        "$type": "dimension",
+        "2xs": {
+          "$value": "{font-size.100}"
+        },
+        "xs": {
+          "$value": "{font-size.200}"
+        },
+        "sm": {
+          "$value": "{font-size.300}"
+        },
+        "md": {
+          "$value": "{font-size.400}"
+        },
+        "lg": {
+          "$value": "{font-size.500}"
+        },
+        "xl": {
+          "$value": "{font-size.700}"
+        },
+        "2xl": {
+          "$value": "{font-size.800}"
+        },
+        "3xl": {
+          "$value": "{font-size.900}"
+        },
+        "4xl": {
+          "$value": "{font-size.1000}"
+        }
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "regular": {
+          "$value": "{font-weight.regular}"
+        },
+        "medium": {
+          "$value": "{font-weight.medium}"
+        },
+        "semibold": {
+          "$value": "{font-weight.semibold}"
+        },
+        "bold": {
+          "$value": "{font-weight.bold}"
+        },
+        "display": {
+          "$value": "{font-weight.bold}"
+        }
+      },
+      "leading": {
+        "$type": "number",
+        "tight": {
+          "$value": "{line-height.300}"
+        },
+        "snug": {
+          "$value": "{line-height.500}"
+        },
+        "normal": {
+          "$value": "{line-height.800}"
+        },
+        "relaxed": {
+          "$value": "{line-height.900}"
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "tight": {
+          "$value": "{letter-spacing.tight}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        },
+        "normal": {
+          "$value": "{letter-spacing.normal}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        },
+        "wide": {
+          "$value": "{letter-spacing.wide}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        },
+        "caps": {
+          "$value": "{letter-spacing.widest}",
+          "$extensions": {
+            "org.mt": {
+              "cssUnit": "em",
+              "role": "tracking"
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,58 @@
+{
+  "$description": "Alert / inline banner.",
+  "alert": {
+    "radius": {
+      "$value": "{shape.radius.card}"
+    },
+    "padding": {
+      "$value": "{space.md}"
+    },
+    "gap": {
+      "$value": "{space.sm}"
+    },
+    "info": {
+      "background": {
+        "$value": "{color.feedback.info-surface}"
+      },
+      "text": {
+        "$value": "{color.feedback.on-info}"
+      },
+      "icon": {
+        "$value": "{color.feedback.info}"
+      }
+    },
+    "success": {
+      "background": {
+        "$value": "{color.feedback.success-surface}"
+      },
+      "text": {
+        "$value": "{color.feedback.on-success}"
+      },
+      "icon": {
+        "$value": "{color.feedback.success}"
+      }
+    },
+    "warning": {
+      "background": {
+        "$value": "{color.feedback.warning-surface}"
+      },
+      "text": {
+        "$value": "{color.feedback.on-warning}"
+      },
+      "icon": {
+        "$value": "{color.feedback.warning}"
+      }
+    },
+    "error": {
+      "background": {
+        "$value": "{color.feedback.error-surface}"
+      },
+      "text": {
+        "$value": "{color.feedback.on-error}"
+      },
+      "icon": {
+        "$value": "{color.feedback.error}"
+      }
+    }
+  }
+}

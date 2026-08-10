@@ -1,0 +1,57 @@
+{
+  "$description": "Badge / status pill.",
+  "badge": {
+    "radius": {
+      "$value": "{shape.radius.pill}"
+    },
+    "padding-x": {
+      "$value": "{space.xs}"
+    },
+    "font-size": {
+      "$value": "{text.caption.font-size}"
+    },
+    "font-weight": {
+      "$value": "{text.label.font-weight}"
+    },
+    "neutral": {
+      "background": {
+        "$value": "{color.background.surface-subtle}"
+      },
+      "text": {
+        "$value": "{color.text.secondary}"
+      }
+    },
+    "accent": {
+      "background": {
+        "$value": "{color.action.secondary}"
+      },
+      "text": {
+        "$value": "{color.action.primary}"
+      }
+    },
+    "success": {
+      "background": {
+        "$value": "{color.feedback.success-surface}"
+      },
+      "text": {
+        "$value": "{color.feedback.on-success}"
+      }
+    },
+    "warning": {
+      "background": {
+        "$value": "{color.feedback.warning-surface}"
+      },
+      "text": {
+        "$value": "{color.feedback.on-warning}"
+      }
+    },
+    "error": {
+      "background": {
+        "$value": "{color.feedback.error-surface}"
+      },
+      "text": {
+        "$value": "{color.feedback.on-error}"
+      }
+    }
+  }
+}

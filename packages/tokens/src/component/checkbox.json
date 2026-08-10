@@ -1,0 +1,26 @@
+{
+  "$description": "Checkbox.",
+  "checkbox": {
+    "size": {
+      "$value": "{size.icon.md}"
+    },
+    "radius": {
+      "$value": "{shape.radius.control}"
+    },
+    "border": {
+      "$value": "{color.border.strong}"
+    },
+    "background": {
+      "$value": "{color.background.surface}"
+    },
+    "checked-background": {
+      "$value": "{color.action.primary}"
+    },
+    "checked-icon": {
+      "$value": "{color.action.on-primary}"
+    },
+    "focus": {
+      "$value": "{color.focus.ring}"
+    }
+  }
+}
