@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { animate, motion, useMotionValue, useReducedMotion } from "framer-motion";
 
 /**
  * Personal brand mark: an isometric 3D box drawn as an OUTLINE whose edges are
@@ -144,6 +144,9 @@ function MorseEdge({
 export function BrandMark() {
   const reduceMotion = useReducedMotion() ?? false;
   const [marching, setMarching] = useState(false);
+  const rotate = useMotionValue(0);
+  const hovering = useRef(false);
+  const spinRef = useRef<ReturnType<typeof animate> | null>(null);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -151,8 +154,49 @@ export function BrandMark() {
     return () => clearTimeout(t);
   }, [reduceMotion]);
 
+  // Continuous, moderate idle spin while hovered (one turn ≈ 7s).
+  const spinLoop = () => {
+    if (reduceMotion) return;
+    spinRef.current = animate(rotate, rotate.get() + 360, {
+      duration: 7,
+      ease: "linear",
+      onComplete: () => {
+        if (hovering.current) spinLoop();
+      },
+    });
+  };
+  const onHoverStart = () => {
+    hovering.current = true;
+    spinLoop();
+  };
+  const onHoverEnd = () => {
+    hovering.current = false;
+    spinRef.current?.stop();
+  };
+  // A quick, satisfying full-turn flick on click/tap (~1.2s), then resume idle spin if still hovered.
+  const onTap = () => {
+    if (reduceMotion) return;
+    spinRef.current?.stop();
+    spinRef.current = animate(rotate, rotate.get() + 360, {
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1],
+      onComplete: () => {
+        if (hovering.current) spinLoop();
+      },
+    });
+  };
+
   return (
-    <div aria-hidden="true" className="relative w-[300px] max-w-full sm:w-[340px]">
+    <motion.div
+      aria-hidden="true"
+      className="relative w-[300px] max-w-full cursor-pointer select-none sm:w-[340px]"
+      style={{ rotate, transformOrigin: "50% 45%" }}
+      onHoverStart={onHoverStart}
+      onHoverEnd={onHoverEnd}
+      onTap={onTap}
+      whileHover={reduceMotion ? undefined : { scale: 1.05 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.96 }}
+    >
       <svg
         width="100%"
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}
@@ -165,6 +209,6 @@ export function BrandMark() {
           <MorseEdge key={i} a={e.a} b={e.b} face={e.face} drawDelay={160 + i * 90} marching={marching} reduce={reduceMotion} />
         ))}
       </svg>
-    </div>
+    </motion.div>
   );
 }
