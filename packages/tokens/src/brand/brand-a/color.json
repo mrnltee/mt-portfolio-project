@@ -1,0 +1,8 @@
+{
+  "$description": "Brand A color foundation — brand ramp + neutral selection. Phase 1.",
+  "brand": {
+    "$type": "color",
+    "ramp": {},
+    "neutral": {}
+  }
+}

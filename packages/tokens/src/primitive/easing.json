@@ -1,0 +1,6 @@
+{
+  "$description": "Easing curves. Phase 1.",
+  "easing": {
+    "$type": "cubicBezier"
+  }
+}

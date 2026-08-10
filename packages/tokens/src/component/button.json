@@ -1,0 +1,8 @@
+{
+  "$description": "Button component tokens (semantic aliases). Phase 1.",
+  "button": {
+    "primary": {},
+    "secondary": {},
+    "ghost": {}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$description": "Global color primitives — brand/theme-agnostic raw ramps. Phase 1.",
+  "color": {
+    "$type": "color",
+    "neutral": {},
+    "blue": {},
+    "violet": {},
+    "teal": {},
+    "amber": {},
+    "red": {},
+    "green": {}
+  }
+}

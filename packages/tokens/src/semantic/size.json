@@ -1,0 +1,7 @@
+{
+  "$description": "Semantic size roles (density-driven). Phase 1.",
+  "size": {
+    "$type": "dimension",
+    "control": {}
+  }
+}

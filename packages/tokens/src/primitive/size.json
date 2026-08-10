@@ -1,0 +1,6 @@
+{
+  "$description": "Icon/control size ramp. Phase 1.",
+  "size": {
+    "$type": "dimension"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$description": "MT resolver manifest. Declares the two theming dimensions (brand, theme) and the order in which DTCG token sets are composed into each brand×theme permutation. Tool-agnostic: this manifest is our own composition spec and lives alongside — not inside — the token values. Set patterns are globs resolved relative to ../src, with {brand} and {theme} substituted per permutation.",
+  "name": "MT Design System",
+  "version": "0.0.0",
+  "spec": "DTCG 2025.10",
+  "dimensions": {
+    "brand": ["a", "b", "c"],
+    "theme": ["light", "dark"]
+  },
+  "sets": {
+    "primitive": ["primitive/*.json"],
+    "brand": ["brand/brand-{brand}/*.json"],
+    "semantic-base": [
+      "semantic/typography.json",
+      "semantic/space.json",
+      "semantic/radius.json",
+      "semantic/elevation.json",
+      "semantic/motion.json",
+      "semantic/size.json"
+    ],
+    "semantic-theme": ["semantic/color.{theme}.json"],
+    "component": ["component/*.json"]
+  },
+  "compose": ["primitive", "brand", "semantic-base", "semantic-theme", "component"],
+  "output": {
+    "permutationName": "brand-{brand}-{theme}"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "$description": "Tag component tokens (semantic aliases). Phase 1.",
+  "tag": {
+    "neutral": {},
+    "accent": {}
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$description": "Composite typography roles (theme-invariant). Phase 1.",
+  "text": {
+    "$type": "typography",
+    "display": {},
+    "heading": {},
+    "body": {},
+    "label": {},
+    "caption": {},
+    "overline": {},
+    "code": {}
+  }
+}

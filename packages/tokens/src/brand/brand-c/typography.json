@@ -1,0 +1,9 @@
+{
+  "$description": "Brand C typography foundation — font families + scale ratio. Phase 1.",
+  "brand": {
+    "font-family": {
+      "$type": "fontFamily"
+    },
+    "scale": {}
+  }
+}

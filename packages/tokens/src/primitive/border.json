@@ -1,0 +1,6 @@
+{
+  "$description": "Border width ramp. Phase 1.",
+  "border-width": {
+    "$type": "dimension"
+  }
+}

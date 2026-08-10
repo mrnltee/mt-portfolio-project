@@ -1,0 +1,9 @@
+{
+  "$description": "Semantic elevation roles (composite shadow). Phase 1.",
+  "elevation": {
+    "$type": "shadow",
+    "flat": {},
+    "raised": {},
+    "overlay": {}
+  }
+}

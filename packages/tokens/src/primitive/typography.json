@@ -1,0 +1,15 @@
+{
+  "$description": "Type ramps (family lives in brand). Phase 1.",
+  "font-size": {
+    "$type": "dimension"
+  },
+  "line-height": {
+    "$type": "number"
+  },
+  "font-weight": {
+    "$type": "fontWeight"
+  },
+  "letter-spacing": {
+    "$type": "dimension"
+  }
+}

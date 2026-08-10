@@ -1,0 +1,5 @@
+node_modules/
+# Generated token outputs — never hand-edited, always rebuilt from src/.
+packages/*/build/
+*.log
+.DS_Store

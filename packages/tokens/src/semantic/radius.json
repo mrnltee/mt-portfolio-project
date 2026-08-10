@@ -1,0 +1,10 @@
+{
+  "$description": "Semantic radius roles. Phase 1.",
+  "radius": {
+    "$type": "dimension",
+    "control": {},
+    "field": {},
+    "card": {},
+    "pill": {}
+  }
+}

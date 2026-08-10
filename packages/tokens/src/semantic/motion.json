@@ -1,0 +1,14 @@
+{
+  "$description": "Semantic motion roles. Phase 1.",
+  "duration": {
+    "$type": "duration",
+    "fast": {},
+    "base": {},
+    "slow": {}
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "standard": {},
+    "emphasized": {}
+  }
+}

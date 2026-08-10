@@ -1,0 +1,6 @@
+{
+  "$description": "Corner radius ramp. Phase 1.",
+  "radius": {
+    "$type": "dimension"
+  }
+}

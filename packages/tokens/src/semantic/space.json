@@ -1,0 +1,10 @@
+{
+  "$description": "Semantic spacing roles (density-scaled). Phase 1.",
+  "space": {
+    "$type": "dimension",
+    "inset": {},
+    "stack": {},
+    "inline": {},
+    "gutter": {}
+  }
+}

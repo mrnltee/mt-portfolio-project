@@ -1,0 +1,8 @@
+{
+  "$description": "Brand B density foundation — spacing/control-size multiplier. Phase 1.",
+  "brand": {
+    "density": {
+      "$type": "number"
+    }
+  }
+}

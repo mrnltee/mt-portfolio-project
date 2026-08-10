@@ -1,0 +1,11 @@
+{
+  "$description": "Semantic color roles — DARK resolution. References brand ramp + primitives. Phase 1.",
+  "color": {
+    "$type": "color",
+    "surface": {},
+    "content": {},
+    "border": {},
+    "action": {},
+    "feedback": {}
+  }
+}

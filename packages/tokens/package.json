@@ -1,0 +1,30 @@
+{
+  "name": "@mt/tokens",
+  "version": "0.0.0",
+  "description": "MT Design System — DTCG source tokens and generated CSS/TypeScript/Tailwind/Figma outputs.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": [
+    "src",
+    "resolver",
+    "build"
+  ],
+  "exports": {
+    "./css/*": "./build/css/*",
+    "./ts/*": "./build/ts/*",
+    "./tailwind/*": "./build/tailwind/*",
+    "./src/*": "./src/*"
+  },
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "validate": "tsx scripts/validate.ts",
+    "clean": "rm -rf build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "fast-glob": "^3.3.2",
+    "style-dictionary": "^4.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  }
+}

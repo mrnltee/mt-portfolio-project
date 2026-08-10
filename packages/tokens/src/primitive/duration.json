@@ -1,0 +1,6 @@
+{
+  "$description": "Motion durations. Phase 1.",
+  "duration": {
+    "$type": "duration"
+  }
+}

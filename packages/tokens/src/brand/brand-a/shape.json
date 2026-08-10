@@ -1,0 +1,8 @@
+{
+  "$description": "Brand A shape foundation — radius base/scale. Phase 1.",
+  "brand": {
+    "radius-base": {
+      "$type": "dimension"
+    }
+  }
+}
