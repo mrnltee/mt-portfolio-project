@@ -153,11 +153,6 @@ export function BrandMark() {
 
   return (
     <div aria-hidden="true" className="relative w-[300px] max-w-full sm:w-[340px]">
-      {/* faint indigo glow behind the box */}
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{ background: "radial-gradient(circle, rgb(var(--mt-color-indigo-500-rgb) / 0.10) 0%, transparent 68%)" }}
-      />
       <svg
         width="100%"
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}

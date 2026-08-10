@@ -21,7 +21,7 @@ export function Hero() {
             Product Designer {/* [REPLACE] optional: add location, e.g. "· San Francisco, CA" */}
           </motion.p>
           <motion.h1 {...rise(0.05)} className="font-display text-display font-bold tracking-tight text-text-primary">
-            Mernel Tusoy
+            Mernel
           </motion.h1>
           <motion.p {...rise(0.1)} className="mt-5 text-body-lg text-text-secondary">
             {/* [REPLACE] Replace with your real tagline — one or two sentences on what you design and how you think about it. */}
