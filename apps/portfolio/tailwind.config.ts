@@ -23,6 +23,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily,
+      // Tailwind's default aria variants omit `invalid`; enable it so
+      // `aria-invalid:*` utilities (e.g. the Input error border) generate.
+      aria: {
+        invalid: 'invalid="true"',
+      },
     },
   },
   plugins: [],
