@@ -16,7 +16,7 @@ export function Hero() {
     <section className="border-b border-border-default py-20 sm:py-28">
       <div className="mx-auto flex max-w-3xl flex-col items-start px-5 sm:px-8">
         <motion.p {...rise(0)} className="mb-4 text-overline text-action-primary">
-          UI/UX Designer {/* [REPLACE] optional: add location, e.g. "· San Francisco, CA" */}
+          Product Designer {/* [REPLACE] optional: add location, e.g. "· San Francisco, CA" */}
         </motion.p>
         <motion.h1 {...rise(0.05)} className="font-display text-display font-bold tracking-tight text-text-primary">
           Mernel Tusoy
