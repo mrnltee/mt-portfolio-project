@@ -36,6 +36,28 @@ const FACES = [
   `rotateX(-90deg) translateZ(${HALF}px)`, // bottom
 ];
 
+// Morse "M T" (—— —) drawn as a dash pattern. Unit = 10px; one full cycle spans
+// exactly one cube edge (EDGE px), so every edge reads M (dash dash) then T (dash).
+const STROKE = 4; // edge thickness (bold)
+const C = "var(--mt-color-indigo-500)";
+const MORSE_STOPS = [
+  `${C} 0px`, `${C} 30px`, //           M · dash 1
+  `transparent 30px`, `transparent 40px`, //  intra gap
+  `${C} 40px`, `${C} 70px`, //          M · dash 2
+  `transparent 70px`, `transparent 100px`, // inter-letter gap
+  `${C} 100px`, `${C} 130px`, //        T · dash
+  `transparent 130px`, `transparent 150px`, // trailing gap
+].join(", ");
+const MH = `repeating-linear-gradient(to right, ${MORSE_STOPS})`; // horizontal edges
+const MV = `repeating-linear-gradient(to bottom, ${MORSE_STOPS})`; // vertical edges
+// Four Morse-patterned edges per face (top / bottom / left / right), transparent interior.
+const MORSE_EDGES = [
+  `${MH} left top / 100% ${STROKE}px no-repeat`,
+  `${MH} left bottom / 100% ${STROKE}px no-repeat`,
+  `${MV} left top / ${STROKE}px 100% no-repeat`,
+  `${MV} right top / ${STROKE}px 100% no-repeat`,
+].join(", ");
+
 export function BrandMark() {
   const reduce = useReducedMotion() ?? false;
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -136,8 +158,7 @@ export function BrandMark() {
             className="absolute inset-0"
             style={{
               transform: t,
-              background: "transparent",
-              border: "4px dashed var(--mt-color-indigo-500)",
+              background: MORSE_EDGES,
               backfaceVisibility: "visible",
             }}
           />
