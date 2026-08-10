@@ -5,113 +5,121 @@ Reference for future edits to this project — read this before adding pages or 
 ## Stack
 
 Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion. Static/Vercel-deployable,
-no backend.
+no backend. This app lives in the **`mt-design-system` monorepo** as `apps/portfolio` and
+consumes the `@mt/tokens` workspace package (`packages/tokens`). Run it with
+`npm run portfolio:dev` from the monorepo root (or `npm run dev` from this folder).
 
 ## Design token system
 
-**Single source of truth:** `lib/tokens.ts`. Every color, type size, spacing value, radius,
-shadow, and motion timing used anywhere in the UI is defined there once and consumed via
-Tailwind (`tailwind.config.ts` imports directly from `lib/tokens.ts`). Never hardcode a hex
-value, px size, or duration in a component — add or reuse a token instead.
+**Single source of truth:** the **`@mt/tokens`** package (`packages/tokens` in the monorepo) —
+NOT a local file. Tokens are authored as DTCG JSON in `packages/tokens/src/**` across four tiers
+(**Primitive → Brand → Semantic → Component**) and built into consumer artifacts. There is no
+`lib/tokens.ts` — do not recreate one. Never hardcode a hex, px size, or duration in a component;
+use a token class or `--mt-*` CSS variable.
+
+### How tokens reach the app
+
+- **Tailwind preset** — `tailwind.config.ts` imports `@mt/tokens/tailwind`, which supplies the
+  `colors`, `fontSize`, `borderRadius`, `boxShadow`, `spacing`/`sizing`, and motion
+  `duration`/`easing` scales as utility classes.
+- **Runtime CSS variables** — `app/layout.tsx` imports `@mt/tokens/css`, exposing layered
+  `--mt-color-*` (and other `--mt-*`) variables under `:root`, `[data-theme="light|dark"]`, and
+  `[data-brand="a|b|c"]`. `app/globals.css` reads these (e.g. the body background/text, the
+  default `border-color`, the `.focus-ring` outline) — it no longer defines any `--color-*`
+  blocks itself.
+- **To change a token value:** edit `packages/tokens/src/**` and rebuild with
+  `npm run tokens:build` (monorepo root). The portfolio's `prebuild` script also rebuilds tokens
+  before `next build`, so CI/Vercel always has fresh output.
 
 ### Primitive vs. semantic colors
 
-- **Primitives** (`neutral`, `accent`, `success`, `warning`, `error` in `lib/tokens.ts`) are
-  the raw color scale. They compile to Tailwind classes like `bg-neutral-100` or
-  `bg-accent-500` and are safe for one-off decorative use.
-- **Semantic tokens** (`semanticColor` in `lib/tokens.ts`) map a *role* — background, text,
-  border, accent, status — to a primitive step, once per theme (light/dark). These are the
-  ones components should actually use: `bg-page`, `bg-surface`, `bg-surface-muted`,
-  `border-border` / `border-border-strong`, `text-ink` / `text-ink-secondary` / `text-ink-muted`,
-  `bg-brand` / `bg-brand-hover` / `bg-brand-subtle` / `text-brand-on`, `text-status-success`,
-  etc.
-- Semantic tokens are implemented as CSS custom properties in `app/globals.css` (`:root` for
-  light, `.dark` for dark — toggled by `next-themes` adding/removing the `dark` class on
-  `<html>`). **If you change a primitive hex in `lib/tokens.ts`, update the matching
-  `--color-*` custom property in `app/globals.css` to match** — these two files must stay in
-  sync; there's no build step that generates one from the other.
-- Always reach for a semantic class (`bg-surface`, `text-ink-secondary`) over a primitive one
-  (`bg-neutral-0`, `text-neutral-600`) in component code, so dark mode "just works" without a
-  `dark:` override.
+- **Semantic classes are what components use** (grouped `background` / `text` / `border` /
+  `action` / `feedback` / `focus` / `overlay`):
+  `bg-background-canvas` (page), `bg-background-surface`, `bg-background-surface-subtle`;
+  `text-text-primary` / `text-text-secondary` / `text-text-tertiary` / `text-text-inverse`;
+  `border-border-default` / `-subtle` / `-strong` / `-focus`;
+  `bg-action-primary` / `text-action-primary`;
+  `text-feedback-error` / `-warning` / `-success` / `-info`, `bg-feedback-error-surface`, etc.
+- **Primitive ramps** (`sand`, `indigo`, `green`, `amber`, `red`, …) compile to classes like
+  `bg-indigo-500` and are for one-off decorative use only (e.g. the hero brand mark). Prefer a
+  semantic class so theming "just works".
 
-### Other token scales
+### Theming (light/dark + brand)
 
-- **Typography** — `typeScale` in `lib/tokens.ts` defines named sizes (`display`, `h1`…`h4`,
-  `body-lg`, `body`, `body-sm`, `caption`, `overline`), each feeding a Tailwind `fontSize` key
-  (`text-h1`, `text-body`, etc.) with its line-height/letter-spacing baked in. Font *weight*
-  and *family* are applied separately via `font-display`/`font-sans` + `font-bold`/`font-semibold`
-  utilities — see `typeScale[name].weight/family` for the intended pairing and match it when
-  using a given size.
-- **Spacing** — intentionally *not* overridden; it equals Tailwind's default 4px-based scale.
-  `spacingScale` in `lib/tokens.ts` exists only to drive the visualization on `/design-system`.
-- **Radius** — `radiusScale` → Tailwind `borderRadius` (`rounded-sm` … `rounded-2xl`, `rounded-full`).
-- **Shadow** — `shadowScale` → Tailwind `boxShadow` (`shadow-soft-sm/md/lg`), soft/diffused by
-  design, no harsh drop shadows.
-- **Motion** — `motionTokens` → `duration-fast/base/slow` (150/250/400ms) and `ease-soft`.
-  Framer Motion spring interactions use `motionTokens.spring` (stiffness 260 / damping 24)
-  directly in component code.
+- **Light/dark:** `next-themes` (`ThemeProvider`, `attribute={["class","data-theme"]}`,
+  `defaultTheme="light"`, wired via `components/theme-provider.tsx` + `ThemeToggle`) sets
+  `data-theme` on `<html>`, and the semantic `--mt-*` variables flip automatically. A `dark`
+  class is emitted too (so Tailwind `dark:` utilities work), but you almost never need it — use
+  semantic classes. **Never write a component-level `dark:` color override.**
+- **Brand:** `<html data-brand="a">` pins the app to Brand A. The token system is multi-brand
+  (`a`/`b`/`c`); the portfolio consumes one brand.
 
-All of the above is rendered live on `/design-system` — that page reads directly from
-`lib/tokens.ts`, so it can never drift out of sync with the actual system.
+### Other scales
+
+- **Typography** — `text-display`, `text-h1`…`text-h4`, `text-body-lg`, `text-body`,
+  `text-body-sm`, `text-label`, `text-caption`, `text-overline`, `text-code` (line-height and
+  letter-spacing baked in). Apply weight/family separately via `font-display`/`font-sans`/
+  `font-mono` + `font-bold`/`font-semibold`.
+- **Radius** — `rounded-control` / `-field` / `-card` / `-container` / `-dialog` / `-pill`.
+- **Shadow** — `shadow-surface` / `-raised` / `-overlay` / `-modal` (elevation scale).
+- **Motion** — `duration-fast` / `-normal` / `-slow` and `ease-standard` / `-emphasized` for CSS;
+  Framer Motion reads raw values from `@mt/tokens/motion` (`motion.duration`, `motion.easing`).
+
+`/design-system` renders all of the above **live** from `@mt/tokens/metadata`, so it can't drift
+out of sync with the real system.
 
 ## Folder structure
 
 ```
 app/                        Routes (App Router)
-  page.tsx                  Home
+  page.tsx                  Home (hero + filterable featured project grid)
   case-studies/page.tsx     Case study index (filterable grid)
   case-studies/[slug]/      Dynamic case study route, statically generated
-  design-system/page.tsx    Live token + component documentation
+  design-system/page.tsx    Live token + component documentation (reads @mt/tokens/metadata)
   about/page.tsx
   contact/page.tsx
   how-this-was-built/page.tsx
-  layout.tsx                Root layout: fonts, ThemeProvider, Header/Footer, PageTransition
-  globals.css                Semantic color CSS custom properties + base styles
+  layout.tsx                Root layout: fonts, data-brand, ThemeProvider, @mt/tokens/css, chrome
+  globals.css               Base styles + .focus-ring utility (colors come from @mt, not here)
 
 components/
   ui/                       Design-system primitives (Button, Input, Card, Tag, NavLink,
                              Avatar, SectionHeading, Divider, ThemeToggle, ImagePlaceholder)
   layout/                   Header, Footer, Container, Section
-  sections/                 Page-specific composites (Hero, ProjectCard, ProjectGrid,
-                             CaseStudyTemplate)
-  design-system/            Sections specific to the /design-system page (color/type/
-                             spacing/component showcases)
+  sections/                 Page composites (Hero, ProjectCard, ProjectGrid, CaseStudyTemplate,
+                             BrandMark — the interactive 3D Morse-wireframe hero mark)
+  design-system/            Sections for the /design-system page (color/type/spacing/component)
   how-it-was-built/         PromptPanel + CopyButton for /how-this-was-built
   motion/                   PageTransition, RevealOnScroll
   theme-provider.tsx        next-themes wrapper
 
 lib/
-  tokens.ts                 Design token source of truth (see above)
   utils.ts                  cn() class-merge helper
   color.ts                  hex→HSL formatter (used on /design-system)
   projects-data.ts          All case study content — the single place to edit project copy
-  original-prompt.ts        Verbatim text shown on /how-this-was-built
+  original-prompt.ts        Verbatim scaffolding prompt shown on /how-this-was-built
 
 types/
   project.ts                CaseStudy and related types
 ```
 
+Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
+
 ## Conventions
 
-- **Editing project content**: change `lib/projects-data.ts` only — it drives the home page
-  grid, the case-studies index, the filter tags, and every `/case-studies/[slug]` page. Don't
-  hardcode project copy in components.
-- **Placeholders**: anything meant to be replaced is marked with a visible `[REPLACE]` prefix
-  in the rendered text (not just a code comment), so it's obvious when browsing the live site.
-  Follow this convention for any new placeholder content you add.
-- **Images**: there are no real image assets yet. `components/ui/image-placeholder.tsx`
-  renders a labeled placeholder box instead of a broken `<img>`. When you have real assets,
-  replace each `<ImagePlaceholder label="..." />` call with `next/image` — the component's
-  doc comment shows the exact swap. Always write a real, descriptive `alt`.
-- **Components**: variant/size APIs use `class-variance-authority` (see `components/ui/button.tsx`
-  and `tag.tsx` for the pattern). Add new variants there rather than overriding with ad hoc
-  `className` strings at call sites.
-- **Dark mode**: never write a component-level `dark:` override for color — use the semantic
-  tokens and it's automatic. `dark:` is fine for things that are genuinely non-color (e.g. an
-  image swap), which this project doesn't currently need.
-- **Motion**: keep it purposeful. Use `RevealOnScroll` sparingly (section-level, not every
-  child), and prefer the existing `duration-*`/`ease-soft` tokens over inventing new timings.
-- **Accessibility**: every interactive element uses the shared `.focus-ring` utility class
-  (defined in `globals.css`) instead of relying on the browser default outline — keep using it
-  on anything focusable you add. Respect `prefers-reduced-motion` (already handled globally in
-  `globals.css` plus per-component `useReducedMotion()` checks in the motion components).
+- **Editing project content**: change `lib/projects-data.ts` only — it drives the home grid, the
+  case-studies index, filter tags, and every `/case-studies/[slug]` page.
+- **Placeholders**: mark anything to be replaced with a visible `[REPLACE]` prefix in the rendered
+  text, not just a code comment.
+- **Images**: `components/ui/image-placeholder.tsx` renders a labeled box; swap each
+  `<ImagePlaceholder />` for `next/image` when you have real assets, with a real `alt`.
+- **Components**: variant/size APIs use `class-variance-authority` (see `button.tsx`, `tag.tsx`).
+  Add variants there, not ad hoc `className` strings. Form fields flag errors with
+  `aria-invalid` — the Input's `aria-invalid:*` classes plus the `.focus-ring[aria-invalid]`
+  rule in `globals.css` give the red border/ring/surface (see `input.tsx`).
+- **Dark mode**: use semantic classes; never a component-level `dark:` color override.
+- **Motion**: keep it purposeful. Use `RevealOnScroll` sparingly; prefer the `duration-*`/`ease-*`
+  tokens; drive Framer Motion from `@mt/tokens/motion`. All motion respects
+  `prefers-reduced-motion` (globally in `globals.css` and per-component `useReducedMotion()`).
+- **Accessibility**: every focusable element uses the shared `.focus-ring` utility (in
+  `globals.css`) instead of the browser default outline.
