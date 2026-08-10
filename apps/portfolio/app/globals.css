@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Color tokens are provided by @mt/tokens (imported in app/layout.tsx as
+ * `@mt/tokens/css`) as layered --mt-* CSS variables. The legacy --color-*
+ * blocks were removed once every consumer migrated to @mt (Stage 2D).
+ */
+
+* {
+  border-color: var(--mt-color-border-default);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--mt-color-background-canvas);
+  color: var(--mt-color-text-primary);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Shared focus-visible ring, used instead of the browser default outline. */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--mt-color-focus-ring);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

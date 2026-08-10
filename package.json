@@ -4,12 +4,16 @@
   "private": true,
   "description": "MT Design System — independent, multi-brand, DTCG-based token source and generated outputs. Consumed by applications (e.g. mernel-portfolio) via @mt/tokens.",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ],
   "scripts": {
     "build": "npm run build -w @mt/tokens",
     "validate": "npm run validate -w @mt/tokens",
-    "clean": "npm run clean -w @mt/tokens"
+    "clean": "npm run clean -w @mt/tokens",
+    "tokens:build": "npm run build -w @mt/tokens",
+    "portfolio:dev": "npm run dev -w mernel-portfolio",
+    "portfolio:build": "npm run build -w mernel-portfolio"
   },
   "engines": {
     "node": ">=20"
