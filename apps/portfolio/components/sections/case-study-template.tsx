@@ -17,11 +17,7 @@ export function CaseStudyTemplate({ project }: { project: CaseStudy }) {
       <header className="border-b border-border-default py-16 sm:py-20">
         <Container className="max-w-3xl">
           <div className="mb-4 flex flex-wrap gap-2">
-            {project.projectTypes.map((t) => (
-              <Tag key={t} variant="accent">
-                {t}
-              </Tag>
-            ))}
+            <Tag variant="accent">{project.category}</Tag>
           </div>
           <h1 className="font-display text-h1 font-bold text-text-primary">{project.title}</h1>
           <dl className="mt-6 grid grid-cols-1 gap-4 border-t border-border-default pt-6 text-body-sm sm:grid-cols-3">

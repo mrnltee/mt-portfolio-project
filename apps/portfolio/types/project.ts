@@ -14,16 +14,18 @@ export interface OutcomeMetric {
   value: string;
 }
 
+/** The single filter axis for the project grid. */
+export type Category = "Enterprise SaaS" | "AI Products" | "Design Systems" | "Mobile";
+
 export interface CaseStudy {
   slug: string;
   title: string;
   role: string;
-  /** Short filter-friendly category, e.g. "Product Design" — distinct from the full `role` job title. */
-  roleTag: string;
   timeframe: string;
+  /** The one axis the grid filters on — distinct from `tools`. */
+  category: Category;
+  /** Tools used — shown as card metadata, never a filter chip. */
   tools: string[];
-  /** Drives the home page filter — keep to a handful of short tags. */
-  projectTypes: string[];
   summary: string;
   coverLabel: string;
   tone: 0 | 1 | 2 | 3;

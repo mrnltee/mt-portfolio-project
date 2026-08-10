@@ -17,8 +17,8 @@ export function ProjectCard({ project }: { project: CaseStudy }) {
         <Card className="flex h-full flex-col overflow-hidden group-hover:shadow-modal">
           <ImagePlaceholder label={project.coverLabel} tone={project.tone} className="rounded-none border-0 border-b" />
           <CardBody className="flex flex-1 flex-col gap-3">
-            <div className="flex flex-wrap gap-2">
-              {project.projectTypes.map((t) => (
+            <div className="flex flex-wrap gap-1.5">
+              {project.tools.map((t) => (
                 <Tag key={t}>{t}</Tag>
               ))}
             </div>

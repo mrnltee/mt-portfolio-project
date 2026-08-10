@@ -1,4 +1,7 @@
-import type { CaseStudy } from "@/types/project";
+import type { CaseStudy, Category } from "@/types/project";
+
+/** Canonical filter order. A category only shows as a chip when a project uses it. */
+export const CATEGORIES: Category[] = ["Enterprise SaaS", "AI Products", "Design Systems", "Mobile"];
 
 /**
  * [REPLACE] Every entry in this file is placeholder content for a fictional
@@ -11,10 +14,9 @@ export const caseStudies: CaseStudy[] = [
     slug: "wildflow-habit-app",
     title: "Wildflow — Habit Tracking App",
     role: "Lead Product Designer",
-    roleTag: "Product Design",
     timeframe: "Jan 2024 – Apr 2024",
+    category: "Mobile",
     tools: ["Figma", "FigJam", "Maze", "Notion"],
-    projectTypes: ["Mobile App"],
     summary: "[REPLACE] One-line summary of the project and your impact, written for a scanning hiring manager.",
     coverLabel: "Wildflow app screens",
     tone: 0,
@@ -61,10 +63,9 @@ export const caseStudies: CaseStudy[] = [
     slug: "northwind-banking-redesign",
     title: "Northwind — Online Banking Redesign",
     role: "UX Researcher & Designer",
-    roleTag: "UX Research",
     timeframe: "Jun 2023 – Nov 2023",
+    category: "Enterprise SaaS",
     tools: ["Figma", "UserTesting", "Miro", "Jira"],
-    projectTypes: ["Web App"],
     summary: "[REPLACE] One-line summary of the project and your impact, written for a scanning hiring manager.",
     coverLabel: "Northwind banking dashboard",
     tone: 1,
@@ -111,10 +112,9 @@ export const caseStudies: CaseStudy[] = [
     slug: "atlas-design-system",
     title: "Atlas — Design System",
     role: "Design Systems Lead",
-    roleTag: "Design Systems",
     timeframe: "Feb 2023 – Present",
+    category: "Design Systems",
     tools: ["Figma", "Storybook", "Zeroheight"],
-    projectTypes: ["Design System"],
     summary: "[REPLACE] One-line summary of the project and your impact, written for a scanning hiring manager.",
     coverLabel: "Atlas component library",
     tone: 2,
@@ -161,8 +161,4 @@ export const caseStudies: CaseStudy[] = [
 
 export function getCaseStudyBySlug(slug: string) {
   return caseStudies.find((project) => project.slug === slug);
-}
-
-export function getAllTags(project: CaseStudy) {
-  return Array.from(new Set([project.roleTag, ...project.projectTypes, ...project.tools]));
 }

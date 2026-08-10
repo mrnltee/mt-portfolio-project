@@ -5,46 +5,43 @@ import { motion, AnimatePresence } from "framer-motion";
 import { motion as mtMotion } from "@mt/tokens/motion";
 import { ProjectCard } from "./project-card";
 import { FilterTag } from "@/components/ui/tag";
-import { getAllTags } from "@/lib/projects-data";
-import type { CaseStudy } from "@/types/project";
+import { CATEGORIES } from "@/lib/projects-data";
+import type { CaseStudy, Category } from "@/types/project";
 
 type SortOrder = "featured" | "az";
 
 export function ProjectGrid({ projects }: { projects: CaseStudy[] }) {
-  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
   const [sort, setSort] = useState<SortOrder>("featured");
 
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    projects.forEach((p) => getAllTags(p).forEach((t) => tags.add(t)));
-    return Array.from(tags).sort();
-  }, [projects]);
-
-  const toggleTag = (tag: string) => {
-    setActiveTags((prev) => (prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]));
-  };
+  // Only surface categories at least one project uses, kept in canonical order.
+  const categories = useMemo(
+    () => CATEGORIES.filter((c) => projects.some((p) => p.category === c)),
+    [projects],
+  );
 
   const visible = useMemo(() => {
-    let list = projects;
-    if (activeTags.length > 0) {
-      list = list.filter((p) => getAllTags(p).some((t) => activeTags.includes(t)));
-    }
+    let list = activeCategory ? projects.filter((p) => p.category === activeCategory) : projects;
     if (sort === "az") {
       list = [...list].sort((a, b) => a.title.localeCompare(b.title));
     }
     return list;
-  }, [projects, activeTags, sort]);
+  }, [projects, activeCategory, sort]);
 
   return (
     <div>
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by role, tool, or type">
-          <FilterTag active={activeTags.length === 0} onClick={() => setActiveTags([])}>
+        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
+          <FilterTag active={activeCategory === null} onClick={() => setActiveCategory(null)}>
             All
           </FilterTag>
-          {allTags.map((tag) => (
-            <FilterTag key={tag} active={activeTags.includes(tag)} onClick={() => toggleTag(tag)}>
-              {tag}
+          {categories.map((category) => (
+            <FilterTag
+              key={category}
+              active={activeCategory === category}
+              onClick={() => setActiveCategory((prev) => (prev === category ? null : category))}
+            >
+              {category}
             </FilterTag>
           ))}
         </div>
