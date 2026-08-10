@@ -4,11 +4,9 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/motion/page-transition";
-// Stage 2B: @mt/tokens layered runtime CSS variables (--mt-*). Additive — nothing consumes
-// them yet, so this does not change any existing visual. Imported before globals.css.
-// @ts-expect-error — the package exposes CSS at runtime without a TypeScript declaration.
+// @mt/tokens layered runtime CSS variables (--mt-*). Imported before globals.css.
+// Both stylesheet imports are typed via css.d.ts (no @ts-expect-error needed).
 import "@mt/tokens/css";
-// @ts-expect-error — the global stylesheet is handled by Next.js at build time.
 import "./globals.css";
 
 const sans = Inter({
