@@ -5,6 +5,7 @@ import { ColorSection } from "@/components/design-system/color-section";
 import { TypeSection } from "@/components/design-system/type-section";
 import { SpacingSection } from "@/components/design-system/spacing-section";
 import { ComponentSection } from "@/components/design-system/component-section";
+import { LibrarySection } from "@/components/design-system/library-section";
 
 export const metadata: Metadata = {
   title: "Design System — Mernel Tusoy",
@@ -16,6 +17,7 @@ const JUMP_LINKS = [
   { href: "#typography", label: "Typography" },
   { href: "#spacing", label: "Spacing & grid" },
   { href: "#components", label: "Components" },
+  { href: "#component-library", label: "Component library" },
 ];
 
 export default function DesignSystemPage() {
@@ -72,6 +74,19 @@ export default function DesignSystemPage() {
         </p>
         <div className="mt-4">
           <ComponentSection />
+        </div>
+      </Section>
+
+      <Section aria-labelledby="component-library-heading" id="component-library" className="border-t border-border-default">
+        <h2 id="component-library-heading" className="font-display text-h2 font-bold text-text-primary">
+          Component library
+        </h2>
+        <p className="mt-3 max-w-2xl text-body text-text-secondary">
+          Reusable primitives built on the same tokens — form controls, buttons, feedback &amp; status, navigation, and
+          iconography.
+        </p>
+        <div className="mt-4">
+          <LibrarySection />
         </div>
       </Section>
     </>
