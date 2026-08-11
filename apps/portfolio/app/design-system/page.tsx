@@ -7,6 +7,7 @@ import { SpacingSection } from "@/components/design-system/spacing-section";
 import { ComponentSection } from "@/components/design-system/component-section";
 import { LibrarySection } from "@/components/design-system/library-section";
 import { LibraryInteractive } from "@/components/design-system/library-interactive";
+import { LibraryFinal } from "@/components/design-system/library-final";
 
 export const metadata: Metadata = {
   title: "Design System — Mernel Tusoy",
@@ -89,6 +90,7 @@ export default function DesignSystemPage() {
         <div className="mt-4">
           <LibrarySection />
           <LibraryInteractive />
+          <LibraryFinal />
         </div>
       </Section>
     </>
