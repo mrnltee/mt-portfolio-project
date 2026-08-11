@@ -15,6 +15,8 @@ export const buttonVariants = cva(
       variant: {
         primary: "bg-action-primary text-action-on-primary hover:bg-action-primary-hover",
         secondary: "border border-border-default bg-background-surface text-text-primary hover:bg-background-surface-subtle",
+        tertiary: "bg-action-accent-subtle text-action-on-accent-subtle hover:bg-action-accent-subtle/70",
+        danger: "bg-action-destructive text-action-on-destructive hover:bg-action-destructive-hover",
         ghost: "text-text-primary hover:bg-background-surface-subtle",
         link: "text-action-primary underline-offset-4 hover:underline p-0 h-auto",
       },
