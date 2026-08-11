@@ -63,6 +63,13 @@ export default function AboutPage() {
               have to think about. Most of my work sits at the intersection of research, systems thinking, and
               craft.
             </p>
+            <p className="mt-3 max-w-2xl text-body-sm text-text-secondary">
+              I&apos;ve worked at IBM, and on products for Maxicare, SM Cinema, Robinsons Movieworld, and
+              GoDaddy (white-label).
+            </p>
+            <p className="mt-2 text-body-sm text-text-tertiary">
+              Based in the Philippines (GMT+8) · Open to remote work and relocation
+            </p>
           </div>
         </div>
       </Section>
