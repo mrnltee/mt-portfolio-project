@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { Bold, Italic, Underline, AlignLeft, AlignCenter } from "lucide-react";
+import { Bold, Italic, Underline, AlignLeft, AlignCenter, Home, Layers, Palette, Mail } from "lucide-react";
 import { Combobox } from "@/components/ui/combobox";
+import { SideNav } from "@/components/ui/side-nav";
 import { DatePicker } from "@/components/ui/date-picker";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Stepper } from "@/components/ui/stepper";
@@ -106,6 +107,17 @@ export function LibraryFinal() {
             Month
           </Button>
         </ButtonGroup>
+      </Group>
+
+      <Group title="Side nav" note="Vertical navigation — highlights the current route">
+        <SideNav
+          items={[
+            { label: "Home", href: "/", icon: Home },
+            { label: "Case studies", href: "/case-studies", icon: Layers },
+            { label: "Design system", href: "/design-system", icon: Palette },
+            { label: "Contact", href: "/contact", icon: Mail },
+          ]}
+        />
       </Group>
 
       <Group title="Link list" note="Bordered navigational list">
