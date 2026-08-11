@@ -49,7 +49,12 @@ export default function AboutPage() {
     <>
       <Section className="pt-16 sm:pt-20">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-          <Avatar alt="Mernel Tusoy" size={96} />
+          <Avatar
+            src="/mernel-avatar.png"
+            alt="Mernel Tusoy"
+            size={112}
+            className="bg-action-accent-subtle object-top ring-1 ring-border-default"
+          />
           <div>
             <h1 className="font-display text-h1 font-bold text-text-primary">About</h1>
             <p className="mt-3 max-w-2xl text-body-lg text-text-secondary">
