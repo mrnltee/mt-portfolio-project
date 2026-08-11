@@ -70,12 +70,13 @@ import { Card, CardBody } from "@/components/ui/card";
 import { Tag, FilterTag } from "@/components/ui/tag";
 import { MaterialIcon } from "@/components/ui/material-icon";
 import { cn } from "@/lib/utils";
+import { slugify } from "./component-toc";
 
 const focusPreviewStyle: CSSProperties = { outline: "2px solid var(--mt-color-focus-ring)", outlineOffset: "2px" };
 
 function Category({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section className="border-t border-border-default pt-10 first:border-t-0 first:pt-0">
+    <section id={slugify(title)} className="scroll-mt-24 border-t border-border-default pt-10 first:border-t-0 first:pt-0">
       <h3 className="text-overline text-action-primary">{title}</h3>
       <div className="mt-1 divide-y divide-border-default">{children}</div>
     </section>
@@ -84,7 +85,7 @@ function Category({ title, children }: { title: string; children: ReactNode }) {
 
 function Demo({ title, note, children }: { title: string; note?: string; children: ReactNode }) {
   return (
-    <div className="py-8">
+    <div id={slugify(title)} className="scroll-mt-24 py-8">
       <div className="mb-4 flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
         <h4 className="font-display text-h4 font-semibold text-text-primary">{title}</h4>
         {note && <code className="text-caption text-text-secondary">{note}</code>}
