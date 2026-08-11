@@ -149,7 +149,7 @@ export function BrandMark() {
     <div
       ref={wrapRef}
       aria-hidden="true"
-      className="relative w-[300px] max-w-full cursor-pointer select-none sm:w-[320px]"
+      className="brand-glow relative w-[300px] max-w-full cursor-pointer select-none sm:w-[320px]"
       onMouseMove={reduce ? undefined : onMove}
       onMouseEnter={reduce ? undefined : onMove}
       onMouseLeave={reduce ? undefined : onLeave}

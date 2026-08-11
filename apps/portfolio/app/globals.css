@@ -22,6 +22,43 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/*
+ * Subtle isometric-box pattern behind every page. The mask is a monochrome cube
+ * tile; the visible colour comes from --pattern-color, so it adapts to theme.
+ */
+:root {
+  --pattern-color: rgb(var(--mt-color-indigo-500-rgb) / 0.05);
+}
+:root[data-theme="dark"] {
+  --pattern-color: rgb(var(--mt-color-indigo-300-rgb) / 0.07);
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--pattern-color);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='72'%3E%3Cpath%20d='M32%2012L52.8%2024L52.8%2048L32%2060L11.2%2048L11.2%2024Z%20M32%2036L32%2012M32%2036L11.2%2048M32%2036L52.8%2048'%20fill='none'%20stroke='black'%20stroke-width='1.5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='72'%3E%3Cpath%20d='M32%2012L52.8%2024L52.8%2048L32%2060L11.2%2048L11.2%2024Z%20M32%2036L32%2012M32%2036L11.2%2048M32%2036L52.8%2048'%20fill='none'%20stroke='black'%20stroke-width='1.5'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-size: 64px 72px;
+  mask-size: 64px 72px;
+}
+
+/* Indigo glow for the hero brand cube; intensifies on hover/focus. */
+.brand-glow {
+  filter: drop-shadow(0 0 4px rgb(var(--mt-color-indigo-500-rgb) / 0.45))
+    drop-shadow(0 0 12px rgb(var(--mt-color-indigo-500-rgb) / 0.28));
+  transition: filter 0.35s ease;
+}
+.brand-glow:hover,
+.brand-glow:focus-within {
+  filter: drop-shadow(0 0 6px rgb(var(--mt-color-indigo-500-rgb) / 0.7))
+    drop-shadow(0 0 22px rgb(var(--mt-color-indigo-500-rgb) / 0.5));
+}
+
 /* Shared focus-visible ring, used instead of the browser default outline. */
 .focus-ring {
   outline: none;
