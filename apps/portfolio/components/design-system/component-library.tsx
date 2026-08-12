@@ -59,7 +59,7 @@ import { SideNav } from "@/components/ui/side-nav";
 import { LinkList } from "@/components/ui/link-list";
 import { Alert } from "@/components/ui/alert";
 import { Banner } from "@/components/ui/banner";
-import { Toaster, useToast } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/toast";
 import { Progress } from "@/components/ui/progress";
 import { Spinner } from "@/components/ui/spinner";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -404,10 +404,8 @@ export function ComponentLibrary() {
             </div>
           </Demo>
 
-          <Demo title="Toast / Snackbar" note="@radix-ui/react-toast · mount <Toaster> once">
-            <Toaster>
-              <ToastDemo />
-            </Toaster>
+          <Demo title="Toast / Snackbar" note="@radix-ui/react-toast · Toaster mounted app-wide">
+            <ToastDemo />
           </Demo>
 
           <Demo title="Progress · Spinner · Skeleton">

@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/motion/page-transition";
+import { Toaster } from "@/components/ui/toast";
 // @mt/tokens layered runtime CSS variables (--mt-*). Imported before globals.css.
 // Both stylesheet imports are typed via css.d.ts (no @ts-expect-error needed).
 import "@mt/tokens/css";
@@ -45,17 +46,19 @@ export default function RootLayout({
         {/* Stage 2B: emit BOTH `class` (keeps existing .dark dark mode) and `data-theme`
             (for @mt/tokens). data-brand="a" selects the initial @mt brand. */}
         <ThemeProvider attribute={["class", "data-theme"]} defaultTheme="light" enableSystem={false}>
-          <a
-            href="#main-content"
-            className="focus-ring sr-only rounded-field bg-action-primary px-4 py-2 text-action-on-primary focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
-          >
-            Skip to main content
-          </a>
-          <Header />
-          <main id="main-content" className="flex-1">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer />
+          <Toaster>
+            <a
+              href="#main-content"
+              className="focus-ring sr-only rounded-field bg-action-primary px-4 py-2 text-action-on-primary focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+            >
+              Skip to main content
+            </a>
+            <Header />
+            <main id="main-content" className="flex-1">
+              <PageTransition>{children}</PageTransition>
+            </main>
+            <Footer />
+          </Toaster>
         </ThemeProvider>
       </body>
     </html>

@@ -20,15 +20,18 @@ export default function HowThisWasBuiltPage() {
             aesthetic, accent color, and default theme.
           </p>
           <p>
-            It then grew past that original prompt. The design tokens were pulled out of the app into a
+            It then grew well past that original prompt. The design tokens were pulled out of the app into a
             standalone, multi-brand token library — authored in the{" "}
             <a href="https://www.designtokens.org" className="focus-ring rounded underline decoration-border-strong underline-offset-2 hover:text-text-primary" target="_blank" rel="noreferrer">DTCG</a>{" "}
-            standard and shared through an{" "}
+            standard, shared through an{" "}
             <code className="rounded bg-background-surface-subtle px-1.5 py-0.5 text-caption text-text-primary">@mt/tokens</code>{" "}
-            package in a monorepo, then projected back into Figma. The <a href="/design-system" className="focus-ring rounded underline decoration-border-strong underline-offset-2 hover:text-text-primary">design-system</a> page
-            is generated straight from that single source of truth. I also added the interactive 3D brand mark in
-            the hero and tightened component states (like the input error styling), reviewing and adjusting the
-            generated code page by page.
+            package in a monorepo, and projected back into Figma — so the{" "}
+            <a href="/design-system" className="focus-ring rounded underline decoration-border-strong underline-offset-2 hover:text-text-primary">design-system</a>{" "}
+            page is generated straight from that single source of truth. From there I built out a full component
+            library — buttons, form controls, navigation, and feedback, including interactive pieces like a
+            combobox, date picker, and toasts on Radix — plus an interactive 3D brand mark and a subtle honeycomb
+            backdrop. Everything was reviewed and adjusted page by page, and the whole thing lives on GitHub,
+            auto-deploying to Vercel.
           </p>
           <p>
             Every project, metric, and photo elsewhere on this site is placeholder content pending real case
