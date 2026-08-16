@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import { Command } from "cmdk";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "./popover";
@@ -30,6 +30,7 @@ export function Combobox({
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const listboxId = useId();
   const selected = options.find((o) => o.value === value);
 
   return (
@@ -39,6 +40,8 @@ export function Combobox({
           type="button"
           role="combobox"
           aria-expanded={open}
+          aria-controls={listboxId}
+          aria-haspopup="listbox"
           className={cn(
             "focus-ring inline-flex h-control-md w-full items-center justify-between gap-2 rounded-field border border-border-default bg-background-surface px-3.5 text-body transition-colors hover:border-border-strong",
             selected ? "text-text-primary" : "text-text-tertiary",
@@ -57,7 +60,7 @@ export function Combobox({
               className="h-10 w-full bg-transparent text-body-sm text-text-primary outline-none placeholder:text-text-tertiary"
             />
           </div>
-          <Command.List className="max-h-56 overflow-auto p-1">
+          <Command.List id={listboxId} className="max-h-56 overflow-auto p-1">
             <Command.Empty className="px-2.5 py-6 text-center text-body-sm text-text-secondary">{emptyText}</Command.Empty>
             {options.map((o) => (
               <Command.Item
