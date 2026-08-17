@@ -37,9 +37,17 @@ function LetterCube({ letter }: { letter: "M" | "T" }) {
           strokeLinejoin="round"
         />
       ) : (
+        // T drawn as an upward arrow: vertical shaft + a chevron head at the box's top corner.
         <>
-          <line x1={P.UL[0]} y1={P.UL[1]} x2={P.UR[0]} y2={P.UR[1]} stroke="var(--mt-color-action-primary)" strokeWidth={5} strokeLinecap="round" />
-          <line x1={60} y1={P.UL[1]} x2={60} y2={P.B[1]} stroke="var(--mt-color-action-primary)" strokeWidth={5} strokeLinecap="round" />
+          <line x1={60} y1={P.T[1]} x2={60} y2={P.B[1]} stroke="var(--mt-color-action-primary)" strokeWidth={5} strokeLinecap="round" />
+          <polyline
+            points={`42,38 ${P.T[0]},${P.T[1]} 78,38`}
+            fill="none"
+            stroke="var(--mt-color-action-primary)"
+            strokeWidth={5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </>
       )}
     </svg>
@@ -54,11 +62,11 @@ function Dash() {
 export function BrandStoryDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (v: boolean) => void }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="max-w-xl">
         <DialogTitle>Why the box is empty</DialogTitle>
         <DialogDescription className="mt-1">The story behind the mark.</DialogDescription>
 
-        <div className="mt-6 space-y-6">
+        <div className="mt-6 space-y-6 [text-wrap:pretty]">
           <section>
             <h3 className="text-overline text-action-primary">It starts empty</h3>
             <p className="mt-2 text-body-sm text-text-secondary">
@@ -85,7 +93,8 @@ export function BrandStoryDialog({ open, onOpenChange }: { open: boolean; onOpen
             <h3 className="text-overline text-action-primary">It hides an M and a T</h3>
             <p className="mt-2 text-body-sm text-text-secondary">
               As the box turns, its own edges line up into letters. Catch it at one angle and you see an M.
-              Keep watching and it resolves into a T.
+              Keep watching and it resolves into a T, drawn as an arrow pointing up: a reminder that I keep
+              looking ahead.
             </p>
             <div className="mt-4 grid grid-cols-2 gap-4">
               {(["M", "T"] as const).map((l) => (

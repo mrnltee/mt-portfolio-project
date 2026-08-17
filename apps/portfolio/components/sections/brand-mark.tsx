@@ -13,8 +13,8 @@ import { BrandStoryDialog } from "./brand-story";
  *
  * Interaction (trackball): hover position sets angular velocity (above→down,
  * below→up, left→forward, right→back; speed scales with distance from center);
- * click flings a burst in the cursor direction that coasts with friction; mouse
- * leave eases the tilt home and keeps a slow idle spin. Reduced-motion safe.
+ * mouse leave eases the tilt home and keeps a slow idle spin. Click or Enter/Space
+ * opens the brand-story modal. Reduced-motion safe.
  */
 
 const HALF = 70; // half edge (px)
@@ -68,7 +68,7 @@ export function BrandMark() {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(SVGLineElement | null)[]>([]);
-  const s = useRef({ rx: RX0, ry: RY0, vx: 0, vy: 0, px: 0, py: 0, inside: false, fling: false, march: 0 });
+  const s = useRef({ rx: RX0, ry: RY0, vx: 0, vy: 0, px: 0, py: 0, inside: false, march: 0 });
 
   useEffect(() => {
     if (reduce) return;
@@ -94,13 +94,7 @@ export function BrandMark() {
     };
     const tick = () => {
       st.march = (st.march + MARCH) % 150; // morse dashes crawl along the edges
-      if (st.fling) {
-        st.vx *= FRICTION;
-        st.vy *= FRICTION;
-        st.rx += st.vx;
-        st.ry += st.vy;
-        if (Math.abs(st.vx) < 0.0008 && Math.abs(st.vy) < 0.0008) st.fling = false;
-      } else if (st.inside) {
+      if (st.inside) {
         const tvx = -st.py * MAXV; // above center → spin downward
         const tvy = -st.px * MAXV; // left of center → spin forward
         st.vx += (tvx - st.vx) * 0.15;
@@ -164,7 +158,7 @@ export function BrandMark() {
         {/* Hover / focus hint, anchored above the top-right corner. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-1 top-1 z-10 -translate-y-full rounded-field border border-border-default bg-background-surface px-3 py-2 text-right opacity-0 shadow-overlay transition-all duration-200 group-hover:opacity-100 group-focus:opacity-100"
+          className="pointer-events-none absolute right-1 top-1 z-10 -translate-y-full rounded-field border border-border-default bg-background-surface px-3 py-2 text-right opacity-0 shadow-overlay transition-opacity duration-200 delay-500 group-hover:opacity-100 group-hover:delay-0 group-focus:opacity-100 group-focus:delay-0"
         >
           <p className="whitespace-nowrap text-caption text-text-secondary">curious about the box?</p>
           <p className="text-caption font-medium text-action-primary underline underline-offset-2">click here</p>
