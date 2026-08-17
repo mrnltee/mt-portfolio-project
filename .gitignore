@@ -5,3 +5,7 @@ packages/*/build/
 .DS_Store
 .vercel
 .env*
+# Agent skills installed via `npx skills` — per-machine tooling, not app code.
+.agents/
+.claude/skills/
+skills-lock.json
