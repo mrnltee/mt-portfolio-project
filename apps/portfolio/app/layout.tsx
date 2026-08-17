@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/motion/page-transition";
 import { Toaster } from "@/components/ui/toast";
+import { Analytics } from "@vercel/analytics/next";
 // @mt/tokens layered runtime CSS variables (--mt-*). Imported before globals.css.
 // Both stylesheet imports are typed via css.d.ts (no @ts-expect-error needed).
 import "@mt/tokens/css";
@@ -60,6 +61,7 @@ export default function RootLayout({
             <Footer />
           </Toaster>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

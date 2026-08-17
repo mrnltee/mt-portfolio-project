@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
+import { BrandStoryDialog } from "./brand-story";
 
 /**
  * Personal brand mark: a 3D wireframe box whose 12 edges are crisp SVG strokes
@@ -64,6 +65,7 @@ const defaultPts = VERTS.map((v) => project(rotate(v, RX0, RY0)));
 
 export function BrandMark() {
   const reduce = useReducedMotion() ?? false;
+  const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(SVGLineElement | null)[]>([]);
   const s = useRef({ rx: RX0, ry: RY0, vx: 0, vy: 0, px: 0, py: 0, inside: false, fling: false, march: 0 });
@@ -136,51 +138,66 @@ export function BrandMark() {
   const onLeave = () => {
     s.current.inside = false;
   };
-  const onClick = (e: React.MouseEvent) => {
-    const { px, py } = norm(e);
-    const dist = Math.min(1, Math.hypot(px, py));
-    const burst = (7 + dist * 16) * (Math.PI / 180);
-    s.current.vx += -py * burst;
-    s.current.vy += -px * burst;
-    s.current.fling = true;
-  };
+  const openStory = () => setOpen(true);
 
   return (
-    <div
-      ref={wrapRef}
-      aria-hidden="true"
-      className="brand-glow relative w-[300px] max-w-full cursor-pointer select-none sm:w-[320px]"
-      onMouseMove={reduce ? undefined : onMove}
-      onMouseEnter={reduce ? undefined : onMove}
-      onMouseLeave={reduce ? undefined : onLeave}
-      onClick={reduce ? undefined : onClick}
-    >
-      <svg
-        width="100%"
-        viewBox={`0 0 ${VIEW} ${VIEW}`}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="Rotating 3D box outlined in Morse code for M and T"
+    <>
+      <div
+        ref={wrapRef}
+        role="button"
+        tabIndex={0}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-label="Open the story behind this brand mark"
+        className="focus-ring brand-glow group relative w-[300px] max-w-full cursor-pointer select-none rounded-card sm:w-[320px]"
+        onMouseMove={reduce ? undefined : onMove}
+        onMouseEnter={reduce ? undefined : onMove}
+        onMouseLeave={reduce ? undefined : onLeave}
+        onClick={openStory}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openStory();
+          }
+        }}
       >
-        {EDGES.map((e, i) => (
-          <line
-            key={i}
-            ref={(el) => {
-              lineRefs.current[i] = el;
-            }}
-            x1={defaultPts[e[0]][0]}
-            y1={defaultPts[e[0]][1]}
-            x2={defaultPts[e[1]][0]}
-            y2={defaultPts[e[1]][1]}
-            stroke="var(--mt-color-indigo-500)"
-            strokeWidth={STROKE}
-            strokeLinecap="round"
-            pathLength={150}
-            strokeDasharray={DASH}
-          />
-        ))}
-      </svg>
-    </div>
+        {/* Hover / focus hint, anchored above the top-right corner. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-1 top-1 z-10 -translate-y-full rounded-field border border-border-default bg-background-surface px-3 py-2 text-right opacity-0 shadow-overlay transition-all duration-200 group-hover:opacity-100 group-focus:opacity-100"
+        >
+          <p className="whitespace-nowrap text-caption text-text-secondary">curious about the box?</p>
+          <p className="text-caption font-medium text-action-primary underline underline-offset-2">click here</p>
+        </div>
+
+        <svg
+          width="100%"
+          viewBox={`0 0 ${VIEW} ${VIEW}`}
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          {EDGES.map((e, i) => (
+            <line
+              key={i}
+              ref={(el) => {
+                lineRefs.current[i] = el;
+              }}
+              x1={defaultPts[e[0]][0]}
+              y1={defaultPts[e[0]][1]}
+              x2={defaultPts[e[1]][0]}
+              y2={defaultPts[e[1]][1]}
+              stroke="var(--mt-color-indigo-500)"
+              strokeWidth={STROKE}
+              strokeLinecap="round"
+              pathLength={150}
+              strokeDasharray={DASH}
+            />
+          ))}
+        </svg>
+      </div>
+
+      <BrandStoryDialog open={open} onOpenChange={setOpen} />
+    </>
   );
 }
