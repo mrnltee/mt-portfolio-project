@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     "Product designer with ten-plus years across enterprise SaaS, AI document tooling, and cinema booking, designing for the stack engineers actually build in.",
 };
 
+// One shared content width so every section aligns (centered, symmetric margins).
+const WIDTH = "max-w-4xl";
+
 const WHAT_I_BRING = [
   {
     title: "I hand over decisions, not possibilities.",
@@ -46,7 +49,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Opening */}
-      <Section className="pt-16 sm:pt-20">
+      <Section containerClassName={WIDTH} className="pt-16 pb-12 sm:pt-20 sm:pb-16">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
           <Avatar
             src="/mernel-avatar-head.png"
@@ -57,7 +60,7 @@ export default function AboutPage() {
           <h1 className="font-display text-h1 font-bold text-text-primary">About</h1>
         </div>
 
-        <div className="mt-8 max-w-3xl space-y-4">
+        <div className="mt-8 space-y-4">
           <p className="text-body-lg text-text-primary">
             I&apos;ve changed direction more than once. Web designer, graphic artist, UI/UX designer, and then
             in 2019 back into development.
@@ -80,7 +83,7 @@ export default function AboutPage() {
       </Section>
 
       {/* What I bring */}
-      <Section className="border-t border-border-default">
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
         <h2 className="font-display text-h2 font-bold text-text-primary">What I bring</h2>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
           {WHAT_I_BRING.map((item, i) => (
@@ -97,33 +100,30 @@ export default function AboutPage() {
       </Section>
 
       {/* Working with engineers */}
-      <Section className="border-t border-border-default">
-        <div className="max-w-3xl">
-          <h2 className="font-display text-h2 font-bold text-text-primary">Working with engineers</h2>
-          <div className="mt-6 space-y-4">
-            <p className="text-body text-text-secondary">
-              A QA engineer I worked with put it better than I would: I&apos;m reliable to work with because
-              when something blocks on their end, I adjust.
-            </p>
-            <p className="text-body text-text-secondary">
-              That&apos;s most of it. I don&apos;t treat a constraint as a betrayal of the design. Sometimes
-              the build comes back close to what I drew rather than identical, and if the behavior is right,
-              close is fine. I&apos;ve been the person on the other end of that conversation. It changes what
-              you fight for.
-            </p>
-          </div>
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
+        <h2 className="font-display text-h2 font-bold text-text-primary">Working with engineers</h2>
+        <div className="mt-6 space-y-4">
+          <p className="text-body text-text-secondary">
+            A QA engineer I worked with put it better than I would: I&apos;m reliable to work with because when
+            something blocks on their end, I adjust.
+          </p>
+          <p className="text-body text-text-secondary">
+            That&apos;s most of it. I don&apos;t treat a constraint as a betrayal of the design. Sometimes the
+            build comes back close to what I drew rather than identical, and if the behavior is right, close is
+            fine. I&apos;ve been the person on the other end of that conversation. It changes what you fight for.
+          </p>
         </div>
       </Section>
 
       {/* Selected work */}
-      <Section className="border-t border-border-default">
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
         <h2 className="font-display text-h2 font-bold text-text-primary">Selected work</h2>
         <div className="mt-8 grid grid-cols-1 gap-6">
           {SELECTED_WORK.map((item, i) => (
             <RevealOnScroll key={item.title} delay={i * 0.06}>
               <Card>
                 <CardBody className="sm:flex sm:gap-8">
-                  <h3 className="mb-2 shrink-0 font-display text-h4 font-semibold text-text-primary sm:mb-0 sm:w-56">
+                  <h3 className="mb-2 shrink-0 font-display text-h4 font-semibold text-text-primary sm:mb-0 sm:w-52">
                     {item.title}
                   </h3>
                   <p className="text-body text-text-secondary">{item.body}</p>
@@ -135,9 +135,9 @@ export default function AboutPage() {
       </Section>
 
       {/* Where I've worked */}
-      <Section className="border-t border-border-default">
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
         <h2 className="font-display text-h2 font-bold text-text-primary">Where I&apos;ve worked</h2>
-        <p className="mt-3 max-w-3xl text-body text-text-secondary">
+        <p className="mt-3 text-body text-text-secondary">
           A quick tour of the teams I&apos;ve built things with, from early studios to enterprise, with room at
           the end for whatever comes next.
         </p>
@@ -145,38 +145,34 @@ export default function AboutPage() {
       </Section>
 
       {/* What I'm looking for */}
-      <Section className="border-t border-border-default">
-        <div className="max-w-3xl">
-          <h2 className="font-display text-h2 font-bold text-text-primary">What I&apos;m looking for</h2>
-          <p className="mt-6 text-body text-text-secondary">
-            Enterprise or SaaS products with real complexity in them: multiple roles, real rules, workflows
-            that people live inside for eight hours. I work best on a team where engineers are in the room
-            early rather than at the end.
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
+        <h2 className="font-display text-h2 font-bold text-text-primary">What I&apos;m looking for</h2>
+        <p className="mt-6 text-body text-text-secondary">
+          Enterprise or SaaS products with real complexity in them: multiple roles, real rules, workflows that
+          people live inside for eight hours. I work best on a team where engineers are in the room early rather
+          than at the end.
+        </p>
+      </Section>
+
+      {/* Personal */}
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
+        <h2 className="font-display text-h2 font-bold text-text-primary">Personal</h2>
+        <div className="mt-6 space-y-4">
+          <p className="text-body text-text-secondary">
+            When I hit a badly designed app, I don&apos;t just close it. I work out why it&apos;s behaving that
+            way, screenshot it, send it to friends, and sometimes leave a comment for the developers. I can lose
+            an entire day to state management, checking whether the right thing triggers and the right thing
+            shows.
+          </p>
+          <p className="text-body text-text-secondary">
+            What I&apos;d want a team to remember: that there was a designer here who could code a little, spoke
+            the engineers&apos; language, and used it to make their jobs easier.
           </p>
         </div>
       </Section>
 
-      {/* Personal */}
-      <Section className="border-t border-border-default">
-        <div className="max-w-3xl">
-          <h2 className="font-display text-h2 font-bold text-text-primary">Personal</h2>
-          <div className="mt-6 space-y-4">
-            <p className="text-body text-text-secondary">
-              When I hit a badly designed app, I don&apos;t just close it. I work out why it&apos;s behaving
-              that way, screenshot it, send it to friends, and sometimes leave a comment for the developers. I
-              can lose an entire day to state management, checking whether the right thing triggers and the
-              right thing shows.
-            </p>
-            <p className="text-body text-text-secondary">
-              What I&apos;d want a team to remember: that there was a designer here who could code a little,
-              spoke the engineers&apos; language, and used it to make their jobs easier.
-            </p>
-          </div>
-        </div>
-      </Section>
-
       {/* CTA */}
-      <Section className="border-t border-border-default bg-background-surface-subtle/40">
+      <Section containerClassName={WIDTH} className="border-t border-border-default bg-background-surface-subtle/40 py-12 sm:py-16">
         <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="font-display text-h2 font-bold text-text-primary">Looking for a product designer?</h2>
           <ButtonLink href="/contact" variant="primary" size="lg" className="shrink-0">
