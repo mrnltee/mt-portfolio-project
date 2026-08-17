@@ -14,6 +14,9 @@ export const metadata: Metadata = {
 
 // One shared content width so every section aligns (centered, symmetric margins).
 const WIDTH = "max-w-4xl";
+// Running body copy is capped to a comfortable reading measure (~70ch); headings
+// and feature blocks (cards, timeline) still span the full section width.
+const PROSE = "max-w-2xl";
 
 const WHAT_I_BRING = [
   {
@@ -60,7 +63,7 @@ export default function AboutPage() {
           <h1 className="font-display text-h1 font-bold text-text-primary">About</h1>
         </div>
 
-        <div className="mt-8 space-y-4">
+        <div className={`mt-8 space-y-4 ${PROSE}`}>
           <p className="text-body-lg text-text-primary">
             I&apos;ve changed direction more than once. Web designer, graphic artist, UI/UX designer, and then
             in 2019 back into development.
@@ -102,7 +105,7 @@ export default function AboutPage() {
       {/* Working with engineers */}
       <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
         <h2 className="font-display text-h2 font-bold text-text-primary">Working with engineers</h2>
-        <div className="mt-6 space-y-4">
+        <div className={`mt-6 space-y-4 ${PROSE}`}>
           <p className="text-body text-text-secondary">
             A QA engineer I worked with put it better than I would: I&apos;m reliable to work with because when
             something blocks on their end, I adjust.
@@ -137,7 +140,7 @@ export default function AboutPage() {
       {/* Where I've worked */}
       <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
         <h2 className="font-display text-h2 font-bold text-text-primary">Where I&apos;ve worked</h2>
-        <p className="mt-3 text-body text-text-secondary">
+        <p className={`mt-3 text-body text-text-secondary ${PROSE}`}>
           A quick tour of the teams I&apos;ve built things with, from early studios to enterprise, with room at
           the end for whatever comes next.
         </p>
@@ -147,7 +150,7 @@ export default function AboutPage() {
       {/* What I'm looking for */}
       <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
         <h2 className="font-display text-h2 font-bold text-text-primary">What I&apos;m looking for</h2>
-        <p className="mt-6 text-body text-text-secondary">
+        <p className={`mt-6 text-body text-text-secondary ${PROSE}`}>
           Enterprise or SaaS products with real complexity in them: multiple roles, real rules, workflows that
           people live inside for eight hours. I work best on a team where engineers are in the room early rather
           than at the end.
@@ -157,7 +160,7 @@ export default function AboutPage() {
       {/* Personal */}
       <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
         <h2 className="font-display text-h2 font-bold text-text-primary">Personal</h2>
-        <div className="mt-6 space-y-4">
+        <div className={`mt-6 space-y-4 ${PROSE}`}>
           <p className="text-body text-text-secondary">
             When I hit a badly designed app, I don&apos;t just close it. I work out why it&apos;s behaving that
             way, screenshot it, send it to friends, and sometimes leave a comment for the developers. I can lose
