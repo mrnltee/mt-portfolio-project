@@ -2,11 +2,19 @@ export interface ProcessBlock {
   heading: string;
   body: string;
   imageLabel: string;
+  /** Real screenshot path (in /public), light theme. When set, replaces the placeholder. */
+  image?: string;
+  /** Optional dark-theme screenshot, shown in dark mode. */
+  imageDark?: string;
 }
 
 export interface GalleryItem {
   label: string;
   caption: string;
+  /** Real screenshot path (in /public), light theme. When set, replaces the placeholder. */
+  image?: string;
+  /** Optional dark-theme screenshot, shown in dark mode. */
+  imageDark?: string;
 }
 
 export interface OutcomeMetric {
@@ -28,6 +36,10 @@ export interface CaseStudy {
   tools: string[];
   summary: string;
   coverLabel: string;
+  /** Real cover screenshot path (in /public), light theme. When set, replaces the placeholder. */
+  cover?: string;
+  /** Optional dark-theme cover screenshot, shown in dark mode. */
+  coverDark?: string;
   tone: 0 | 1 | 2 | 3;
   featured: boolean;
   problem: string[];

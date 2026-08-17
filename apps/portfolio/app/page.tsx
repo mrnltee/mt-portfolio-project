@@ -38,7 +38,7 @@ export default function Home() {
             id="selected-work-heading"
             eyebrow="Selected work"
             title="Featured projects"
-            description="Three projects, end to end — the research that shaped them, the systems behind them, and what shipped."
+            description="Selected product design work — the research that shaped it, the systems behind it, and what shipped."
             className="mb-10"
           />
         </RevealOnScroll>

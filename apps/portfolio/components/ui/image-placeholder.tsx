@@ -1,11 +1,20 @@
+import { ThemedImage } from "./themed-image";
 import { cn } from "@/lib/utils";
 
 interface ImagePlaceholderProps {
   /** Describes what real image belongs here — also used as the fallback alt text so this stays screen-reader friendly even before assets are swapped in. */
   label: string;
+  /** Real image path (in /public). When set, a next/image is rendered instead of the dashed placeholder. Treated as the light-theme image. */
+  src?: string;
+  /** Optional dark-theme image path. When set, it is shown in dark mode and `src` is shown in light mode. */
+  srcDark?: string;
   aspect?: "video" | "square" | "portrait" | "wide";
   className?: string;
   tone?: 0 | 1 | 2 | 3;
+  /** Hint next/image to eager-load (use for above-the-fold covers). */
+  priority?: boolean;
+  /** Responsive `sizes` hint for next/image. */
+  sizes?: string;
 }
 
 const ASPECT: Record<NonNullable<ImagePlaceholderProps["aspect"]>, string> = {
@@ -31,7 +40,38 @@ const TONE = [
  *   <Image src="/images/case-studies/slug/hero.jpg" alt="<describe what's shown>" fill className="object-cover" />
  * Keep a real, descriptive `alt` — never leave it empty for meaningful images.
  */
-export function ImagePlaceholder({ label, aspect = "video", className, tone = 0 }: ImagePlaceholderProps) {
+export function ImagePlaceholder({
+  label,
+  src,
+  srcDark,
+  aspect = "video",
+  className,
+  tone = 0,
+  priority,
+  sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px",
+}: ImagePlaceholderProps) {
+  // Real image mode: render a theme-aware next/image (swaps source in dark mode).
+  if (src) {
+    return (
+      <div
+        className={cn(
+          "relative overflow-hidden rounded-card border border-border-default bg-background-surface-subtle",
+          ASPECT[aspect],
+          className
+        )}
+      >
+        <ThemedImage
+          src={src}
+          srcDark={srcDark}
+          alt={label}
+          sizes={sizes}
+          priority={priority}
+          className="object-cover object-top"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       role="img"

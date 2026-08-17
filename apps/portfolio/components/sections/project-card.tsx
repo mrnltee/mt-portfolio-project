@@ -15,7 +15,14 @@ export function ProjectCard({ project }: { project: CaseStudy }) {
         aria-label={`View case study: ${project.title}`}
       >
         <Card className="flex h-full flex-col overflow-hidden group-hover:shadow-modal">
-          <ImagePlaceholder label={project.coverLabel} tone={project.tone} className="rounded-none border-0 border-b" />
+          <ImagePlaceholder
+            label={project.coverLabel}
+            src={project.cover}
+            srcDark={project.coverDark}
+            tone={project.tone}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+            className="rounded-none border-0 border-b"
+          />
           <CardBody className="flex flex-1 flex-col gap-3">
             <div className="flex flex-wrap gap-1.5">
               {project.tools.map((t) => (

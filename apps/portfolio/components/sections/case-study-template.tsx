@@ -66,7 +66,14 @@ export function CaseStudyTemplate({ project }: { project: CaseStudy }) {
                   <h3 className="font-display text-h4 font-semibold text-text-primary">{block.heading}</h3>
                   <p className="mt-3 text-body text-text-secondary">{block.body}</p>
                 </div>
-                <ImagePlaceholder label={block.imageLabel} aspect="wide" tone={(i % 4) as 0 | 1 | 2 | 3} />
+                <ImagePlaceholder
+                  label={block.imageLabel}
+                  src={block.image}
+                  srcDark={block.imageDark}
+                  aspect="video"
+                  tone={(i % 4) as 0 | 1 | 2 | 3}
+                  sizes="(max-width: 768px) 100vw, 384px"
+                />
               </div>
             </RevealOnScroll>
           ))}
@@ -85,7 +92,14 @@ export function CaseStudyTemplate({ project }: { project: CaseStudy }) {
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
           {project.solution.gallery.map((item, i) => (
             <RevealOnScroll key={item.label} delay={i * 0.05}>
-              <ImagePlaceholder label={item.label} aspect="portrait" tone={(i % 4) as 0 | 1 | 2 | 3} />
+              <ImagePlaceholder
+                label={item.label}
+                src={item.image}
+                srcDark={item.imageDark}
+                aspect="video"
+                tone={(i % 4) as 0 | 1 | 2 | 3}
+                sizes="(max-width: 768px) 100vw, 384px"
+              />
               <p className="mt-2 text-caption text-text-secondary">{item.caption}</p>
             </RevealOnScroll>
           ))}

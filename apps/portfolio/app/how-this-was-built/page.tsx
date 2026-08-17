@@ -34,8 +34,9 @@ export default function HowThisWasBuiltPage() {
             auto-deploying to Vercel.
           </p>
           <p>
-            Every project, metric, and photo elsewhere on this site is placeholder content pending real case
-            studies — look for <code className="rounded bg-background-surface-subtle px-1.5 py-0.5 text-caption text-text-primary">[REPLACE]</code> markers.
+            Aside from the Extractly case study — a sanitized, NDA-safe version of real client work — the projects,
+            metrics, and photos elsewhere on this site are still placeholder content pending real case studies. Look
+            for <code className="rounded bg-background-surface-subtle px-1.5 py-0.5 text-caption text-text-primary">[REPLACE]</code> markers.
           </p>
         </div>
       </div>
