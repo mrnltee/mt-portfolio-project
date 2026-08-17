@@ -30,7 +30,7 @@ export function Hero() {
           </motion.p>
           <motion.div {...rise(0.15)} className="mt-8 flex flex-wrap gap-3">
             <ButtonLink href="/case-studies">View case studies</ButtonLink>
-            <ButtonLink href="/MERNEL-TUSOY-UIUX-CV.pdf" variant="secondary" download>
+            <ButtonLink href="/MTusoy_Product_Designer_CV.pdf" variant="secondary" download>
               Download CV
             </ButtonLink>
           </motion.div>
