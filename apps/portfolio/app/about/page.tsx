@@ -4,6 +4,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Card, CardBody } from "@/components/ui/card";
 import { ButtonLink } from "@/components/ui/button";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
+import { CareerTimeline } from "@/components/sections/career-timeline";
 
 export const metadata: Metadata = {
   title: "About — Mernel Tusoy",
@@ -131,6 +132,16 @@ export default function AboutPage() {
             </RevealOnScroll>
           ))}
         </div>
+      </Section>
+
+      {/* Where I've worked */}
+      <Section className="border-t border-border-default">
+        <h2 className="font-display text-h2 font-bold text-text-primary">Where I&apos;ve worked</h2>
+        <p className="mt-3 max-w-3xl text-body text-text-secondary">
+          A quick tour of the teams I&apos;ve built things with, from early studios to enterprise, with room at
+          the end for whatever comes next.
+        </p>
+        <CareerTimeline />
       </Section>
 
       {/* What I'm looking for */}
