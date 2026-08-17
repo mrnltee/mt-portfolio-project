@@ -12,7 +12,7 @@ export default function HowThisWasBuiltPage() {
     <Section className="pt-16 sm:pt-20">
       <div className="max-w-3xl">
         <h1 className="font-display text-h1 font-bold text-text-primary">How this was built</h1>
-        <div className="mt-5 space-y-4 text-body-lg text-text-secondary">
+        <div className="mt-5 max-w-2xl space-y-4 text-body-lg text-text-secondary">
           <p>
             The visual direction started in Figma. From there, Claude Code scaffolded the site from the single
             detailed prompt below, reproduced verbatim, after a short back-and-forth to lock the aesthetic,
