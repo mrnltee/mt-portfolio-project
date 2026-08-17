@@ -66,6 +66,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose } from "@/components/ui/dialog";
 import { Card, CardBody } from "@/components/ui/card";
 import { Tag, FilterTag } from "@/components/ui/tag";
 import { MaterialIcon } from "@/components/ui/material-icon";
@@ -450,6 +451,71 @@ export function ComponentLibrary() {
                 <MoreHorizontal className="h-5 w-5" />
               </IconButton>
             </Tooltip>
+          </Demo>
+
+          <Demo title="Dialog / Modal" note="@radix-ui/react-dialog · focus-trapped · Escape to close · scroll-locked">
+            <div className="flex flex-wrap gap-3">
+              {/* Informational */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" size="sm">Basic</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md">
+                  <DialogTitle>Dialog title</DialogTitle>
+                  <DialogDescription className="mt-2">
+                    Use a dialog for one focused task, or a message that needs the reader&apos;s full attention
+                    before they move on. Keep the content short and the actions obvious.
+                  </DialogDescription>
+                  <div className="mt-6 flex justify-end">
+                    <DialogClose asChild>
+                      <Button size="sm">Got it</Button>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Confirmation */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" size="sm">Confirmation</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md">
+                  <DialogTitle>Publish changes?</DialogTitle>
+                  <DialogDescription className="mt-2">
+                    Your draft will go live immediately and be visible to everyone. You can unpublish it later.
+                  </DialogDescription>
+                  <div className="mt-6 flex justify-end gap-3">
+                    <DialogClose asChild>
+                      <Button size="sm" variant="secondary">Cancel</Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button size="sm">Publish</Button>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Destructive */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" size="sm">Destructive</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md">
+                  <DialogTitle>Delete this item?</DialogTitle>
+                  <DialogDescription className="mt-2">
+                    This can&apos;t be undone. The item and everything in it will be permanently removed.
+                  </DialogDescription>
+                  <div className="mt-6 flex justify-end gap-3">
+                    <DialogClose asChild>
+                      <Button size="sm" variant="secondary">Cancel</Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button size="sm" variant="danger">Delete</Button>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
           </Demo>
         </Category>
 
