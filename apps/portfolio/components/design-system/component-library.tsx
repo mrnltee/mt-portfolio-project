@@ -351,7 +351,7 @@ export function ComponentLibrary() {
           </Demo>
 
           <Demo title="Breadcrumb">
-            <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Case studies", href: "/case-studies" }, { label: "Atlas — Design System" }]} />
+            <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Case studies", href: "/case-studies" }, { label: "Extractly — Document AI" }]} />
           </Demo>
 
           <Demo title="Pagination">

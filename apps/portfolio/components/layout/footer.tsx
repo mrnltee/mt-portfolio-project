@@ -31,7 +31,7 @@ export function Footer() {
             className="focus-ring inline-flex items-center gap-1.5 rounded-field hover:text-text-primary"
           >
             <Sparkles className="h-4 w-4" aria-hidden="true" />
-            Built with AI — see how
+            How this was built
           </Link>
         </nav>
       </Container>

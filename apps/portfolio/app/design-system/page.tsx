@@ -73,7 +73,7 @@ export default function DesignSystemPage() {
         <SectionHeading
           eyebrow="Design system"
           title="Tokens & components"
-          description="This isn't a generic style guide — it's the actual token architecture and component set this site runs on. Every swatch, scale, and specimen below is live-rendered, not screenshotted."
+          description="These are the actual tokens and components this site runs on. Every swatch, scale, and specimen below is live-rendered from the same @mt/tokens, never a screenshot."
         />
       </Section>
 

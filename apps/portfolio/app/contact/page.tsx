@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description: "Get in touch about roles, collaborations, or feedback.",
 };
 
-// [REPLACE] with your real contact details.
 const CONTACT_LINKS: {
   label: string;
   value: string;
@@ -43,8 +42,7 @@ export default function ContactPage() {
     <Section className="pt-16 sm:pt-20">
       <h1 className="font-display text-h1 font-bold text-text-primary">Contact</h1>
       <p className="mt-4 max-w-xl text-body-lg text-text-secondary">
-        {/* [REPLACE] Replace with your own note — availability, what kind of roles you're looking for, timezone, etc. */}
-        Open to full-time and contract product design roles. Reach out — I usually reply within a couple of
+        Open to full-time and contract product design roles. Reach out and I usually reply within a couple of
         days.
       </p>
 

@@ -1,52 +1,50 @@
 import type { Metadata } from "next";
 import { Section } from "@/components/layout/section";
 import { Avatar } from "@/components/ui/avatar";
-import { Tag } from "@/components/ui/tag";
+import { Card, CardBody } from "@/components/ui/card";
+import { ButtonLink } from "@/components/ui/button";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
 
 export const metadata: Metadata = {
   title: "About — Mernel Tusoy",
-  description: "Bio, skills, and design process philosophy.",
+  description:
+    "Product designer with ten-plus years across enterprise SaaS, AI document tooling, and cinema booking, designing for the stack engineers actually build in.",
 };
 
-// [REPLACE] all copy, skills, and process steps below with your own.
-const SKILLS = [
-  "User research",
-  "Interaction design",
-  "Design systems",
-  "Prototyping",
-  "Usability testing",
-  "Accessibility (WCAG)",
-  "Information architecture",
-  "Cross-functional collaboration",
+const WHAT_I_BRING = [
+  {
+    title: "I hand over decisions, not possibilities.",
+    body: "Design ends at a picture. Engineering ends at behavior. Every question I leave open in a file gets answered anyway, by an engineer, alone, with less context than me. So I try to answer them first: empty states, failure states, what happens at zero rows and at five hundred.",
+  },
+  {
+    title: "I've sat in the seat.",
+    body: "Before I designed the document validation workflow on an AI document-processing platform, I did that job. Hours of checking whether a model read a document correctly. I know which part of that day is tedious because I lived the tedious part.",
+  },
+  {
+    title: "I design for the stack that exists.",
+    body: "My engineers build in React, so my designs are React-shaped. I'm not limiting myself. A design that fights the framework loses, and then nobody gets the good version.",
+  },
 ];
 
-const PROCESS = [
+const SELECTED_WORK = [
   {
-    step: "01",
-    title: "Understand",
-    body: "[REPLACE] Describe how you kick off a project — stakeholder interviews, user research, reviewing existing data.",
+    title: "AI document processing",
+    body: "Almost five years as the only designer on an enterprise platform spanning three portals: research, information architecture, workflow design, the design system, usability testing, and handoff. One example. The platform needed scheduled document runs, and the logic underneath was cron: engineer-shaped, not human-shaped. I studied how existing scheduling tools handled it, found that Apple Calendar had the clearest mental model, and rebuilt that logic into something an operations user could set up without thinking about cron at all.",
   },
   {
-    step: "02",
-    title: "Explore",
-    body: "[REPLACE] Describe how you diverge — sketching, wireframing, exploring multiple directions before converging.",
+    title: "IBM",
+    body: "Learning portals for IBM employees. Dense pedagogical requirements turned into navigable interfaces, built in React, Moodle, and WordPress with WCAG applied in the code. I built custom editor blocks so non-technical staff could update pages without a developer, cutting content development time by roughly 30%.",
   },
   {
-    step: "03",
-    title: "Refine",
-    body: "[REPLACE] Describe how you validate and tighten a direction — testing, critique, iteration.",
-  },
-  {
-    step: "04",
-    title: "Ship & measure",
-    body: "[REPLACE] Describe how you hand off to engineering and what you look at post-launch to know it worked.",
+    title: "Cinema booking",
+    body: "Search, showtimes, seat selection, and payment for SM Cinema, Robinsons Movieworld, and Shang Cineplex. Three chains, three sets of business rules, three seat layouts, one experience that had to stay coherent across all of them.",
   },
 ];
 
 export default function AboutPage() {
   return (
     <>
+      {/* Opening */}
       <Section className="pt-16 sm:pt-20">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
           <Avatar
@@ -55,46 +53,124 @@ export default function AboutPage() {
             size={112}
             className="bg-action-accent-subtle ring-1 ring-border-default"
           />
-          <div>
-            <h1 className="font-display text-h1 font-bold text-text-primary">About</h1>
-            <p className="mt-3 max-w-2xl text-body-lg text-text-secondary">
-              {/* [REPLACE] Replace with your real bio — 2-4 sentences on your background, focus area, and what kind of work energizes you. */}
-              I&apos;m a UI/UX designer who likes turning ambiguous problems into interfaces people don&apos;t
-              have to think about. Most of my work sits at the intersection of research, systems thinking, and
-              craft.
+          <h1 className="font-display text-h1 font-bold text-text-primary">About</h1>
+        </div>
+
+        <div className="mt-8 max-w-3xl space-y-4">
+          <p className="text-body-lg text-text-primary">
+            I&apos;ve changed direction more than once. Web designer, graphic artist, UI/UX designer, and then
+            in 2019 back into development.
+          </p>
+          <p className="text-body text-text-secondary">
+            That last turn is the one that mattered. I&apos;d already been designing for a couple of years, so
+            going back to building meant finding out exactly what a design file leaves unanswered. Every state
+            and edge case I&apos;d been handing over and quietly hoping someone would resolve. Then I came back
+            to design, and I haven&apos;t designed the same way since.
+          </p>
+          <p className="text-body text-text-secondary">
+            Ten-plus years in software, and product design is where all of it finally sits in one place: the
+            research, the systems, the interface, and the part where it actually gets built. Alongside the
+            full-time roles, I&apos;ve kept a freelance practice running since 2014.
+          </p>
+          <p className="text-body-sm italic text-text-tertiary">
+            Based in the Philippines (GMT+8) · Open to remote work and relocation
+          </p>
+        </div>
+      </Section>
+
+      {/* What I bring */}
+      <Section className="border-t border-border-default">
+        <h2 className="font-display text-h2 font-bold text-text-primary">What I bring</h2>
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
+          {WHAT_I_BRING.map((item, i) => (
+            <RevealOnScroll key={item.title} delay={i * 0.06}>
+              <Card className="h-full">
+                <CardBody className="flex h-full flex-col">
+                  <h3 className="font-display text-h4 font-semibold text-text-primary">{item.title}</h3>
+                  <p className="mt-3 text-body-sm text-text-secondary">{item.body}</p>
+                </CardBody>
+              </Card>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </Section>
+
+      {/* Working with engineers */}
+      <Section className="border-t border-border-default">
+        <div className="max-w-3xl">
+          <h2 className="font-display text-h2 font-bold text-text-primary">Working with engineers</h2>
+          <div className="mt-6 space-y-4">
+            <p className="text-body text-text-secondary">
+              A QA engineer I worked with put it better than I would: I&apos;m reliable to work with because
+              when something blocks on their end, I adjust.
             </p>
-            <p className="mt-3 max-w-2xl text-body-sm text-text-secondary">
-              I&apos;ve worked at IBM, and on products for Maxicare, SM Cinema, Robinsons Movieworld, and
-              GoDaddy (white-label).
-            </p>
-            <p className="mt-2 text-body-sm text-text-tertiary">
-              Based in the Philippines (GMT+8) · Open to remote work and relocation
+            <p className="text-body text-text-secondary">
+              That&apos;s most of it. I don&apos;t treat a constraint as a betrayal of the design. Sometimes
+              the build comes back close to what I drew rather than identical, and if the behavior is right,
+              close is fine. I&apos;ve been the person on the other end of that conversation. It changes what
+              you fight for.
             </p>
           </div>
         </div>
       </Section>
 
+      {/* Selected work */}
       <Section className="border-t border-border-default">
-        <h2 className="font-display text-h2 font-bold text-text-primary">Skills</h2>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {SKILLS.map((skill) => (
-            <Tag key={skill} variant="neutral" size="md">
-              {skill}
-            </Tag>
+        <h2 className="font-display text-h2 font-bold text-text-primary">Selected work</h2>
+        <div className="mt-8 grid grid-cols-1 gap-6">
+          {SELECTED_WORK.map((item, i) => (
+            <RevealOnScroll key={item.title} delay={i * 0.06}>
+              <Card>
+                <CardBody className="sm:flex sm:gap-8">
+                  <h3 className="mb-2 shrink-0 font-display text-h4 font-semibold text-text-primary sm:mb-0 sm:w-56">
+                    {item.title}
+                  </h3>
+                  <p className="text-body text-text-secondary">{item.body}</p>
+                </CardBody>
+              </Card>
+            </RevealOnScroll>
           ))}
         </div>
       </Section>
 
+      {/* What I'm looking for */}
       <Section className="border-t border-border-default">
-        <h2 className="font-display text-h2 font-bold text-text-primary">How I work</h2>
-        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
-          {PROCESS.map((p, i) => (
-            <RevealOnScroll key={p.step} delay={i * 0.06}>
-              <span className="font-display text-h3 font-bold text-action-primary">{p.step}</span>
-              <h3 className="mt-2 font-display text-h4 font-semibold text-text-primary">{p.title}</h3>
-              <p className="mt-2 text-body text-text-secondary">{p.body}</p>
-            </RevealOnScroll>
-          ))}
+        <div className="max-w-3xl">
+          <h2 className="font-display text-h2 font-bold text-text-primary">What I&apos;m looking for</h2>
+          <p className="mt-6 text-body text-text-secondary">
+            Enterprise or SaaS products with real complexity in them: multiple roles, real rules, workflows
+            that people live inside for eight hours. I work best on a team where engineers are in the room
+            early rather than at the end.
+          </p>
+        </div>
+      </Section>
+
+      {/* Personal */}
+      <Section className="border-t border-border-default">
+        <div className="max-w-3xl">
+          <h2 className="font-display text-h2 font-bold text-text-primary">Personal</h2>
+          <div className="mt-6 space-y-4">
+            <p className="text-body text-text-secondary">
+              When I hit a badly designed app, I don&apos;t just close it. I work out why it&apos;s behaving
+              that way, screenshot it, send it to friends, and sometimes leave a comment for the developers. I
+              can lose an entire day to state management, checking whether the right thing triggers and the
+              right thing shows.
+            </p>
+            <p className="text-body text-text-secondary">
+              What I&apos;d want a team to remember: that there was a designer here who could code a little,
+              spoke the engineers&apos; language, and used it to make their jobs easier.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* CTA */}
+      <Section className="border-t border-border-default bg-background-surface-subtle/40">
+        <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="font-display text-h2 font-bold text-text-primary">Looking for a product designer?</h2>
+          <ButtonLink href="/contact" variant="primary" size="lg" className="shrink-0">
+            Get in touch
+          </ButtonLink>
         </div>
       </Section>
     </>

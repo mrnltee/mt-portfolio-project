@@ -13,30 +13,29 @@ export default function HowThisWasBuiltPage() {
       <div className="max-w-3xl">
         <h1 className="font-display text-h1 font-bold text-text-primary">How this was built</h1>
         <div className="mt-5 space-y-4 text-body-lg text-text-secondary">
-          {/* Personalize the voice if you like — the facts below reflect the real build. */}
           <p>
-            The visual direction started in Figma. From there the site was scaffolded by Claude Code from the
-            single detailed prompt below — reproduced verbatim — after a short back-and-forth to lock the
-            aesthetic, accent color, and default theme.
+            The visual direction started in Figma. From there, Claude Code scaffolded the site from the single
+            detailed prompt below, reproduced verbatim, after a short back-and-forth to lock the aesthetic,
+            accent color, and default theme.
           </p>
           <p>
             It then grew well past that original prompt. The design tokens were pulled out of the app into a
-            standalone, multi-brand token library — authored in the{" "}
+            standalone, multi-brand token library, authored in the{" "}
             <a href="https://www.designtokens.org" className="focus-ring rounded underline decoration-border-strong underline-offset-2 hover:text-text-primary" target="_blank" rel="noreferrer">DTCG</a>{" "}
             standard, shared through an{" "}
             <code className="rounded bg-background-surface-subtle px-1.5 py-0.5 text-caption text-text-primary">@mt/tokens</code>{" "}
-            package in a monorepo, and projected back into Figma — so the{" "}
+            package in a monorepo, and projected back into Figma. That makes the{" "}
             <a href="/design-system" className="focus-ring rounded underline decoration-border-strong underline-offset-2 hover:text-text-primary">design-system</a>{" "}
-            page is generated straight from that single source of truth. From there I built out a full component
-            library — buttons, form controls, navigation, and feedback, including interactive pieces like a
-            combobox, date picker, and toasts on Radix — plus an interactive 3D brand mark and a subtle honeycomb
-            backdrop. Everything was reviewed and adjusted page by page, and the whole thing lives on GitHub,
-            auto-deploying to Vercel.
+            page generate straight from a single source of truth. From there I built a full component library:
+            buttons, form controls, navigation, feedback, and interactive pieces like a combobox, date picker,
+            and toasts on Radix, plus an interactive 3D brand mark and a subtle honeycomb backdrop. Everything
+            was reviewed and adjusted page by page, and the whole thing lives on GitHub, auto-deploying to
+            Vercel.
           </p>
           <p>
-            Aside from the Extractly case study — a sanitized, NDA-safe version of real client work — the projects,
-            metrics, and photos elsewhere on this site are still placeholder content pending real case studies. Look
-            for <code className="rounded bg-background-surface-subtle px-1.5 py-0.5 text-caption text-text-primary">[REPLACE]</code> markers.
+            The work shown here is real. Extractly is a sanitized, NDA-safe reconstruction of a client
+            engagement: the design problem and the decisions behind it are intact, the client&apos;s data and
+            branding are not. More case studies are in progress.
           </p>
         </div>
       </div>

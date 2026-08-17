@@ -32,7 +32,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Mernel Tusoy — Product Designer",
   description:
-    "Portfolio of Mernel Tusoy, a Product designer focused on research-driven, accessible product design. [REPLACE with your real meta description]",
+    "Product designer with ten-plus years in software, designing complex enterprise and SaaS tools that stay easy to use, built for the stack engineers actually work in.",
 };
 
 export default function RootLayout({

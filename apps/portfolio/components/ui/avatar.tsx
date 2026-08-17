@@ -8,7 +8,7 @@ interface AvatarProps {
   className?: string;
 }
 
-/** [REPLACE] src with a real headshot in /public/images. Falls back to initials on the @mt accent-subtle token. */
+/** Pass `src` for a headshot; falls back to initials on the @mt accent-subtle token. */
 export function Avatar({ src, alt, size = 96, className }: AvatarProps) {
   if (!src) {
     const initials = alt

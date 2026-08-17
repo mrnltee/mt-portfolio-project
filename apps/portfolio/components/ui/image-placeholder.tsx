@@ -36,9 +36,9 @@ const TONE = [
  * dashed-border box so it reads unmistakably as a placeholder rather than
  * a broken image.
  *
- * [REPLACE]: swap the call site for next/image, e.g.
- *   <Image src="/images/case-studies/slug/hero.jpg" alt="<describe what's shown>" fill className="object-cover" />
- * Keep a real, descriptive `alt` — never leave it empty for meaningful images.
+ * When no `src` is passed it draws the labeled box; pass `src`/`srcDark` to
+ * render a real theme-aware next/image instead. Keep a descriptive `label`
+ * (it becomes the alt text) — never leave it empty for meaningful images.
  */
 export function ImagePlaceholder({
   label,
@@ -89,7 +89,7 @@ export function ImagePlaceholder({
           <circle cx="8.5" cy="8.5" r="1.5" />
           <path d="M21 15l-5-5L5 21" />
         </svg>
-        <span className="text-caption font-medium text-text-secondary">[REPLACE] {label}</span>
+        <span className="text-caption font-medium text-text-secondary">{label}</span>
       </div>
     </div>
   );
