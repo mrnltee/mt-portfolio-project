@@ -158,7 +158,7 @@ export function BrandMark() {
         {/* Hover / focus hint, anchored above the top-right corner. */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-1 top-1 z-10 -translate-y-full rounded-field border border-border-default bg-background-surface px-3 py-2 text-right opacity-0 shadow-overlay transition-opacity duration-200 delay-500 group-hover:opacity-100 group-hover:delay-0 group-focus:opacity-100 group-focus:delay-0"
+          className="pointer-events-none absolute right-1 top-1 z-10 -translate-y-full rounded-field border border-border-default bg-background-surface px-3 py-2 text-center opacity-0 shadow-overlay transition-opacity duration-200 delay-500 group-hover:opacity-100 group-hover:delay-0 group-focus:opacity-100 group-focus:delay-0"
         >
           <p className="whitespace-nowrap text-caption text-text-secondary">curious about the box?</p>
           <p className="whitespace-nowrap text-caption text-text-tertiary">(click to find out)</p>

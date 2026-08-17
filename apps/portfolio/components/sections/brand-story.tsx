@@ -37,11 +37,12 @@ function LetterCube({ letter }: { letter: "M" | "T" }) {
           strokeLinejoin="round"
         />
       ) : (
-        // T drawn as an upward arrow: vertical shaft + a chevron head at the box's top corner.
+        // T drawn as an upward arrow: vertical shaft + a chevron head resting flush on
+        // the box's two top edges (apex at the top corner, wings on the upper corners).
         <>
           <line x1={60} y1={P.T[1]} x2={60} y2={P.B[1]} stroke="var(--mt-color-action-primary)" strokeWidth={5} strokeLinecap="round" />
           <polyline
-            points={`42,38 ${P.T[0]},${P.T[1]} 78,38`}
+            points={`${P.UL[0]},${P.UL[1]} ${P.T[0]},${P.T[1]} ${P.UR[0]},${P.UR[1]}`}
             fill="none"
             stroke="var(--mt-color-action-primary)"
             strokeWidth={5}
