@@ -453,7 +453,7 @@ export function ComponentLibrary() {
             </Tooltip>
           </Demo>
 
-          <Demo title="Dialog / Modal" note="@radix-ui/react-dialog · focus-trapped · Escape to close · scroll-locked">
+          <Demo title="Dialog / Modal" note="@radix-ui/react-dialog · patterns · sizes · scrolling body">
             <div className="flex flex-wrap gap-3">
               {/* Informational */}
               <Dialog>
@@ -511,6 +511,92 @@ export function ComponentLibrary() {
                     </DialogClose>
                     <DialogClose asChild>
                       <Button size="sm" variant="danger">Delete</Button>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Small */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" size="sm">Small</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-sm">
+                  <DialogTitle>Quick note</DialogTitle>
+                  <DialogDescription className="mt-2">
+                    A compact dialog (max-w-sm) for a short message or a single confirmation.
+                  </DialogDescription>
+                  <div className="mt-6 flex justify-end">
+                    <DialogClose asChild>
+                      <Button size="sm">OK</Button>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Large */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" size="sm">Large</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-2xl">
+                  <DialogTitle>Large dialog</DialogTitle>
+                  <DialogDescription className="mt-2">
+                    A wider panel (max-w-2xl) for richer content, like a form, a comparison, or a preview.
+                  </DialogDescription>
+                  <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    <div className="rounded-card border border-border-default bg-background-surface-subtle/50 p-4 text-body-sm text-text-secondary">
+                      Column one. Drop any content here.
+                    </div>
+                    <div className="rounded-card border border-border-default bg-background-surface-subtle/50 p-4 text-body-sm text-text-secondary">
+                      Column two. The panel grows to fit.
+                    </div>
+                  </div>
+                  <div className="mt-6 flex justify-end">
+                    <DialogClose asChild>
+                      <Button size="sm">Done</Button>
+                    </DialogClose>
+                  </div>
+                </DialogContent>
+              </Dialog>
+
+              {/* Scrolling body (fixed title + footer) */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="secondary" size="sm">Scrollable</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-lg">
+                  <DialogTitle>Terms of service</DialogTitle>
+                  <DialogDescription className="mt-2">Review the details below before you continue.</DialogDescription>
+                  <div className="mt-4 max-h-[45vh] space-y-3 overflow-y-auto pr-1 text-body-sm text-text-secondary">
+                    <p>
+                      This is placeholder content standing in for a long agreement or policy. It exists only to
+                      show how a dialog behaves when its body is taller than the space available.
+                    </p>
+                    <p>
+                      The title and the footer actions stay put while this middle section scrolls, so the
+                      primary buttons are always reachable without hunting for them.
+                    </p>
+                    <p>
+                      Each paragraph here is generic filler. Swap it for real terms, release notes, or anything
+                      that runs long enough to need its own scroll area.
+                    </p>
+                    <p>
+                      Keeping the scroll inside the body rather than the whole panel is the pattern most design
+                      systems reach for. Context stays visible at the top and bottom.
+                    </p>
+                    <p>
+                      On small screens the dialog also caps its height to the viewport, so nothing spills off
+                      the edges and the close control stays in reach.
+                    </p>
+                    <p>When you have read enough, use the actions below. Both simply close this demo dialog.</p>
+                  </div>
+                  <div className="mt-6 flex justify-end gap-3">
+                    <DialogClose asChild>
+                      <Button size="sm" variant="secondary">Decline</Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button size="sm">Accept</Button>
                     </DialogClose>
                   </div>
                 </DialogContent>
