@@ -13,7 +13,7 @@ type Employer = {
 
 // Listed oldest → newest, ending in a placeholder for the next chapter (this year).
 const EMPLOYERS: Employer[] = [
-  { name: "Medilink", logo: "/images/employers/medilink.png", role: "Web Designer" },
+  { name: "Medilink Network Inc.", logo: "/images/employers/medilink.png", role: "Web Designer" },
   { name: "TalentSource Inc.", logo: "/images/employers/talentsource.png", role: "Jr. Graphic Designer" },
   { name: "MobileGroup Inc.", logo: "/images/employers/mobilegroup.png", role: "UI/UX Designer" },
   { name: "HelloMedia Inc.", mono: "hm", role: "UI/UX Designer" }, // add /images/employers/hellomedia.png, then set `logo`
