@@ -16,7 +16,7 @@ export default function CaseStudiesPage() {
         id="case-studies-heading"
         eyebrow="Work"
         title="Case studies"
-        description="Deep dives into selected product design work — problem, process, solution, and outcome. Filter by role, tool, or project type."
+        description="Deep dives into selected product design work — problem, process, solution, and outcome. Filter by project type."
         className="mb-10"
       />
       <ProjectGrid projects={caseStudies} />

@@ -25,6 +25,7 @@ export function ProjectCard({ project }: { project: CaseStudy }) {
           />
           <CardBody className="flex flex-1 flex-col gap-3">
             <div className="flex flex-wrap gap-1.5">
+              <Tag variant="accent">{project.category}</Tag>
               {project.tools.map((t) => (
                 <Tag key={t}>{t}</Tag>
               ))}

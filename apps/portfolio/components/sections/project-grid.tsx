@@ -21,11 +21,12 @@ export function ProjectGrid({ projects }: { projects: CaseStudy[] }) {
   );
 
   const visible = useMemo(() => {
-    let list = activeCategory ? projects.filter((p) => p.category === activeCategory) : projects;
+    const list = activeCategory ? projects.filter((p) => p.category === activeCategory) : [...projects];
     if (sort === "az") {
-      list = [...list].sort((a, b) => a.title.localeCompare(b.title));
+      return [...list].sort((a, b) => a.title.localeCompare(b.title));
     }
-    return list;
+    // "Featured" — flagged projects first, otherwise the authored order in projects-data.ts.
+    return [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
   }, [projects, activeCategory, sort]);
 
   return (

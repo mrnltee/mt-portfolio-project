@@ -20,5 +20,10 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   const project = getCaseStudyBySlug(params.slug);
   if (!project) notFound();
 
-  return <CaseStudyTemplate project={project} />;
+  // Neighbours follow the authored order in projects-data.ts.
+  const index = caseStudies.findIndex((p) => p.slug === project.slug);
+  const prev = index > 0 ? caseStudies[index - 1] : null;
+  const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : null;
+
+  return <CaseStudyTemplate project={project} prev={prev} next={next} />;
 }

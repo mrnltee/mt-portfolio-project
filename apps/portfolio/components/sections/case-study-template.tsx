@@ -1,9 +1,11 @@
+import Link from "next/link";
 import { Section } from "@/components/layout/section";
 import { Container } from "@/components/layout/container";
 import { Tag } from "@/components/ui/tag";
 import { Divider } from "@/components/ui/divider";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
+import { cn } from "@/lib/utils";
 import type { CaseStudy } from "@/types/project";
 
 /**
@@ -11,7 +13,18 @@ import type { CaseStudy } from "@/types/project";
  * All copy and image slots come from lib/projects-data.ts — edit that file,
  * not this template, to swap in real project content.
  */
-export function CaseStudyTemplate({ project }: { project: CaseStudy }) {
+/** Minimal shape needed to link to a neighbouring case study. */
+type CaseStudyLink = Pick<CaseStudy, "slug" | "title">;
+
+export function CaseStudyTemplate({
+  project,
+  prev,
+  next,
+}: {
+  project: CaseStudy;
+  prev?: CaseStudyLink | null;
+  next?: CaseStudyLink | null;
+}) {
   return (
     <article>
       <header className="border-b border-border-default py-16 sm:py-20">
@@ -90,7 +103,7 @@ export function CaseStudyTemplate({ project }: { project: CaseStudy }) {
           <p className="mt-5 text-body-lg text-text-secondary">{project.solution.body}</p>
         </RevealOnScroll>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {project.solution.gallery.map((item, i) => (
+          {(project.solution.gallery ?? []).map((item, i) => (
             <RevealOnScroll key={item.label} delay={i * 0.05}>
               <ImagePlaceholder
                 label={item.label}
@@ -114,8 +127,13 @@ export function CaseStudyTemplate({ project }: { project: CaseStudy }) {
             Outcome &amp; impact
           </h2>
           <p className="mt-5 text-body-lg text-text-secondary">{project.outcome.summary}</p>
-          <dl className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {project.outcome.metrics.map((m) => (
+          <dl
+            className={cn(
+              "mt-8 grid grid-cols-1 gap-6",
+              (project.outcome.metrics?.length ?? 0) === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3",
+            )}
+          >
+            {(project.outcome.metrics ?? []).map((m) => (
               <div key={m.label} className="rounded-card border border-border-default bg-background-surface p-6">
                 <dd className="font-display text-h2 font-bold text-action-primary">{m.value}</dd>
                 <dt className="mt-1 text-caption text-text-secondary">{m.label}</dt>
@@ -124,6 +142,41 @@ export function CaseStudyTemplate({ project }: { project: CaseStudy }) {
           </dl>
         </RevealOnScroll>
       </Section>
+
+      <nav aria-label="Case study navigation" className="border-t border-border-default py-12">
+        <Container className="max-w-3xl">
+          <Link
+            href="/case-studies"
+            className="focus-ring rounded-control text-body-sm font-medium text-action-primary"
+          >
+            ← All case studies
+          </Link>
+          {(prev || next) && (
+            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {prev ? (
+                <Link
+                  href={`/case-studies/${prev.slug}`}
+                  className="focus-ring group rounded-card border border-border-default bg-background-surface p-5 hover:border-border-strong"
+                >
+                  <span className="text-caption uppercase tracking-wide text-text-secondary">Previous</span>
+                  <span className="mt-1 block font-display text-h4 font-semibold text-text-primary">{prev.title}</span>
+                </Link>
+              ) : (
+                <span aria-hidden="true" className="hidden sm:block" />
+              )}
+              {next && (
+                <Link
+                  href={`/case-studies/${next.slug}`}
+                  className="focus-ring group rounded-card border border-border-default bg-background-surface p-5 text-right hover:border-border-strong sm:col-start-2"
+                >
+                  <span className="text-caption uppercase tracking-wide text-text-secondary">Next</span>
+                  <span className="mt-1 block font-display text-h4 font-semibold text-text-primary">{next.title}</span>
+                </Link>
+              )}
+            </div>
+          )}
+        </Container>
+      </nav>
     </article>
   );
 }

@@ -44,6 +44,8 @@ export interface CaseStudy {
   featured: boolean;
   problem: string[];
   process: ProcessBlock[];
-  solution: { body: string; gallery: GalleryItem[] };
-  outcome: { summary: string; metrics: OutcomeMetric[] };
+  /** `gallery` is optional — omit it for a study with no final-design shots. */
+  solution: { body: string; gallery?: GalleryItem[] };
+  /** `metrics` is optional — omit rather than inventing numbers you can't stand behind. */
+  outcome: { summary: string; metrics?: OutcomeMetric[] };
 }
