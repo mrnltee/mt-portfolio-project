@@ -23,7 +23,12 @@ export interface OutcomeMetric {
 }
 
 /** The single filter axis for the project grid. */
-export type Category = "Enterprise SaaS" | "AI Products" | "Design Systems" | "Mobile";
+export type Category =
+  | "Enterprise SaaS"
+  | "AI Products"
+  | "Design Systems"
+  | "Mobile"
+  | "Community & Non-profit";
 
 export interface CaseStudy {
   slug: string;

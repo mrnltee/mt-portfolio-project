@@ -1,7 +1,13 @@
 import type { CaseStudy, Category } from "@/types/project";
 
 /** Canonical filter order. A category only shows as a chip when a project uses it. */
-export const CATEGORIES: Category[] = ["Enterprise SaaS", "AI Products", "Design Systems", "Mobile"];
+export const CATEGORIES: Category[] = [
+  "Enterprise SaaS",
+  "AI Products",
+  "Design Systems",
+  "Mobile",
+  "Community & Non-profit",
+];
 
 /**
  * Screenshots live in one folder per case study, named after its slug:
@@ -11,6 +17,7 @@ const img = (slug: string) => `/images/case-studies/${slug}`;
 
 const EXTRACTLY = img("extractly-document-ai");
 const MAYBAHABA = img("maybahaba-flood-reports");
+const HOR = img("house-of-retrievers-ph");
 
 /**
  * LIVE projects — everything exported as `caseStudies` renders on the home grid,
@@ -161,6 +168,68 @@ export const caseStudies: CaseStudy[] = [
         { label: "before a report stops counting as current", value: "3 hrs" },
         { label: "running cost, by constraint", value: "₱0" },
       ],
+    },
+  },
+  {
+    slug: "house-of-retrievers-ph",
+    title: "House of Retrievers PH",
+    // [REPLACE] role, timeframe and tools are unconfirmed — set these to the real ones.
+    role: "[REPLACE] Designer & Web Lead (volunteer)",
+    timeframe: "[REPLACE] 2026",
+    category: "Community & Non-profit",
+    tools: ["[REPLACE] Figma", "[REPLACE] Next.js"],
+    summary:
+      "The public home of a Philippine furparent non-profit, built to do one persuasive job: turn a breed-named community into an open invitation, and turn affection for our own dogs into showing up for people and animals who need it.",
+    coverLabel: "House of Retrievers PH hero — \"Good dogs. Good people. Greater Good.\"",
+    cover: `${HOR}/hero.jpg`,
+    tone: 2,
+    featured: true,
+    problem: [
+      "House of Retrievers PH is a non-profit that grew out of a furparent community. It gathers pet families around responsible ownership and turns that gathering instinct into service: volunteer-led outreach, practical care learning, and pack activities whose proceeds go to a clearly named beneficiary. The site is the organisation's front door, and the whole job is to convince a stranger, in one scroll, that this is a genuine cause and not just a very charming dog club.",
+      "The hardest thing on the page is the name. \"House of Retrievers\" is honest about where the community came from, and dropping it would throw away the thing that made it cohere. But the door is open well past goldens, and a breed in the wordmark is the quickest way to make someone with a mixed-breed or a rescue assume they are not invited. The site has to carry the origin story and the open invitation in the same breath, without either reading as an apology for the other.",
+      "The second problem is what to ask for. Most non-profit sites are built around a donate button, but this community's real currency is turnout — someone bringing their dog and their Saturday to an outreach. Attendance is a harder yes than money: it costs more, it needs a date and a place, and it only happens if a person can already picture themselves standing there.",
+    ],
+    process: [
+      {
+        heading: "Letting the headline do the reframing",
+        body: "Rather than soften the branding, every section headline is built as a turn: a plain statement in black, then the clause that changes its meaning in gold italic. \"Good dogs. Good people. Greater Good.\" \"More than a breed. A way to give back.\" \"Every good story starts with a pack.\" The pattern is the argument — it keeps naming the dogs, then keeps landing on the purpose, so a visitor is walked from breed to cause four times before they reach the footer instead of being told once in an About paragraph.",
+        imageLabel: "Hero — the headline pattern, the shared promise card, and \"Join the pack\"",
+        image: `${HOR}/hero.jpg`,
+      },
+      {
+        heading: "Answering \"is this for me?\" before it is asked",
+        body: "\"More than a breed\" is placed as the first thing after the hero, because that is the question a non-retriever owner is already holding. Under it, the three pillars set out what the community actually does — showing up for communities that need support, raising healthier and better-socialised dogs together, and designing gatherings that give back — and none of them are breed-gated. The logo does quiet work here too: two dogs, one golden and one black, so the mark itself is already wider than the word next to it.",
+        imageLabel: "\"More than a breed. A way to give back.\" with the three purpose pillars",
+        image: `${HOR}/purpose-pillars.jpg`,
+      },
+      {
+        heading: "Keeping a volunteer-run site alive",
+        body: "A small non-profit cannot hand-maintain a website between engagements, and a stale site reads as a dead organisation. So the proof-of-life section is the community's own Instagram, pulled in and paged through on the homepage — real posts with real dates, from event announcements to International Dog Day. It costs nobody an update, and it means the page a first-time visitor lands on is never older than the last thing the pack actually did.",
+        imageLabel: "\"Life with the retrievers\" — the live Instagram feed with post dates",
+        image: `${HOR}/from-the-pack.jpg`,
+      },
+    ],
+    solution: {
+      body:
+        "The site resolves into a ladder of asks rather than one expensive one. Become a member is the low step — meet other families, trade practical care knowledge. Volunteer together is the real ask, and it is deliberately phrased as bringing your time, your skills, or just a friendly dog, so that having nothing to give but presence still counts. Partner for a cause is the high step, and it is the one carrying the trust burden: it promises a transparent, beneficiary-led activity, matching the pillar that commits proceeds to a clearly named beneficiary. There is no donate button anywhere on the page. The primary call to action, from the header through to the closing frame, is to join.",
+      gallery: [
+        {
+          label: "Three ways in",
+          caption:
+            "Member, volunteer, partner — three sizes of yes on a dark break in the page, so nobody who wants to help has to leave without something they can actually do.",
+          image: `${HOR}/ways-to-join.jpg`,
+        },
+        {
+          label: "The closing invitation",
+          caption:
+            "The last frame is the thesis in one line: \"There is always room for one more good human.\" Not one more retriever — one more human.",
+          image: `${HOR}/closing-invite.jpg`,
+        },
+      ],
+    },
+    outcome: {
+      summary:
+        "House of Retrievers PH is a live non-profit, not a study with a growth chart, so the honest result is the positions the site takes. It asks for turnout rather than money. It ties every gathering to a named beneficiary instead of a general appeal. And it treats the breed in its name as history rather than a membership rule — a reframe the headlines, the pillars, and the two-dog wordmark all carry. The open edge is the copy itself: the hero still greets \"retriever families\", which is broader than goldens but not yet as broad as the door actually is. Widening that language is the next pass, and worth doing before the next intake of members reads it.",
     },
   },
 ];

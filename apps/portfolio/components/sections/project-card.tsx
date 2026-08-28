@@ -12,7 +12,7 @@ export function ProjectCard({ project }: { project: CaseStudy }) {
       <Link
         href={`/case-studies/${project.slug}`}
         className="focus-ring group block h-full rounded-card"
-        aria-label={`View case study: ${project.title}`}
+        aria-label={`View project: ${project.title}`}
       >
         <Card className="flex h-full flex-col overflow-hidden group-hover:shadow-modal">
           <ImagePlaceholder

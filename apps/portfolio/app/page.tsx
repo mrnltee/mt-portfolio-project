@@ -10,8 +10,8 @@ import { caseStudies } from "@/lib/projects-data";
 const QUICK_NAV = [
   {
     href: "/case-studies",
-    title: "Case Studies",
-    description: "Full project write-ups — problem, process, solution, and outcome.",
+    title: "Case Studies & Projects",
+    description: "Full write-ups and shipped work — problem, process, solution, and outcome.",
   },
   {
     href: "/design-system",

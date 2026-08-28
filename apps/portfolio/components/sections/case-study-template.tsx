@@ -53,7 +53,7 @@ export function CaseStudyTemplate({
       <Section aria-labelledby="problem-heading" containerClassName="max-w-3xl">
         <RevealOnScroll>
           <h2 id="problem-heading" className="font-display text-h2 font-bold text-text-primary">
-            Problem &amp; context
+            Problem & context
           </h2>
           <div className="mt-5 space-y-4 text-body-lg text-text-secondary">
             {project.problem.map((p, i) => (
@@ -124,7 +124,7 @@ export function CaseStudyTemplate({
       <Section aria-labelledby="outcome-heading" containerClassName="max-w-3xl">
         <RevealOnScroll>
           <h2 id="outcome-heading" className="font-display text-h2 font-bold text-text-primary">
-            Outcome &amp; impact
+            Outcome & impact
           </h2>
           <p className="mt-5 text-body-lg text-text-secondary">{project.outcome.summary}</p>
           <dl
@@ -143,13 +143,13 @@ export function CaseStudyTemplate({
         </RevealOnScroll>
       </Section>
 
-      <nav aria-label="Case study navigation" className="border-t border-border-default py-12">
+      <nav aria-label="Project navigation" className="border-t border-border-default py-12">
         <Container className="max-w-3xl">
           <Link
             href="/case-studies"
             className="focus-ring rounded-control text-body-sm font-medium text-action-primary"
           >
-            ← All case studies
+            ← All case studies & projects
           </Link>
           {(prev || next) && (
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">

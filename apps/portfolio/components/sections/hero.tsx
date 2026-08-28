@@ -29,7 +29,7 @@ export function Hero() {
             ship matches the thing we designed.
           </motion.p>
           <motion.div {...rise(0.15)} className="mt-8 flex flex-wrap gap-3">
-            <ButtonLink href="/case-studies">View case studies</ButtonLink>
+            <ButtonLink href="/case-studies">View case studies & projects</ButtonLink>
             <ButtonLink href="/MTusoy_Product_Designer_CV.pdf" variant="secondary" download>
               Download CV
             </ButtonLink>

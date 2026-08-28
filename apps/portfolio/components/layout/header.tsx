@@ -11,7 +11,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { href: "/case-studies", label: "Case Studies" },
+  { href: "/case-studies", label: "Case Studies & Projects" },
   { href: "/design-system", label: "Design System" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
