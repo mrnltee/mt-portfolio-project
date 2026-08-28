@@ -173,11 +173,10 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "house-of-retrievers-ph",
     title: "House of Retrievers PH",
-    // [REPLACE] role, timeframe and tools are unconfirmed — set these to the real ones.
-    role: "[REPLACE] Designer & Web Lead (volunteer)",
-    timeframe: "[REPLACE] 2026",
+    role: "Designer & Developer",
+    timeframe: "2026",
     category: "Community & Non-profit",
-    tools: ["[REPLACE] Figma", "[REPLACE] Next.js"],
+    tools: ["Next.js"],
     summary:
       "The public home of a Philippine furparent non-profit, built to do one persuasive job: turn a breed-named community into an open invitation, and turn affection for our own dogs into showing up for people and animals who need it.",
     coverLabel: "House of Retrievers PH hero — \"Good dogs. Good people. Greater Good.\"",
@@ -229,7 +228,12 @@ export const caseStudies: CaseStudy[] = [
     },
     outcome: {
       summary:
-        "House of Retrievers PH is a live non-profit, not a study with a growth chart, so the honest result is the positions the site takes. It asks for turnout rather than money. It ties every gathering to a named beneficiary instead of a general appeal. And it treats the breed in its name as history rather than a membership rule — a reframe the headlines, the pillars, and the two-dog wordmark all carry. The open edge is the copy itself: the hero still greets \"retriever families\", which is broader than goldens but not yet as broad as the door actually is. Widening that language is the next pass, and worth doing before the next intake of members reads it.",
+        "The pack it speaks for is past a thousand furparents across Facebook and Instagram, which makes the site's job less about being found and more about converting an existing audience into people who turn up. So the result worth reporting is the positions it takes: it asks for turnout rather than money, it ties every gathering to a named beneficiary instead of a general appeal, and it treats the breed in its name as history rather than a membership rule — a reframe the headlines, the pillars, and the two-dog wordmark all carry. The open edge is the copy itself. The hero still greets \"retriever families\", which is broader than goldens but not yet as broad as the door actually is, and widening that language is the next pass — worth doing before the next intake of members reads it.",
+      metrics: [
+        { label: "furparents following the pack on social", value: "1,000+" },
+        { label: "ways in — member, volunteer, or partner", value: "3" },
+        { label: "donate buttons, by design", value: "0" },
+      ],
     },
   },
 ];
