@@ -86,6 +86,7 @@ export function CaseStudyTemplate({
                   aspect="video"
                   tone={(i % 4) as 0 | 1 | 2 | 3}
                   sizes="(max-width: 768px) 100vw, 384px"
+                  zoomable
                 />
               </div>
             </RevealOnScroll>
@@ -112,6 +113,7 @@ export function CaseStudyTemplate({
                 aspect="video"
                 tone={(i % 4) as 0 | 1 | 2 | 3}
                 sizes="(max-width: 768px) 100vw, 384px"
+                zoomable
               />
               <p className="mt-2 text-caption text-text-secondary">{item.caption}</p>
             </RevealOnScroll>

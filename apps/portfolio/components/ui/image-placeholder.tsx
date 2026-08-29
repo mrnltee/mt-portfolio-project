@@ -1,4 +1,5 @@
 import { ThemedImage } from "./themed-image";
+import { ZoomableImage } from "./image-zoom";
 import { cn } from "@/lib/utils";
 
 interface ImagePlaceholderProps {
@@ -15,6 +16,9 @@ interface ImagePlaceholderProps {
   priority?: boolean;
   /** Responsive `sizes` hint for next/image. */
   sizes?: string;
+  /** Make a real image click-to-enlarge. Ignored in placeholder mode, and must
+   * stay off wherever the image already sits inside a link or other control. */
+  zoomable?: boolean;
 }
 
 const ASPECT: Record<NonNullable<ImagePlaceholderProps["aspect"]>, string> = {
@@ -49,17 +53,31 @@ export function ImagePlaceholder({
   tone = 0,
   priority,
   sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px",
+  zoomable = false,
 }: ImagePlaceholderProps) {
   // Real image mode: render a theme-aware next/image (swaps source in dark mode).
   if (src) {
+    const frame = cn(
+      "relative overflow-hidden rounded-card border border-border-default bg-background-surface-subtle",
+      ASPECT[aspect],
+      className
+    );
+
+    if (zoomable) {
+      return (
+        <ZoomableImage
+          src={src}
+          srcDark={srcDark}
+          label={label}
+          sizes={sizes}
+          priority={priority}
+          className={frame}
+        />
+      );
+    }
+
     return (
-      <div
-        className={cn(
-          "relative overflow-hidden rounded-card border border-border-default bg-background-surface-subtle",
-          ASPECT[aspect],
-          className
-        )}
-      >
+      <div className={frame}>
         <ThemedImage
           src={src}
           srcDark={srcDark}
