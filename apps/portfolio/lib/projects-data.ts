@@ -178,6 +178,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "The public home of a Filipino furparent non-profit, built so a breed-named community reads as open to every dog.",
     coverLabel: "House of Retrievers PH hero — \"Good dogs. Good people. Greater Good.\"",
+    websiteUrl: "https://www.houseofretrieversph.org/",
     cover: `${HOR}/hero.jpg`,
     tone: 2,
     featured: true,
@@ -224,12 +225,7 @@ export const caseStudies: CaseStudy[] = [
     },
     outcome: {
       summary:
-        "Over a thousand furparents already follow the pack, so the site's job is turning followers into turnout, not being found. It asks for time instead of money, names a beneficiary for every gathering, and treats the breed in its name as history, not a rule.",
-      metrics: [
-        { label: "furparents following the pack on social", value: "1,000+" },
-        { label: "ways in — member, volunteer, or partner", value: "3" },
-        { label: "donate buttons, by design", value: "0" },
-      ],
+        "The site's job is turning followers into turnout, not simply being found. It asks for time instead of money, names a beneficiary for every gathering, and treats the breed in its name as history, not a rule.",
     },
   },
   {

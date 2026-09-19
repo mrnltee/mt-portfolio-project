@@ -153,9 +153,19 @@ export function CaseStudyTemplate({
 
       <nav aria-label="Project navigation" className="border-t border-border-default py-12">
         <Container className="max-w-3xl">
+          {project.websiteUrl ? (
+            <a
+              href={project.websiteUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="focus-ring inline-flex items-center rounded-control border border-border-default bg-background-surface px-4 py-3 text-body-sm font-medium text-action-primary hover:border-border-strong"
+            >
+              Visit the live website <span aria-hidden="true" className="ml-2">↗</span>
+            </a>
+          ) : null}
           <Link
             href="/case-studies"
-            className="focus-ring rounded-control text-body-sm font-medium text-action-primary"
+            className="focus-ring mt-6 block rounded-control text-body-sm font-medium text-action-primary"
           >
             ← All case studies & projects
           </Link>
