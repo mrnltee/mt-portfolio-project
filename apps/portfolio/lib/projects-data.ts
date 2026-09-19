@@ -39,52 +39,53 @@ export const caseStudies: CaseStudy[] = [
     category: "AI Products",
     tools: ["Figma", "FigJam", "Dovetail", "Linear"],
     summary:
-      "A document-AI console for high-volume financial paperwork. It shows reviewers how sure the model is, so they verify instead of retype.",
-    coverLabel: "Extractly dashboard — document volume, throughput, and status mix",
+      "A document-operations platform that turns high-volume financial paperwork into reviewable, policy-aware work across intake, extraction, exceptions, and posting.",
+    coverLabel: "Extractly operations dashboard — queue health, pipeline status, and work that needs attention",
     cover: `${EXTRACTLY}/dashboard-light.png`,
     coverDark: `${EXTRACTLY}/dashboard.png`,
     tone: 3,
     featured: true,
     problem: [
-      "Extractly is a sanitised stand-in for a client engagement. The company and the data are fictional. The design problem is real.",
-      "Back-office teams were processing thousands of invoices, receipts, purchase orders, and BIR forms by hand, re-keying every field into another system. It was slow, hard to audit, and one mistyped TIN could cascade into a compliance problem.",
-      "The automation already existed. People just didn't trust it. So the real problem was not accuracy but legibility: reviewers had to see how sure the model was before they would sign off.",
+      "Extractly is a sanitized, NDA-safe reconstruction of a client engagement. Company names, real data, and proprietary flows have been replaced with a fictional stand-in that preserves the design problem and the decisions behind it.",
+      "Back-office teams were processing thousands of financial and tax documents a month almost entirely by hand: reading scanned invoices, receipts, purchase orders, and BIR forms, then re-keying every field into downstream systems. It was slow and hard to audit, and one mistyped TIN or amount could cascade into reconciliation and compliance problems.",
+      "The automation already existed. People just didn't trust it. So the real design problem was legibility and control: show what the model knows, explain why a field needs attention, and make every human decision traceable from intake through posting.",
     ],
     process: [
       {
-        heading: "Mapping the review workflow",
-        body: "I shadowed reviewers and watched where they slowed down: second-guessing a value, dropping out to a spreadsheet, re-checking a field the model had already got right. People didn't distrust automation. They distrusted unlabelled automation. So the worklist became the anchor, a queue filtered by status, confidence, and assignee.",
-        imageLabel: "Extractly documents worklist with status and confidence filters",
+        heading: "Designing the operating queue",
+        body: "I mapped the product around the decisions operators make before opening a document: what is waiting, why it stopped, who owns it, and how close it is to breaching an SLA. Saved views, layered filters, bulk actions, confidence signals, and intake states turn the documents table into an operating queue rather than a passive archive.",
+        imageLabel: "Extractly document queue with saved views, layered filters, bulk actions, and confidence states",
         image: `${EXTRACTLY}/documents-light.png`,
         imageDark: `${EXTRACTLY}/documents.png`,
       },
       {
-        heading: "Designing for confidence",
-        body: "The review screen puts the document beside its extracted fields, and every field carries a confidence score. Low-confidence fields are flagged and counted, and one control jumps straight to the next one. A full re-read becomes a targeted pass.",
-        imageLabel: "Extractly review screen — document beside confidence-scored fields",
+        heading: "Explaining why review is needed",
+        body: "The review workspace keeps the source, extracted fields, business rules, and audit context in one place. Reviewers can jump directly to fields that require attention, see the model value beside its normalised result, and understand the policy behind a warning before they confirm or correct it. Duplicate handling, reprocessing, comments, and escalation stay inside the same task flow.",
+        imageLabel: "Extractly review workspace with source document, explainable field checks, rules, and activity",
         image: `${EXTRACTLY}/review-light.png`,
         imageDark: `${EXTRACTLY}/review.png`,
       },
       {
-        heading: "Closing the loop with reviewers",
-        body: "Repetitive QA is easy to burn out on, so reviewers get a view of their own accuracy, turnaround, and streaks. It makes the work measurable instead of faceless, and it shows leads where the model still needs help.",
-        imageLabel: "Extractly My Performance — accuracy and turnaround over time",
+        heading: "Making quality operational",
+        body: "Analytics were expanded from personal performance into a shared quality view. Leads can compare first-pass verification, exception mix, queue age, reviewer throughput, document-type accuracy, and SLA health without exporting the work to a spreadsheet. The same language and status model carry from the dashboard into each drill-down.",
+        imageLabel: "Extractly analytics overview with quality, exception, queue-age, and reviewer signals",
         image: `${EXTRACTLY}/performance-light.png`,
         imageDark: `${EXTRACTLY}/performance.png`,
       },
     ],
     solution: {
-      body: "One idea runs through the console: surface the model's confidence, then send human attention where it is needed. Documents move from upload to extraction to review, triage decides what a person sees first, and a shared dashboard keeps volume and throughput visible to the team.",
+      body: "The result is a connected document-operations workspace. Intake catches failures and duplicates early; the queue routes work by status, confidence, ownership, and SLA; the review workspace pairs evidence with policy; and analytics help leads improve the system instead of merely counting completed documents. Client-facing exception and approval flows extend the same model beyond the internal operations team.",
       gallery: [
         {
           label: "Extractly dashboard",
-          caption: "The control room: volume over time, status breakdown, and document mix, with drill-downs into any status.",
+          caption:
+            "The operations control room brings urgent work, pipeline health, recent activity, SLA risk, and each reviewer's next action into one scan.",
           image: `${EXTRACTLY}/dashboard-light.png`,
           imageDark: `${EXTRACTLY}/dashboard.png`,
         },
         {
           label: "Extractly sign-in",
-          caption: "A calm first impression. The console leads with clarity from the login screen in.",
+          caption: "A restrained, enterprise-ready entry point with password and single sign-on paths for connected organisations.",
           image: `${EXTRACTLY}/login-light.png`,
           imageDark: `${EXTRACTLY}/login.png`,
         },
@@ -92,12 +93,7 @@ export const caseStudies: CaseStudy[] = [
     },
     outcome: {
       summary:
-        "Extractly turns data entry into review. People validate instead of retype, and leads get a live picture of quality. The figures below are design targets in this sanitised version, not client results.",
-      metrics: [
-        { label: "financial document types", value: "6" },
-        { label: "confidence-based review tiers", value: "3" },
-        { label: "field-accuracy target", value: "98%+" },
-      ],
+        "The redesigned product gives operators a clearer path from intake to resolution. Reviewers can focus on the fields and exceptions that genuinely need judgement, understand the rule behind each warning, and resolve work without switching tools. Leads gain a shared view of queue health, quality, and process friction, while client approvers receive focused decisions instead of internal operational noise. The qualitative result is a system that makes automation easier to trust because its limits, evidence, and handoffs remain visible.",
     },
   },
   {

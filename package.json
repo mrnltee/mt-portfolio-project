@@ -16,7 +16,7 @@
     "portfolio:build": "npm run build -w mernel-portfolio"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=26"
   },
   "license": "UNLICENSED"
 }

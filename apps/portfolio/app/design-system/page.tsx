@@ -7,6 +7,8 @@ import { TypeSection } from "@/components/design-system/type-section";
 import { SpacingSection } from "@/components/design-system/spacing-section";
 import { ComponentLibrary } from "@/components/design-system/component-library";
 import { COMPONENT_TOC, slugify } from "@/components/design-system/component-toc";
+import { DesignSystemTabs } from "@/components/design-system/design-system-tabs";
+import { MtDesignOverview } from "@/components/design-system/mt-design-overview";
 
 export const metadata: Metadata = {
   title: "Design System — Mernel Tusoy",
@@ -66,18 +68,9 @@ function DesignSystemNav() {
   );
 }
 
-export default function DesignSystemPage() {
+function PortfolioDesignSystem() {
   return (
-    <>
-      <Section className="border-b border-border-default pb-10 pt-16 sm:pt-20">
-        <SectionHeading
-          eyebrow="Design system"
-          title="Tokens & components"
-          description="These are the actual tokens and components this site runs on. Every swatch, scale, and specimen below is live-rendered from the same @mt/tokens, never a screenshot."
-        />
-      </Section>
-
-      <Container className="py-12 sm:py-16 lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
+    <Container className="py-12 sm:py-16 lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
         <DesignSystemNav />
 
         <div className="min-w-0 space-y-16">
@@ -121,7 +114,22 @@ export default function DesignSystemPage() {
             </div>
           </section>
         </div>
-      </Container>
+    </Container>
+  );
+}
+
+export default function DesignSystemPage() {
+  return (
+    <>
+      <Section className="border-b border-border-default pb-10 pt-16 sm:pt-20">
+        <SectionHeading
+          eyebrow="Design systems"
+          title="Systems that scale with the product"
+          description="Compare the live system behind this portfolio with broader libraries designed for product teams. Each version keeps its own purpose, rules, and source of truth."
+        />
+      </Section>
+
+      <DesignSystemTabs portfolioSystem={<PortfolioDesignSystem />} mtDesign={<MtDesignOverview />} />
     </>
   );
 }
