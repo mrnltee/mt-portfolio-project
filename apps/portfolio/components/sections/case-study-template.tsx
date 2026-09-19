@@ -33,7 +33,7 @@ export function CaseStudyTemplate({
             <Tag variant="accent">{project.category}</Tag>
           </div>
           <h1 className="font-display text-h1 font-bold text-text-primary">{project.title}</h1>
-          <dl className="mt-6 grid grid-cols-1 gap-4 border-t border-border-default pt-6 text-body-sm sm:grid-cols-3">
+          <dl className="mt-6 grid grid-cols-1 gap-4 border-t border-border-default pt-6 text-body-sm sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <dt className="text-caption uppercase tracking-wide text-text-secondary">Role</dt>
               <dd className="mt-1 text-text-primary">{project.role}</dd>
@@ -46,6 +46,12 @@ export function CaseStudyTemplate({
               <dt className="text-caption uppercase tracking-wide text-text-secondary">Tools</dt>
               <dd className="mt-1 text-text-primary">{project.tools.join(", ")}</dd>
             </div>
+            {project.platforms?.length ? (
+              <div>
+                <dt className="text-caption uppercase tracking-wide text-text-secondary">Platform</dt>
+                <dd className="mt-1 text-text-primary">{project.platforms.join(", ")}</dd>
+              </div>
+            ) : null}
           </dl>
         </Container>
       </header>
@@ -83,7 +89,7 @@ export function CaseStudyTemplate({
                   label={block.imageLabel}
                   src={block.image}
                   srcDark={block.imageDark}
-                  aspect="video"
+                  aspect={block.aspect ?? "video"}
                   tone={(i % 4) as 0 | 1 | 2 | 3}
                   sizes="(max-width: 768px) 100vw, 384px"
                   zoomable
@@ -110,7 +116,7 @@ export function CaseStudyTemplate({
                 label={item.label}
                 src={item.image}
                 srcDark={item.imageDark}
-                aspect="video"
+                aspect={item.aspect ?? "video"}
                 tone={(i % 4) as 0 | 1 | 2 | 3}
                 sizes="(max-width: 768px) 100vw, 384px"
                 zoomable

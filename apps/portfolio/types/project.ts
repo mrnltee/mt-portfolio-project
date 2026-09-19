@@ -2,6 +2,7 @@ export interface ProcessBlock {
   heading: string;
   body: string;
   imageLabel: string;
+  aspect?: "video" | "square" | "portrait" | "wide";
   /** Real screenshot path (in /public), light theme. When set, replaces the placeholder. */
   image?: string;
   /** Optional dark-theme screenshot, shown in dark mode. */
@@ -11,6 +12,7 @@ export interface ProcessBlock {
 export interface GalleryItem {
   label: string;
   caption: string;
+  aspect?: "video" | "square" | "portrait" | "wide";
   /** Real screenshot path (in /public), light theme. When set, replaces the placeholder. */
   image?: string;
   /** Optional dark-theme screenshot, shown in dark mode. */
@@ -39,8 +41,11 @@ export interface CaseStudy {
   category: Category;
   /** Tools used — shown as card metadata, never a filter chip. */
   tools: string[];
+  /** Supported product surfaces, shown on the case-study detail page. */
+  platforms?: string[];
   summary: string;
   coverLabel: string;
+  coverAspect?: "video" | "square" | "portrait" | "wide";
   /** Real cover screenshot path (in /public), light theme. When set, replaces the placeholder. */
   cover?: string;
   /** Optional dark-theme cover screenshot, shown in dark mode. */
