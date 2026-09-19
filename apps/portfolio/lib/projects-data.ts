@@ -18,6 +18,7 @@ const img = (slug: string) => `/images/case-studies/${slug}`;
 const EXTRACTLY = img("extractly-document-ai");
 const MAYBAHABA = img("maybahaba-flood-reports");
 const HOR = img("house-of-retrievers-ph");
+const HOR_APP = img("house-of-retrievers-ph-app");
 
 /**
  * LIVE projects — everything exported as `caseStudies` renders on the home grid,
@@ -169,6 +170,70 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "house-of-retrievers-ph",
+    title: "House of Retrievers PH",
+    role: "Designer & Developer",
+    timeframe: "2026",
+    category: "Community & Non-profit",
+    tools: ["Next.js"],
+    summary:
+      "The public home of a Filipino furparent non-profit, built so a breed-named community reads as open to every dog.",
+    coverLabel: "House of Retrievers PH hero — \"Good dogs. Good people. Greater Good.\"",
+    cover: `${HOR}/hero.jpg`,
+    tone: 2,
+    featured: true,
+    problem: [
+      "House of Retrievers PH turns a furparent community into service: volunteer outreach, practical care learning, and gatherings whose proceeds go to a named beneficiary. The site is its front door.",
+      "The hardest thing on the page is the name. It says where the pack came from, and dropping it would throw away what made the community cohere. But the door is open well past goldens, and a breed in the wordmark is the fastest way to make a rescue owner feel uninvited.",
+      "The second problem is the ask. Most non-profit sites are built around a donate button. This community's currency is turnout, someone bringing their dog and their Saturday. That is a harder yes than money.",
+    ],
+    process: [
+      {
+        heading: "Letting the headline do the work",
+        body: "Every section headline is a turn: a plain line in black, then the clause that changes it in gold italic. Good dogs. Good people. Greater Good. More than a breed. A way to give back. The pattern is the argument. It walks a visitor from breed to cause four times before the footer.",
+        imageLabel: "Hero — the headline pattern, the shared promise card, and \"Join the pack\"",
+        image: `${HOR}/hero.jpg`,
+      },
+      {
+        heading: "Answering \"is this for me?\"",
+        body: "\"More than a breed\" sits first after the hero, because that is the question a non-retriever owner is already holding. The three pillars under it, outreach, better care, and gatherings that give back, are none of them breed-gated. The logo helps too: two dogs, one golden, one black.",
+        imageLabel: "\"More than a breed. A way to give back.\" with the three purpose pillars",
+        image: `${HOR}/purpose-pillars.jpg`,
+      },
+      {
+        heading: "Keeping a volunteer-run site alive",
+        body: "A small non-profit cannot hand-update a website between engagements, and a stale site reads as a dead one. So the proof of life is the community's own Instagram, embedded and dated. It costs nobody an update, and the homepage is never older than the last thing the pack did.",
+        imageLabel: "\"Life with the retrievers\" — the live Instagram feed with post dates",
+        image: `${HOR}/from-the-pack.jpg`,
+      },
+    ],
+    solution: {
+      body:
+        "The asks form a ladder. Become a member is the low step. Volunteer together is the real one, phrased as bringing your time, your skills, or just a friendly dog, so presence alone still counts. Partner for a cause carries the trust, promising a named beneficiary. There is no donate button anywhere. The ask is to join.",
+      gallery: [
+        {
+          label: "Three ways in",
+          caption: "Member, volunteer, partner — three sizes of yes, so nobody who wants to help leaves empty-handed.",
+          image: `${HOR}/ways-to-join.jpg`,
+        },
+        {
+          label: "The closing invitation",
+          caption: "The last frame, in one line: \"There is always room for one more good human.\" Not one more retriever.",
+          image: `${HOR}/closing-invite.jpg`,
+        },
+      ],
+    },
+    outcome: {
+      summary:
+        "Over a thousand furparents already follow the pack, so the site's job is turning followers into turnout, not being found. It asks for time instead of money, names a beneficiary for every gathering, and treats the breed in its name as history, not a rule.",
+      metrics: [
+        { label: "furparents following the pack on social", value: "1,000+" },
+        { label: "ways in — member, volunteer, or partner", value: "3" },
+        { label: "donate buttons, by design", value: "0" },
+      ],
+    },
+  },
+  {
+    slug: "house-of-retrievers-ph-app",
     title: "House of Retrievers PH: My ComPAWnion App",
     role: "Senior Product Designer & Developer",
     timeframe: "2026",
@@ -179,7 +244,7 @@ export const caseStudies: CaseStudy[] = [
       "A warm, practical community app that helps Filipino furparents show up for their dogs, their pack, and the causes they care about.",
     coverLabel: "My ComPAWnion app concept — a welcoming House of Retrievers PH community experience",
     coverAspect: "portrait",
-    cover: `${HOR}/app-home.png`,
+    cover: `${HOR_APP}/app-home.png`,
     tone: 2,
     featured: true,
     problem: [
@@ -193,21 +258,21 @@ export const caseStudies: CaseStudy[] = [
         body: "The home experience starts with what members actually need: announcements, upcoming events, and a gentle path into the community. The tone stays friendly and editorial, while the structure makes it easy to see what is new, what is next, and where a member can help.",
         imageLabel: "My ComPAWnion home and announcements experience for everyday member updates",
         aspect: "portrait",
-        image: `${HOR}/app-home.png`,
+        image: `${HOR_APP}/app-home.png`,
       },
       {
         heading: "Making events feel worth showing up for",
         body: "Events are treated as the heartbeat of the product, not a calendar dump. A member can understand the invitation, see who it is for, open the details, join the waitlist when space is tight, and come back later to the photos and the story of what the gathering made possible.",
         imageLabel: "Event listing, event detail, attendance states, and photo album direction",
         aspect: "portrait",
-        image: `${HOR}/app-event.png`,
+        image: `${HOR_APP}/app-event.png`,
       },
       {
         heading: "Connecting dogs, people, and trust",
         body: "Profiles give the community a human shape: a member can introduce themselves, add their dogs, and move between personal context and the shared pack. Beneficiary pages and transparency reports complete the loop, showing where care goes after the event ends.",
         imageLabel: "Member and dog profiles alongside beneficiaries and transparency reporting",
         aspect: "video",
-        image: `${HOR}/app-profile.png`,
+        image: `${HOR_APP}/app-profile.png`,
       },
     ],
     solution: {
@@ -218,13 +283,13 @@ export const caseStudies: CaseStudy[] = [
           label: "The community loop",
           caption: "Home, community, events, and profiles work together so the app supports both belonging and action.",
           aspect: "portrait",
-          image: `${HOR}/app-community.png`,
+          image: `${HOR_APP}/app-community.png`,
         },
         {
           label: "Care you can follow through",
           caption: "Beneficiary stories and transparency reports keep the relationship between a gathering and its impact visible.",
           aspect: "portrait",
-          image: `${HOR}/app-transparency.png`,
+          image: `${HOR_APP}/app-transparency.png`,
         },
       ],
     },
