@@ -47,7 +47,7 @@ export const caseStudies: CaseStudy[] = [
     coverAspect: "portrait",
     cover: `${AUTOSWEEP}/home-light.png`,
     coverDark: `${AUTOSWEEP}/home.png`,
-    prototypeUrl: "https://www.figma.com/design/jHxCDpgzI3anYdo2WPsUZH/MT-Case-Study-Autosweep?node-id=1-2",
+    prototypeUrl: "https://www.figma.com/proto/jHxCDpgzI3anYdo2WPsUZH/MT-Case-Study-Autosweep?node-id=1-2&t=Als0dUsa4y9nIk5P-1",
     tone: 0,
     featured: true,
     problem: [
