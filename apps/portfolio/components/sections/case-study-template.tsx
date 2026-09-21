@@ -153,15 +153,29 @@ export function CaseStudyTemplate({
 
       <nav aria-label="Project navigation" className="border-t border-border-default py-12">
         <Container className="max-w-3xl">
-          {project.websiteUrl ? (
-            <a
-              href={project.websiteUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="focus-ring inline-flex items-center rounded-control border border-border-default bg-background-surface px-4 py-3 text-body-sm font-medium text-action-primary hover:border-border-strong"
-            >
-              Visit the live website <span aria-hidden="true" className="ml-2">↗</span>
-            </a>
+          {project.websiteUrl || project.prototypeUrl ? (
+            <div className="flex flex-wrap gap-3">
+              {project.websiteUrl ? (
+                <a
+                  href={project.websiteUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="focus-ring inline-flex items-center rounded-control border border-border-default bg-background-surface px-4 py-3 text-body-sm font-medium text-action-primary hover:border-border-strong"
+                >
+                  Visit the live website <span aria-hidden="true" className="ml-2">↗</span>
+                </a>
+              ) : null}
+              {project.prototypeUrl ? (
+                <a
+                  href={project.prototypeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="focus-ring inline-flex items-center rounded-control border border-border-default bg-background-surface px-4 py-3 text-body-sm font-medium text-action-primary hover:border-border-strong"
+                >
+                  View the Figma file &amp; prototype <span aria-hidden="true" className="ml-2">↗</span>
+                </a>
+              ) : null}
+            </div>
           ) : null}
           <Link
             href="/case-studies"

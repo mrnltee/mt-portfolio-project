@@ -47,6 +47,8 @@ export interface CaseStudy {
   coverLabel: string;
   /** Optional live project URL shown in the case-study footer. */
   websiteUrl?: string;
+  /** Optional Figma file / prototype URL shown in the case-study footer. */
+  prototypeUrl?: string;
   coverAspect?: "video" | "square" | "portrait" | "wide";
   /** Real cover screenshot path (in /public), light theme. When set, replaces the placeholder. */
   cover?: string;

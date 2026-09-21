@@ -19,6 +19,7 @@ const EXTRACTLY = img("extractly-document-ai");
 const MAYBAHABA = img("maybahaba-flood-reports");
 const HOR = img("house-of-retrievers-ph");
 const HOR_APP = img("house-of-retrievers-ph-app");
+const AUTOSWEEP = img("autosweep-companion-app");
 
 /**
  * LIVE projects — everything exported as `caseStudies` renders on the home grid,
@@ -32,6 +33,91 @@ const HOR_APP = img("house-of-retrievers-ph-app");
  *   into a wall. Prefer short sentences; one idea each.
  */
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "autosweep-companion-app",
+    title: "Autosweep — Toll App Redesign",
+    role: "Product Designer & UX Researcher (independent case study)",
+    timeframe: "2026",
+    category: "Mobile",
+    tools: ["Figma", "Heuristic audit", "Design tokens", "Prototyping"],
+    platforms: ["iOS", "Responsive web"],
+    summary:
+      "A UX audit and mobile-first redesign of the Philippines' Autosweep RFID toll app, built to answer a driver's three real questions on the first screen.",
+    coverLabel: "Redesigned Autosweep Home — balance-first vehicle card, sticker status, reload, recent activity",
+    coverAspect: "portrait",
+    cover: `${AUTOSWEEP}/home-light.png`,
+    coverDark: `${AUTOSWEEP}/home.png`,
+    prototypeUrl: "https://www.figma.com/design/jHxCDpgzI3anYdo2WPsUZH/MT-Case-Study-Autosweep?node-id=1-2",
+    tone: 0,
+    featured: true,
+    problem: [
+      "Autosweep is the prepaid RFID toll system for the Skyway, SLEX, STAR, TPLEX and NAIAX tollways, with over a million registered customers. Its companion app is where drivers check balance, reload, and get help when a sticker fails to read or a charge looks wrong.",
+      "Every session starts with one of three questions: do I have enough load, was that charge right, did my money arrive. The app answered none of them on the first screen. The balance was two taps deep, two of four primary tabs did not work, and there was no transaction history at all.",
+      "The money moments were the quietest and the most damaging. A ₱13 convenience fee appeared only at the final summary, and bank passwords were typed into an Autosweep-branded webview with no URL bar. This is an independent case study, not client work; all sample data is invented.",
+    ],
+    process: [
+      {
+        heading: "Auditing against the app's own support form",
+        body: "I reviewed all 41 captured screens and documented 32 findings with severity, evidence and a recommendation each. The Customer Care form listed the reasons people contact Autosweep: incorrect charging, uncredited load, unreadable sticker, request for statement. That list became the research: every support category that becomes a screen is a call that does not happen.",
+        imageLabel: "The original Home screen — no balance, a placeholder greeting, and a disabled primary tab",
+        aspect: "portrait",
+        image: `${AUTOSWEEP}/before-home.png`,
+      },
+      {
+        heading: "Leading with the balance, and its status",
+        body: "Each vehicle card now shows the balance in 38pt numerals, a plain-language status chip, sticker status, and a Reload button inside the card. A low-balance state turns the card amber and offers auto-reload, so the app tells you before the toll plaza does. The last three transactions and any operator announcement sit directly beneath.",
+        imageLabel: "Redesigned Home in its low-balance state — amber banner, status chip, Reload now, auto-reload prompt",
+        aspect: "portrait",
+        image: `${AUTOSWEEP}/home-low-balance.png`,
+      },
+      {
+        heading: "Reloading in three decisions, fee first",
+        body: "The original flow asked users to classify their provider, retyped the amount on every method screen, and revealed the fee at the end. The redesign inverts it: amount with presets and a live total, then one grouped provider list showing each fee, then review. Bank sign-in moves to the system browser behind a plain-language interstitial, and an in-app receipt closes the loop.",
+        imageLabel: "Reload step 2 — every provider in one list with its fee, saved card pre-selected",
+        aspect: "portrait",
+        image: `${AUTOSWEEP}/reload-method-light.png`,
+        imageDark: `${AUTOSWEEP}/reload-method.png`,
+      },
+    ],
+    solution: {
+      body: "Twenty-nine screens in Light and Dark, built on a two-mode token collection so the themes cannot drift, with five shared components and a wired prototype. A five-tab shell only lists things that work; Activity replaces the six-dropdown statement generator; Traffic and Help are native instead of an embedded website. After the main screens, I scanned every tappable control for dead ends and built the six screens they pointed to, from a notifications inbox to auto-reload settings.",
+      gallery: [
+        {
+          label: "Activity ledger",
+          caption: "Every toll and reload with its running balance, grouped by day, with a one-tap dispute from the detail view.",
+          aspect: "portrait",
+          image: `${AUTOSWEEP}/activity.png`,
+        },
+        {
+          label: "Native traffic",
+          caption: "Per-tollway status with freshness timestamps and advisories — replacing a webview blocked by a 2018 consent modal.",
+          aspect: "portrait",
+          image: `${AUTOSWEEP}/traffic.png`,
+        },
+        {
+          label: "Help with visible numbers",
+          caption: "Hotlines with hours and a Call button, one account pre-selected, a plain-language concern picker, and ticket tracking after sending.",
+          aspect: "portrait",
+          image: `${AUTOSWEEP}/help.png`,
+        },
+        {
+          label: "Notifications and auto-reload",
+          caption: "Two of the screens the dead-end scan produced: the inbox behind the Home bell, and the settings two other screens were already promising.",
+          aspect: "portrait",
+          image: `${AUTOSWEEP}/notifications.png`,
+        },
+      ],
+    },
+    outcome: {
+      summary:
+        "Measured from the design files rather than live users: the balance moved from two taps to zero, a reload went from seven screens to three decisions with the fee shown on step one, and the brand green was darkened twelve percent to clear WCAG AA on every button label, link and chip — taking contrast failures from more than thirty to none, verified in both themes. The next step is validating with drivers.",
+      metrics: [
+        { label: "Taps to see the balance", value: "2 → 0" },
+        { label: "Decisions to complete a reload", value: "7 → 3" },
+        { label: "WCAG AA contrast failures", value: "31+ → 0" },
+      ],
+    },
+  },
   {
     slug: "extractly-document-ai",
     title: "Extractly — Document AI",
