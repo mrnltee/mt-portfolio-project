@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { motion as mtMotion } from "@mt/tokens/motion";
 import { Card, CardBody } from "@/components/ui/card";
 import { Tag } from "@/components/ui/tag";
@@ -7,8 +7,14 @@ import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import type { CaseStudy } from "@/types/project";
 
 export function ProjectCard({ project }: { project: CaseStudy }) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2, ease: mtMotion.easing.standard }} className="h-full">
+    <motion.div
+      whileHover={reduceMotion ? undefined : { y: -4 }}
+      transition={{ duration: reduceMotion ? 0 : 0.2, ease: mtMotion.easing.standard }}
+      className="h-full"
+    >
       <Link
         href={`/case-studies/${project.slug}`}
         className="focus-ring group block h-full rounded-card"
