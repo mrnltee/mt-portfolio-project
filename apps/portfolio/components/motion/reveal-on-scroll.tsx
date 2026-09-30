@@ -17,10 +17,10 @@ export function RevealOnScroll({ children, delay = 0, className, as = "div" }: R
 
   return (
     <Component
-      initial={reduceMotion ? undefined : { opacity: 0, y: 24 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: mtMotion.easing.standard }}
+      transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : delay, ease: mtMotion.easing.standard }}
       className={className}
     >
       {children}
