@@ -25,7 +25,8 @@ export function ProjectCard({ project }: { project: CaseStudy }) {
             label={project.coverLabel}
             src={project.cover}
             srcDark={project.coverDark}
-            aspect={project.coverAspect ?? "video"}
+            aspect="video"
+            fit={project.coverAspect === "portrait" ? "contain" : "cover"}
             tone={project.tone}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
             className="rounded-none border-0 border-b"
