@@ -24,13 +24,10 @@ const FOUNDATIONS = [
 const navLink = "focus-ring block rounded py-0.5 text-body-sm text-text-secondary hover:text-text-primary";
 const navHead = "text-caption font-semibold uppercase tracking-wide text-text-tertiary";
 
-/** In-page table of contents — sticky on desktop, separate from the site header. */
-function DesignSystemNav() {
+/** In-page table of contents — sticky on desktop, collapsible on smaller screens. */
+function DesignSystemNavLinks() {
   return (
-    <nav
-      aria-label="On this page"
-      className="hidden lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-auto lg:pb-10"
-    >
+    <>
       <p className={navHead}>Foundations</p>
       <ul className="mt-2 space-y-1">
         {FOUNDATIONS.map((f) => (
@@ -64,13 +61,71 @@ function DesignSystemNav() {
           </li>
         ))}
       </ul>
+    </>
+  );
+}
+
+function DesignSystemNav() {
+  return (
+    <nav
+      aria-label="On this page"
+      className="hidden lg:sticky lg:top-20 lg:block lg:max-h-[calc(100vh-6rem)] lg:self-start lg:overflow-auto lg:pb-10"
+    >
+      <DesignSystemNavLinks />
     </nav>
   );
 }
 
+function MobileDesignSystemNav() {
+  return (
+    <details className="mb-8 rounded-card border border-border-default bg-background-surface p-4 lg:hidden">
+      <summary className="focus-ring cursor-pointer rounded-field font-semibold text-text-primary">
+        On this page
+      </summary>
+      <div className="mt-4 space-y-5">
+        <div>
+          <p className={navHead}>Foundations</p>
+          <ul className="mt-2 space-y-1">
+            {FOUNDATIONS.map((f) => (
+              <li key={f.href}>
+                <a href={f.href} className={navLink}>
+                  {f.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p className={navHead}>Components</p>
+          <ul className="mt-2 space-y-2">
+            {COMPONENT_TOC.map((cat) => (
+              <li key={cat.title}>
+                <details className="rounded-field border border-border-subtle px-3 py-2">
+                  <summary className="focus-ring cursor-pointer rounded text-body-sm font-semibold text-text-primary">
+                    {cat.title}
+                  </summary>
+                  <ul className="mt-2 space-y-1 border-l border-border-default pl-3">
+                    {cat.items.map((item) => (
+                      <li key={item}>
+                        <a href={`#${slugify(item)}`} className={navLink}>
+                          {item}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </details>
+  );
+}
 function PortfolioDesignSystem() {
   return (
     <Container className="py-12 sm:py-16 lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
+        <MobileDesignSystemNav />
         <DesignSystemNav />
 
         <div className="min-w-0 space-y-16">

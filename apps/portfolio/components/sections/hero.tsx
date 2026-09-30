@@ -8,9 +8,9 @@ import { BrandMark } from "@/components/sections/brand-mark";
 export function Hero() {
   const reduceMotion = useReducedMotion();
   const rise = (delay: number) => ({
-    initial: reduceMotion ? undefined : { opacity: 0, y: 16 },
+    initial: false,
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, delay, ease: mtMotion.easing.standard },
+    transition: { duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : delay, ease: mtMotion.easing.standard },
   });
 
   return (
