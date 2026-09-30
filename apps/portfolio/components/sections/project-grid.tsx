@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { motion as mtMotion } from "@mt/tokens/motion";
 import { ProjectCard } from "./project-card";
 import { FilterTag } from "@/components/ui/tag";
@@ -13,6 +13,7 @@ type SortOrder = "featured" | "az";
 export function ProjectGrid({ projects }: { projects: CaseStudy[] }) {
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
   const [sort, setSort] = useState<SortOrder>("featured");
+  const reduceMotion = useReducedMotion();
 
   // Only surface categories at least one project uses, kept in canonical order.
   const categories = useMemo(
@@ -60,16 +61,22 @@ export function ProjectGrid({ projects }: { projects: CaseStudy[] }) {
         </label>
       </div>
 
-      <motion.div layout className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        Showing {visible.length} {visible.length === 1 ? "project" : "projects"}
+        {activeCategory ? ` in ${activeCategory}` : ""}
+        {sort === "az" ? ", sorted A to Z." : "."}
+      </p>
+
+      <motion.div layout={!reduceMotion} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {visible.map((project) => (
             <motion.div
               key={project.slug}
-              layout
-              initial={{ opacity: 0, scale: 0.96 }}
+              layout={!reduceMotion}
+              initial={false}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2, ease: mtMotion.easing.standard }}
+              exit={reduceMotion ? undefined : { opacity: 0, scale: 0.96 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: mtMotion.easing.standard }}
             >
               <ProjectCard project={project} />
             </motion.div>
