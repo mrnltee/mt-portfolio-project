@@ -4,11 +4,11 @@ import { CopyButton } from "./copy-button";
 const HEADER_LINE = /^[A-Z][A-Z /]{2,}$/;
 
 function renderLine(line: string, key: number) {
-  if (line.trim().length === 0) return <div key={key} className="h-4" aria-hidden="true" />;
+  if (line.trim().length === 0) return <span key={key} className="block h-4" aria-hidden="true" />;
 
   if (HEADER_LINE.test(line.trim())) {
     return (
-      <div key={key} className="mt-3 whitespace-pre-wrap font-semibold text-action-primary first:mt-0">
+      <span key={key} className="mt-3 block whitespace-pre-wrap font-semibold text-action-primary first:mt-0">
         {line}
       </div>
     );
@@ -17,7 +17,7 @@ function renderLine(line: string, key: number) {
   const parts = line.split(/(`[^`]+`|\[REPLACE[^\]]*\])/g).filter((p) => p !== "");
 
   return (
-    <div key={key} className="whitespace-pre-wrap text-text-secondary">
+    <span key={key} className="block whitespace-pre-wrap text-text-secondary">
       {parts.map((part, i) => {
         if (part.startsWith("`") && part.endsWith("`")) {
           return (
