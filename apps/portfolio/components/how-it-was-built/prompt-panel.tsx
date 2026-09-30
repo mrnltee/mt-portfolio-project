@@ -10,7 +10,7 @@ function renderLine(line: string, key: number) {
     return (
       <span key={key} className="mt-3 block whitespace-pre-wrap font-semibold text-action-primary first:mt-0">
         {line}
-      </div>
+      </span>
     );
   }
 
@@ -35,7 +35,7 @@ function renderLine(line: string, key: number) {
         }
         return <span key={i}>{part}</span>;
       })}
-    </div>
+    </span>
   );
 }
 
@@ -55,7 +55,7 @@ export function PromptPanel() {
         <CopyButton text={ORIGINAL_PROMPT} />
       </div>
       <pre className="max-h-[32rem] overflow-auto p-5 font-mono text-body-sm leading-relaxed">
-        {lines.map((line, i) => renderLine(line, i))}
+        <code className="block">{lines.map((line, i) => renderLine(line, i))}</code>
       </pre>
     </div>
   );
