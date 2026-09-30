@@ -2,7 +2,6 @@
 
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
-import { motion as mtMotion } from "@mt/tokens/motion";
 
 /**
  * Keyed on pathname so each App Router navigation remounts and replays a
@@ -24,9 +23,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
       key={pathname}
-      initial={{ opacity: 0, y: 8 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: mtMotion.duration.normal / 1000, ease: mtMotion.easing.standard }}
     >
       {children}
     </motion.div>
