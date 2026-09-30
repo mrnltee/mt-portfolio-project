@@ -125,6 +125,7 @@ function MobileDesignSystemNav() {
 function PortfolioDesignSystem() {
   return (
     <Container className="py-12 sm:py-16 lg:grid lg:grid-cols-[210px_minmax(0,1fr)] lg:gap-12">
+        <MobileDesignSystemNav />
         <DesignSystemNav />
 
         <div className="min-w-0 space-y-16">
