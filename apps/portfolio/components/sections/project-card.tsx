@@ -8,6 +8,8 @@ import type { CaseStudy } from "@/types/project";
 
 export function ProjectCard({ project }: { project: CaseStudy }) {
   const reduceMotion = useReducedMotion();
+  const visibleTools = project.tools.slice(0, 2);
+  const additionalTools = project.tools.length - visibleTools.length;
 
   return (
     <motion.div
@@ -25,23 +27,36 @@ export function ProjectCard({ project }: { project: CaseStudy }) {
             label={project.coverLabel}
             src={project.cover}
             srcDark={project.coverDark}
-            aspect={project.coverAspect ?? "video"}
+            aspect="video"
+            fit={project.coverAspect === "portrait" ? "contain" : "cover"}
             tone={project.tone}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
             className="rounded-none border-0 border-b"
           />
           <CardBody className="flex flex-1 flex-col gap-3">
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap items-center gap-1.5">
               <Tag variant="accent">{project.category}</Tag>
-              {project.tools.map((t) => (
-                <Tag key={t}>{t}</Tag>
+              {visibleTools.map((tool) => (
+                <Tag key={tool}>{tool}</Tag>
               ))}
+              {additionalTools > 0 && (
+                <Tag aria-label={`${additionalTools} additional tools`}>+{additionalTools}</Tag>
+              )}
             </div>
             <h3 className="font-display text-h4 font-semibold text-text-primary">{project.title}</h3>
-            <p className="flex-1 text-body-sm text-text-secondary">{project.summary}</p>
-            <p className="text-caption text-text-secondary">
-              {project.role} · {project.timeframe}
-            </p>
+            <p className="line-clamp-3 flex-1 text-body-sm text-text-secondary">{project.summary}</p>
+            <div className="mt-auto space-y-3 pt-1">
+              <div className="flex min-h-10 items-start justify-between gap-3 border-t border-border-default pt-3">
+                <p className="line-clamp-2 text-caption text-text-secondary">{project.role}</p>
+                <p className="shrink-0 whitespace-nowrap text-caption text-text-secondary">
+                  {project.timeframe}
+                </p>
+              </div>
+              <div className="flex items-center justify-between text-body-sm font-semibold text-text-primary group-hover:underline group-focus-visible:underline">
+                <span>View case study</span>
+                <span aria-hidden="true">→</span>
+              </div>
+            </div>
           </CardBody>
         </Card>
       </Link>

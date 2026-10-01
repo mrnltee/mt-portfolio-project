@@ -10,6 +10,8 @@ interface ImagePlaceholderProps {
   /** Optional dark-theme image path. When set, it is shown in dark mode and `src` is shown in light mode. */
   srcDark?: string;
   aspect?: "video" | "square" | "portrait" | "wide";
+  /** How the image fits inside its frame. Use contain for portrait app screens in landscape card media. */
+  fit?: "cover" | "contain";
   className?: string;
   tone?: 0 | 1 | 2 | 3;
   /** Hint next/image to eager-load (use for above-the-fold covers). */
@@ -49,6 +51,7 @@ export function ImagePlaceholder({
   src,
   srcDark,
   aspect = "video",
+  fit = "cover",
   className,
   tone = 0,
   priority,
@@ -84,7 +87,7 @@ export function ImagePlaceholder({
           alt={label}
           sizes={sizes}
           priority={priority}
-          className="object-cover object-top"
+          className={fit === "contain" ? "object-contain object-center p-4" : "object-cover object-top"}
         />
       </div>
     );
