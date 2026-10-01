@@ -1,5 +1,3 @@
-"use client";
-
 import type { CSSProperties } from "react";
 import { motion as motionTokens } from "@mt/tokens/motion";
 
