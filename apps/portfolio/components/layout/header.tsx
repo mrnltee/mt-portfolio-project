@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { motion as mtMotion } from "@mt/tokens/motion";
 import { Container } from "./container";
 import { NavLink } from "@/components/ui/nav-link";
@@ -19,7 +19,17 @@ const NAV_ITEMS = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
   const pathname = usePathname();
+  const prefersReducedMotion = useReducedMotion();
+
+  const activeItem = NAV_ITEMS.find(
+    ({ href }) => pathname === href || pathname.startsWith(`${href}/`)
+  );
+  const highlightedHref = hoveredHref ?? activeItem?.href;
+  const highlightTransition = prefersReducedMotion
+    ? { duration: 0 }
+    : { type: "spring" as const, stiffness: 520, damping: 38, mass: 0.72 };
 
   useEffect(() => setOpen(false), [pathname]);
 
@@ -35,7 +45,7 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 bg-background-canvas/45 backdrop-blur-md">
+    <header className="sticky top-0 z-40">
       <Container className="flex h-16 items-center justify-between gap-3">
         <Link
           href="/"
@@ -46,20 +56,45 @@ export function Header() {
 
         <nav
           aria-label="Primary"
+          onMouseLeave={() => setHoveredHref(null)}
+          onBlurCapture={(event) => {
+            const nextTarget = event.relatedTarget;
+            if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
+              setHoveredHref(null);
+            }
+          }}
           className="hidden items-center gap-0.5 rounded-pill border border-border-default/60 bg-background-canvas/70 p-1.5 shadow-raised backdrop-blur-xl md:flex"
         >
-          {NAV_ITEMS.map((item) => (
-            <NavLink
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "whitespace-nowrap rounded-pill px-3 py-2 text-caption aria-[current=page]:bg-action-accent-subtle",
-                item.href === "/contact" && "text-action-primary hover:text-action-primary"
-              )}
-            >
-              {item.label}
-            </NavLink>
-          ))}
+          {NAV_ITEMS.map((item) => {
+            const isActive =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const isHighlighted = highlightedHref === item.href;
+
+            return (
+              <NavLink
+                key={item.href}
+                href={item.href}
+                onMouseEnter={() => setHoveredHref(item.href)}
+                onFocus={() => setHoveredHref(item.href)}
+                className={cn(
+                  "relative isolate whitespace-nowrap rounded-pill px-3 py-2 text-caption text-text-secondary transition-colors duration-normal hover:text-action-primary motion-reduce:transition-none",
+                  isActive &&
+                    "text-action-primary after:absolute after:bottom-0.5 after:left-1/2 after:h-0.5 after:w-3 after:-translate-x-1/2 after:rounded-full after:bg-action-primary",
+                  item.href === "/contact" && "text-action-primary hover:text-action-primary"
+                )}
+              >
+                {isHighlighted && (
+                  <motion.span
+                    layoutId="primary-nav-highlight"
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 z-0 rounded-pill bg-action-accent-subtle"
+                    transition={highlightTransition}
+                  />
+                )}
+                <span className="relative z-10">{item.label}</span>
+              </NavLink>
+            );
+          })}
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
