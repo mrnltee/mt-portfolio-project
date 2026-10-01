@@ -35,21 +35,21 @@ function ToolList({ duplicate = false }: { duplicate?: boolean }) {
       {TOOLS.map((tool) => (
         <li
           key={tool.name}
-          className="inline-flex min-w-max items-center gap-3 rounded-container border border-border-subtle bg-background-surface/75 px-4 py-3 text-body-sm font-medium text-text-primary"
+          className="group inline-flex min-w-max items-center gap-3 rounded-container border border-border-subtle bg-background-surface/75 px-4 py-3 text-body-sm font-medium text-text-primary"
         >
           {"icon" in tool ? (
             <svg
               aria-hidden="true"
               focusable="false"
               viewBox={tool.icon === "vscode" ? "0 0 128 128" : "0 0 24 24"}
-              className="h-6 w-6 shrink-0 text-text-secondary"
+              className="h-6 w-6 shrink-0 text-text-primary transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-0.5 group-hover:-rotate-6 group-hover:scale-110"
             >
               <use href={"/tool-logos.svg#" + tool.icon} />
             </svg>
           ) : (
             <span
               aria-hidden="true"
-              className="flex h-6 w-6 shrink-0 items-center justify-center font-display text-caption font-bold text-text-secondary"
+              className="flex h-6 w-6 shrink-0 items-center justify-center font-display text-caption font-bold text-text-primary transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-0.5 group-hover:-rotate-6 group-hover:scale-110"
             >
               {tool.mark}
             </span>
