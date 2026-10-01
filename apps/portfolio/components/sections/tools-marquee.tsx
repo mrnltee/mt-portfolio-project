@@ -42,7 +42,7 @@ function ToolList({ duplicate = false }: { duplicate?: boolean }) {
               aria-hidden="true"
               focusable="false"
               viewBox={tool.icon === "vscode" ? "0 0 128 128" : "0 0 24 24"}
-              className="h-6 w-6 shrink-0 text-text-primary transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-0.5 group-hover:-rotate-6 group-hover:scale-110"
+              className="h-6 w-6 shrink-0 fill-current text-text-primary transition-transform duration-300 ease-out motion-reduce:transition-none group-hover:-translate-y-0.5 group-hover:-rotate-6 group-hover:scale-110"
             >
               <use href={"/tool-logos.svg#" + tool.icon} />
             </svg>
