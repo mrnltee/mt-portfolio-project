@@ -5,6 +5,7 @@ import { Card, CardBody } from "@/components/ui/card";
 import { ButtonLink } from "@/components/ui/button";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
 import { CareerTimeline } from "@/components/sections/career-timeline";
+import { ToolsMarquee } from "@/components/sections/tools-marquee";
 
 export const metadata: Metadata = {
   title: "About — Mernel Tusoy",
@@ -115,6 +116,19 @@ export default function AboutPage() {
             build comes back close to what I drew rather than identical, and if the behavior is right, close is
             fine. I&apos;ve been the person on the other end of that conversation. It changes what you fight for.
           </p>
+        </div>
+      </Section>
+
+      {/* Tools */}
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="font-display text-h2 font-bold text-text-primary">Tools I use</h2>
+          <p className={`text-body-sm text-text-secondary ${PROSE}`}>
+            Design, AI, and build tools I use across the product lifecycle.
+          </p>
+        </div>
+        <div className="mt-8">
+          <ToolsMarquee />
         </div>
       </Section>
 
