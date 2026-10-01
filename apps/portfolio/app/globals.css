@@ -84,6 +84,49 @@ body::before {
   }
 }
 
+/* Continuous, seamless tools strip. Duration is supplied from the motion token in the component. */
+.tools-marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+}
+.tools-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: tools-marquee var(--tools-marquee-duration) linear infinite;
+  will-change: transform;
+}
+.tools-marquee:hover .tools-marquee-track,
+.tools-marquee:focus-within .tools-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes tools-marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .tools-marquee-viewport {
+    overflow: visible;
+    mask-image: none;
+  }
+  .tools-marquee-track {
+    animation: none !important;
+    width: 100%;
+    will-change: auto;
+  }
+  .tools-marquee-group:not([aria-hidden="true"]) {
+    flex-wrap: wrap;
+    width: 100%;
+    padding-right: 0;
+  }
+  .tools-marquee-group[aria-hidden="true"] {
+    display: none;
+  }
+}
+
 @layer utilities {
   .text-balance {
     white-space: normal;
