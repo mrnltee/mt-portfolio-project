@@ -36,7 +36,11 @@ npm run dev      # start the dev server
 npm run build    # static export to out/
 npx serve out    # preview the exported site locally
 npm run lint     # eslint
+npm run test:scroll  # after build: checks Back restores the scroll on /case-studies
 ```
+
+`test:scroll` serves `out/` itself and drives Chromium with Playwright (first time on a machine:
+`npx playwright install chromium`). From the monorepo root it is `npm run portfolio:test:scroll`.
 
 ## Deploying
 
