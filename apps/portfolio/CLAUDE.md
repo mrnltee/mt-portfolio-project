@@ -96,7 +96,7 @@ components/
   ui/                       Design-system primitives (Button, Input, Card, Tag, NavLink,
                              Avatar, SectionHeading, Divider, ThemeToggle, ImagePlaceholder)
   layout/                   Header, Footer, Container, Section
-  sections/                 Page composites (Hero, TeamsStrip, WorkBand, WhatIBring, ContactBand,
+  sections/                 Page composites (Hero, TeamsStrip, WorkBand, WhatIBring, ContactBand, ToolsGrid,
                              ProjectCard, ProjectGrid, CaseStudyTemplate, project-media,
                              BrandMark — the interactive 3D Morse-wireframe hero mark)
   design-system/            Sections for the /design-system page (color/type/spacing/component)
@@ -108,7 +108,7 @@ lib/
   utils.ts                  cn() class-merge helper
   color.ts                  hex→HSL formatter (used on /design-system)
   projects-data.ts          All case study content — the single place to edit project copy
-  content.ts                Copy shared by pages (What I bring, employers)
+  content.ts                Copy shared by pages (What I bring, employers, About tools + skills)
   site.ts                   Site settings: URL, email, CV path, time zone, SITE_ACCENT
   original-prompt.ts        Verbatim scaffolding prompt shown on /how-this-was-built
 
@@ -125,6 +125,10 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
   to three) puts a project on the home page and needs `band` (media + one `highlight`, which may only
   restate a fact the study makes). `tint` picks the screenshot panel colour; `contribution` adds the
   "What I did" list. Copy shared by pages (What I bring, employers) lives in `lib/content.ts`.
+- **About → Tools I use / Skills**: `TOOL_GROUPS` and `SKILLS` in `lib/content.ts`, rendered by
+  `ToolsGrid` (static, grouped; it replaced the marquee once the list grew past ~20). A tool's `icon`
+  is a `<symbol id>` in `public/tool-logos.svg` (Simple Icons paths, CC0); use `mark` (a short
+  monogram) when no logo is available. Only list tools the owner actually uses.
 - **Page structure**: Home = `Hero` (bento) → `TeamsStrip` → `WorkBand`s → `WhatIBring` → `ContactBand`.
   Every case study ends with `ContactBand`, then Next case study (wraps to the first) and All work.
   Screenshot framing: `components/sections/project-media.tsx` (`PhoneShot`, `BrowserShot`,

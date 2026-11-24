@@ -4,7 +4,7 @@ import { Avatar } from "@/components/ui/avatar";
 import { Card, CardBody } from "@/components/ui/card";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
 import { CareerTimeline } from "@/components/sections/career-timeline";
-import { ToolsMarquee } from "@/components/sections/tools-marquee";
+import { ToolsGrid } from "@/components/sections/tools-grid";
 import { WhatIBring } from "@/components/sections/what-i-bring";
 import { ContactBand } from "@/components/sections/contact-band";
 
@@ -93,17 +93,15 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Tools */}
-      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="font-display text-h2 font-bold text-text-primary">Tools I use</h2>
+      {/* Tools & skills (grouped; edit in lib/content.ts) */}
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16" aria-labelledby="tools-heading">
+        <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <h2 id="tools-heading" className="font-display text-h2 font-bold text-text-primary">Tools I use</h2>
           <p className={`text-body-sm text-text-secondary ${PROSE}`}>
             Design, AI, and build tools I use across the product lifecycle.
           </p>
         </div>
-        <div className="mt-8">
-          <ToolsMarquee />
-        </div>
+        <ToolsGrid />
       </Section>
 
       {/* Selected work */}
