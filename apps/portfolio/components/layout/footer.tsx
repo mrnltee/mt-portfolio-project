@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Mail, Sparkles } from "lucide-react";
 import { LinkedInIcon } from "@/components/ui/icons";
+import { LINKEDIN_URL } from "@/lib/site";
 import { Container } from "./container";
 
 export function Footer() {
@@ -18,7 +19,7 @@ export function Footer() {
             Email
           </a>
           <a
-            href="https://www.linkedin.com/in/merneltusoy"
+            href={LINKEDIN_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="focus-ring inline-flex items-center gap-1.5 rounded-field hover:text-text-primary"
