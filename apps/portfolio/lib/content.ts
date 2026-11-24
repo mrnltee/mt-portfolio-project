@@ -134,5 +134,6 @@ export const SKILLS: string[] = [
   "Design tokens",
   "Accessibility (WCAG)",
   "Front-end development",
+  "Business analysis",
   "Project management",
 ];
