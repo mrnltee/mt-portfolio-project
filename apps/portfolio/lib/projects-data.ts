@@ -260,9 +260,10 @@ export const caseStudies: CaseStudy[] = [
     role: "Designer & Developer",
     timeframe: "2026",
     category: "Community & Non-profit",
-    tools: ["Next.js"],
+    tools: ["Figma", "Next.js", "Postgres"],
+    platforms: ["Web", "Admin on desktop & phone"],
     summary:
-      "The public home of a Filipino furparent non-profit, built so a breed-named community reads as open to every dog.",
+      "The public home and volunteer-run back office of a Filipino furparent non-profit, from a breed-named front door to the event gate.",
     coverLabel: "House of Retrievers PH hero — \"Good dogs. Good people. Greater Good.\"",
     websiteUrl: "https://www.houseofretrieversph.org/",
     cover: `${HOR}/hero.jpg`,
@@ -272,6 +273,7 @@ export const caseStudies: CaseStudy[] = [
       "House of Retrievers PH turns a furparent community into service: volunteer outreach, practical care learning, and gatherings whose proceeds go to a named beneficiary. The site is its front door.",
       "The hardest thing on the page is the name. It says where the pack came from, and dropping it would throw away what made the community cohere. But the door is open well past goldens, and a breed in the wordmark is the fastest way to make a rescue owner feel uninvited.",
       "The second problem is the ask. Most non-profit sites are built around a donate button. This community's currency is turnout, someone bringing their dog and their Saturday. That is a harder yes than money.",
+      "The third problem sits behind the page. The same few volunteers run every event: sign-ups, payment checks, sponsor letters and the door. The admin has to suit people who do this on a Saturday, not as a job.",
     ],
     process: [
       {
@@ -292,10 +294,28 @@ export const caseStudies: CaseStudy[] = [
         imageLabel: "\"Life with the retrievers\" — the live Instagram feed with post dates",
         image: `${HOR}/from-the-pack.jpg`,
       },
+      {
+        heading: "An admin that opens on people",
+        body: "The dashboard answers two questions in order: what needs you today, then what is coming up. Each new member, partner or volunteer opens the record it is about. Events show how full they are. The sidebar collapses to icons with tooltips, and on a phone it becomes a full menu.",
+        imageLabel: "Admin dashboard — \"Needs you\" follow-ups beside upcoming events and capacity",
+        image: `${HOR}/admin-dashboard.jpg`,
+      },
+      {
+        heading: "Brands say yes event by event",
+        body: "Sponsors don't commit to the whole community, so brands live in a directory and are invited per event. The Brand tracker records each reply, the role and what they're giving. Only brands that said Yes appear on the public site. Unsaved edits are outlined in gold until saved.",
+        imageLabel: "Brand tracker — per-event invites, replies and giving, with two unsaved changes",
+        image: `${HOR}/admin-brand-tracker.jpg`,
+      },
+      {
+        heading: "A welcome at the door, not a ticket check",
+        body: "Volunteers scan the QR from each guest's confirmation, type the code, or find them by name. A successful check-in greets the guest by name, for this event, with their furbaby's photo or their initials. A separate display screen shows the same welcome to the arriving crowd.",
+        imageLabel: "Check-in — the welcome card for a guest and their dog after a scan",
+        image: `${HOR}/admin-checkin-welcome.jpg`,
+      },
     ],
     solution: {
       body:
-        "The asks form a ladder. Become a member is the low step. Volunteer together is the real one, phrased as bringing your time, your skills, or just a friendly dog, so presence alone still counts. Partner for a cause carries the trust, promising a named beneficiary. There is no donate button anywhere. The ask is to join.",
+        "The asks form a ladder: become a member, volunteer together, partner for a cause. There is no donate button; the ask is to join. Behind it, one admin carries every yes through: registrations and payment checks, guest and brand replies per event, a team chat, and a door that greets each guest and their dog by name.",
       gallery: [
         {
           label: "Three ways in",
@@ -307,11 +327,43 @@ export const caseStudies: CaseStudy[] = [
           caption: "The last frame, in one line: \"There is always room for one more good human.\" Not one more retriever.",
           image: `${HOR}/closing-invite.jpg`,
         },
+        {
+          label: "Registrations",
+          caption: "Every registrant, their furbaby, ticket and payment, with payments waiting on a receipt check flagged at the top.",
+          image: `${HOR}/admin-registrations.jpg`,
+        },
+        {
+          label: "Guest tracker",
+          caption: "Invited guests, their reply and whether they show on the event page, with letters sent to several at once.",
+          image: `${HOR}/admin-guest-tracker.jpg`,
+        },
+        {
+          label: "Team chat",
+          caption: "One room for the admin team, open from any page, with emoji presets for quick replies at a busy gate.",
+          image: `${HOR}/admin-team-chat.jpg`,
+        },
+        {
+          label: "Check-in display screen",
+          caption: "The welcome shown on a screen at the venue, with the latest arrivals and the count along the bottom.",
+          image: `${HOR}/admin-checkin-display.jpg`,
+        },
+        {
+          label: "Admin dashboard on a phone",
+          caption: "The same dashboard, stacked into one column for admins working from a phone.",
+          aspect: "portrait",
+          image: `${HOR}/admin-dashboard-phone.jpg`,
+        },
+        {
+          label: "Check-in welcome on a phone",
+          caption: "The door works from a volunteer's phone: scan, welcome, and \"Ready for the next guest\".",
+          aspect: "portrait",
+          image: `${HOR}/admin-checkin-welcome-phone.jpg`,
+        },
       ],
     },
     outcome: {
       summary:
-        "The site's job is turning followers into turnout, not simply being found. It asks for time instead of money, names a beneficiary for every gathering, and treats the breed in its name as history, not a rule.",
+        "The site's job is turning followers into turnout, not simply being found. It asks for time instead of money, names a beneficiary for every gathering, and treats the breed in its name as history, not a rule. The admin gives the volunteers behind that turnout one place to run it, from desk or gate.",
     },
   },
   {
