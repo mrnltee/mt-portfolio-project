@@ -16,6 +16,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* While Lenis runs (components/motion/smooth-scroll.tsx) it animates every scroll itself; CSS smoothing
+   on top would make each frame ease again. Under reduced motion Lenis is off and the rule below applies. */
+html.lenis {
+  scroll-behavior: auto;
+}
+
+/* A section that receives focus from a same-page link (e.g. Skip to main content) isn't a control;
+   a native jump shows no ring around it, so neither does the smooth one. */
+[data-scroll-target]:focus {
+  outline: none;
+}
+
 body {
   background: var(--mt-color-background-canvas);
   color: var(--mt-color-text-primary);

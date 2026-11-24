@@ -4,12 +4,14 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/motion/page-transition";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { Toaster } from "@/components/ui/toast";
 import { Analytics } from "@vercel/analytics/next";
 import { LINKEDIN_URL, SITE_ACCENT, SITE_NAME, SITE_URL } from "@/lib/site";
 // @mt/tokens layered runtime CSS variables (--mt-*). Imported before globals.css.
 // Both stylesheet imports are typed via css.d.ts (no @ts-expect-error needed).
 import "@mt/tokens/css";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const sans = Inter({
@@ -78,6 +80,7 @@ export default function RootLayout({
               <PageTransition>{children}</PageTransition>
             </main>
             <Footer />
+            <SmoothScroll />
           </Toaster>
         </ThemeProvider>
         {/* Vercel Analytics only works on Vercel; on Cloudflare Pages, Web Analytics is enabled in the dashboard instead. */}
