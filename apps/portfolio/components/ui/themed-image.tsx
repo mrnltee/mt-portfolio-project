@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useMounted } from "@/lib/use-mounted";
 
 /**
  * A next/image that swaps its source with the active theme. Renders a single
@@ -26,8 +26,7 @@ export function ThemedImage({
   className?: string;
 }) {
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
 
   const showDark = mounted && resolvedTheme === "dark" && Boolean(srcDark);
 

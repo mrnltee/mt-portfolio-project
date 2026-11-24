@@ -41,7 +41,12 @@ export function Header() {
     ? { duration: 0 }
     : { type: "spring" as const, stiffness: 520, damping: 38, mass: 0.72 };
 
-  useEffect(() => setOpen(false), [pathname]);
+  // Close the menu when the route changes (adjusting state during render, not in an effect).
+  const [menuPath, setMenuPath] = useState(pathname);
+  if (menuPath !== pathname) {
+    setMenuPath(pathname);
+    setOpen(false);
+  }
 
   // The mobile menu is a disclosure, not a modal: no scroll lock or focus trap.
   // Escape closes it and returns focus to the toggle.

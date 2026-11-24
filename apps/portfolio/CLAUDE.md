@@ -4,7 +4,7 @@ Reference for future edits to this project — read this before adding pages or 
 
 ## Stack
 
-Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion. Static export (`out/`), hosted on Cloudflare Pages,
+Next.js 16 (App Router, React 19) + TypeScript + Tailwind CSS + Framer Motion. Static export (`out/`), hosted on Cloudflare Pages,
 no backend. This app lives in the **`mt-design-system` monorepo** as `apps/portfolio` and
 consumes the `@mt/tokens` workspace package (`packages/tokens`). Run it with
 `npm run portfolio:dev` from the monorepo root (or `npm run dev` from this folder).
@@ -110,6 +110,7 @@ lib/
   projects-data.ts          All case study content — the single place to edit project copy
   content.ts                Copy shared by pages (What I bring, employers, About tools + skills)
   site.ts                   Site settings: URL, email, CV path, time zone, SITE_ACCENT
+  use-mounted.ts            useMounted(): false on the server/hydration, true after (theme-dependent UI)
   original-prompt.ts        Verbatim scaffolding prompt shown on /how-this-was-built
 
 types/
@@ -146,6 +147,11 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
 - **Motion**: keep it purposeful. Use `RevealOnScroll` sparingly; prefer the `duration-*`/`ease-*`
   tokens; drive Framer Motion from `@mt/tokens/motion`. All motion respects
   `prefers-reduced-motion` (globally in `globals.css` and per-component `useReducedMotion()`).
+- **Next.js 16 / React 19** (upgraded Nov 2026 for security advisories): route `params` are a Promise, so
+  `await params` in pages and `generateMetadata` (a plain `params.slug` is undefined and every case study 404s).
+  Lint is `npm run lint` → `eslint .` with `eslint.config.mjs` (flat config; `next lint` no longer exists).
+  Don't `setState` inside `useEffect` (the React hooks rule fails the lint): for "only after hydration"
+  use `useMounted()` from `lib/use-mounted.ts`; to reset state when a value changes, compare it during render.
 - **Accessibility**: every focusable element uses the shared `.focus-ring` utility (in
   `globals.css`) instead of the browser default outline. The ring follows the element's own radius;
   don't add a `border-radius` to `.focus-ring`.

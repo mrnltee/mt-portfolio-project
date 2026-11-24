@@ -1,6 +1,6 @@
 # Mernel Tusoy — Portfolio
 
-Product design portfolio built with Next.js 14 (App Router), TypeScript, Tailwind CSS, and
+Product design portfolio built with Next.js 16 (App Router, React 19), TypeScript, Tailwind CSS, and
 Framer Motion. Fully static, no backend required.
 
 See [`CLAUDE.md`](./CLAUDE.md) for the design token system, folder structure, and editing
