@@ -11,6 +11,13 @@ export const EMAIL = "mbtusoy@gmail.com";
 
 export const CV_URL = "/MTusoy_Product_Designer_CV.pdf";
 
+/**
+ * SITE SETTING — Google Calendar booking page (Calendar → Create → Appointment schedule →
+ * Share → copy the link). Paste it here and "Book a call" appears on the Contact page and in the
+ * closing contact band. Leave it empty to hide the button everywhere.
+ */
+export const BOOKING_URL: string = "";
+
 /** IANA zone for the "local time" card. */
 export const TIME_ZONE = "Asia/Manila";
 

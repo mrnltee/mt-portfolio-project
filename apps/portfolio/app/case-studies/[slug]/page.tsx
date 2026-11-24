@@ -3,12 +3,18 @@ import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudyBySlug } from "@/lib/projects-data";
 import { CaseStudyTemplate } from "@/components/sections/case-study-template";
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return caseStudies.map((project) => ({ slug: project.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const project = getCaseStudyBySlug(params.slug);
+// Next.js 15+ passes route params as a Promise; reading `params.slug` directly is undefined.
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getCaseStudyBySlug(slug);
   if (!project) return {};
   return {
     title: `${project.title} — Mernel Tusoy`,
@@ -16,8 +22,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  const project = getCaseStudyBySlug(params.slug);
+export default async function CaseStudyPage({ params }: Props) {
+  const { slug } = await params;
+  const project = getCaseStudyBySlug(slug);
   if (!project) notFound();
 
   // Neighbours follow the authored order in projects-data.ts.

@@ -1,9 +1,9 @@
-import { Mail } from "lucide-react";
+import { CalendarDays, Mail } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { LinkedInIcon } from "@/components/ui/icons";
-import { CV_URL, EMAIL, LINKEDIN_URL } from "@/lib/site";
+import { BOOKING_URL, CV_URL, EMAIL, LINKEDIN_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -32,8 +32,16 @@ export function ContactBand({ className, headingLevel = "h2" }: { className?: st
               <Mail className="h-icon-md w-icon-md" aria-hidden="true" />
               {EMAIL}
             </a>
-            <div className="flex flex-col gap-3 sm:flex-row">
+            {/* With the booking button there are four; two rows of two keep the heading from being squeezed. */}
+            <div className={cn("flex flex-col gap-3 sm:flex-row sm:flex-wrap", BOOKING_URL && "lg:grid lg:grid-cols-2")}>
               <ButtonLink href={`mailto:${EMAIL}`}>Email me</ButtonLink>
+              {BOOKING_URL && (
+                <ButtonLink href={BOOKING_URL} target="_blank" rel="noopener noreferrer" variant="on-dark">
+                  <CalendarDays className="h-icon-sm w-icon-sm" aria-hidden="true" />
+                  Book a call
+                  <span className="sr-only">(opens Google Calendar in a new tab)</span>
+                </ButtonLink>
+              )}
               <ButtonLink href={CV_URL} download variant="on-dark">
                 Download CV
               </ButtonLink>
