@@ -40,9 +40,13 @@ use a token class or `--mt-*` CSS variable.
   `border-border-default` / `-subtle` / `-strong` / `-focus`;
   `bg-action-primary` / `text-action-primary`;
   `text-feedback-error` / `-warning` / `-success` / `-info`, `bg-feedback-error-surface`, etc.
-- **Primitive ramps** (`sand`, `indigo`, `green`, `amber`, `red`, …) compile to classes like
-  `bg-indigo-500` and are for one-off decorative use only (e.g. the hero brand mark). Prefer a
-  semantic class so theming "just works".
+- **Primitive ramps** (`sand`, `burnt-orange`, `green`, `amber`, `red`, …) compile to classes like
+  `bg-green-500` and are for one-off decorative use only. Prefer a semantic class so theming and the
+  accent setting "just work" (the brand mark strokes use `--mt-color-action-primary`).
+- **Roles added in the Nov 2026 redesign:** `text-text-link` (eyebrows, links), `border-border-control`
+  (input boundaries, ≥3:1), `bg-background-logo-plate` + `text-text-on-logo-plate` (employer logos),
+  `bg-background-tint-green|blue|violet` (decorative panels behind project screenshots; never put text
+  on them). The current nav item is `text-action-on-accent-subtle` on `bg-action-accent-subtle`.
 
 ### Theming (light/dark + brand)
 
@@ -53,6 +57,12 @@ use a token class or `--mt-*` CSS variable.
   semantic classes. **Never write a component-level `dark:` color override.**
 - **Brand:** `<html data-brand="a">` pins the app to Brand A. The token system is multi-brand
   (`a`/`b`/`c`); the portfolio consumes one brand.
+- **Accent (site setting):** `<html data-accent={SITE_ACCENT}>`, set in `lib/site.ts`. Change that one
+  value to repaint buttons, links, focus rings, tags, the nav highlight and the brand mark:
+  `"burnt-orange"` (default) | `"terracotta"` | `"pine"` | `"oxblood"` | `"ochre"` | `"ink"`. The type comes
+  from `@mt/tokens` (`overlays.accent.values`), so a value the tokens don't ship fails `tsc`, and
+  `npm run validate` checks every accent against the WCAG AA pairs in light and dark. Never use a
+  primitive accent ramp (e.g. `bg-burnt-orange-500`) in a component; use the semantic classes.
 
 ### Other scales
 
@@ -72,7 +82,7 @@ out of sync with the real system.
 
 ```
 app/                        Routes (App Router)
-  page.tsx                  Home (hero + filterable featured project grid)
+  page.tsx                  Home (bento hero, teams strip, three work bands, what I bring, contact)
   case-studies/page.tsx     Case study index (filterable grid)
   case-studies/[slug]/      Dynamic case study route, statically generated
   design-system/page.tsx    Live token + component documentation (reads @mt/tokens/metadata)
@@ -86,7 +96,8 @@ components/
   ui/                       Design-system primitives (Button, Input, Card, Tag, NavLink,
                              Avatar, SectionHeading, Divider, ThemeToggle, ImagePlaceholder)
   layout/                   Header, Footer, Container, Section
-  sections/                 Page composites (Hero, ProjectCard, ProjectGrid, CaseStudyTemplate,
+  sections/                 Page composites (Hero, TeamsStrip, WorkBand, WhatIBring, ContactBand,
+                             ProjectCard, ProjectGrid, CaseStudyTemplate, project-media,
                              BrandMark — the interactive 3D Morse-wireframe hero mark)
   design-system/            Sections for the /design-system page (color/type/spacing/component)
   how-it-was-built/         PromptPanel + CopyButton for /how-this-was-built
@@ -97,6 +108,8 @@ lib/
   utils.ts                  cn() class-merge helper
   color.ts                  hex→HSL formatter (used on /design-system)
   projects-data.ts          All case study content — the single place to edit project copy
+  content.ts                Copy shared by pages (What I bring, employers)
+  site.ts                   Site settings: URL, email, CV path, time zone, SITE_ACCENT
   original-prompt.ts        Verbatim scaffolding prompt shown on /how-this-was-built
 
 types/
@@ -107,8 +120,16 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
 
 ## Conventions
 
-- **Editing project content**: change `lib/projects-data.ts` only — it drives the home grid, the
-  case-studies index, filter tags, and every `/case-studies/[slug]` page.
+- **Editing project content**: change `lib/projects-data.ts` only — it drives the home work bands,
+  the case-studies index, filter tags, and every `/case-studies/[slug]` page. `featured: true` (keep it
+  to three) puts a project on the home page and needs `band` (media + one `highlight`, which may only
+  restate a fact the study makes). `tint` picks the screenshot panel colour; `contribution` adds the
+  "What I did" list. Copy shared by pages (What I bring, employers) lives in `lib/content.ts`.
+- **Page structure**: Home = `Hero` (bento) → `TeamsStrip` → `WorkBand`s → `WhatIBring` → `ContactBand`.
+  Every case study ends with `ContactBand`, then Next case study (wraps to the first) and All work.
+  Screenshot framing: `components/sections/project-media.tsx` (`PhoneShot`, `BrowserShot`,
+  `MediaPanel`) with a decorative `FrameLabel`. Card-wide links put the link on the title and stretch
+  it with `after:absolute after:inset-0` (never an `aria-label` that differs from the visible text).
 - **Placeholders**: mark anything to be replaced with a visible `[REPLACE]` prefix in the rendered
   text, not just a code comment.
 - **Images**: `components/ui/image-placeholder.tsx` renders a labeled box; swap each
@@ -122,4 +143,5 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
   tokens; drive Framer Motion from `@mt/tokens/motion`. All motion respects
   `prefers-reduced-motion` (globally in `globals.css` and per-component `useReducedMotion()`).
 - **Accessibility**: every focusable element uses the shared `.focus-ring` utility (in
-  `globals.css`) instead of the browser default outline.
+  `globals.css`) instead of the browser default outline. The ring follows the element's own radius;
+  don't add a `border-radius` to `.focus-ring`.

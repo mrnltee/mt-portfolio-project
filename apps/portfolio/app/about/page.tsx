@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Section } from "@/components/layout/section";
 import { Avatar } from "@/components/ui/avatar";
 import { Card, CardBody } from "@/components/ui/card";
-import { ButtonLink } from "@/components/ui/button";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
 import { CareerTimeline } from "@/components/sections/career-timeline";
 import { ToolsMarquee } from "@/components/sections/tools-marquee";
+import { WhatIBring } from "@/components/sections/what-i-bring";
+import { ContactBand } from "@/components/sections/contact-band";
 
 export const metadata: Metadata = {
   title: "About — Mernel Tusoy",
@@ -18,21 +19,6 @@ const WIDTH = "max-w-4xl";
 // Running body copy is capped to a comfortable reading measure (~70ch); headings
 // and feature blocks (cards, timeline) still span the full section width.
 const PROSE = "max-w-2xl";
-
-const WHAT_I_BRING = [
-  {
-    title: "I hand over decisions, not possibilities.",
-    body: "Design ends at a picture. Engineering ends at behavior. Every question I leave open in a file gets answered anyway, by an engineer, alone, with less context than me. So I try to answer them first: empty states, failure states, what happens at zero rows and at five hundred.",
-  },
-  {
-    title: "I've sat in the seat.",
-    body: "Before I designed the document validation workflow on an AI document-processing platform, I did that job. Hours of checking whether a model read a document correctly. I know which part of that day is tedious because I lived the tedious part.",
-  },
-  {
-    title: "I design for the stack that exists.",
-    body: "My engineers build in React, so my designs are React-shaped. I'm not limiting myself. A design that fights the framework loses, and then nobody gets the good version.",
-  },
-];
 
 const SELECTED_WORK = [
   {
@@ -86,21 +72,9 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* What I bring */}
-      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16">
-        <h2 className="font-display text-h2 font-bold text-text-primary">What I bring</h2>
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {WHAT_I_BRING.map((item, i) => (
-            <RevealOnScroll key={item.title} delay={i * 0.06}>
-              <Card className="h-full">
-                <CardBody className="flex h-full flex-col">
-                  <h3 className="font-display text-h4 font-semibold text-text-primary">{item.title}</h3>
-                  <p className="mt-3 text-body-sm text-text-secondary">{item.body}</p>
-                </CardBody>
-              </Card>
-            </RevealOnScroll>
-          ))}
-        </div>
+      {/* What I bring (shared with the home page) */}
+      <Section containerClassName={WIDTH} className="border-t border-border-default py-12 sm:py-16" aria-labelledby="what-i-bring-heading">
+        <WhatIBring eyebrow={false} />
       </Section>
 
       {/* Working with engineers */}
@@ -188,15 +162,8 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* CTA */}
-      <Section containerClassName={WIDTH} className="border-t border-border-default bg-background-surface-subtle/40 py-12 sm:py-16">
-        <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="font-display text-h2 font-bold text-text-primary">Looking for a product designer?</h2>
-          <ButtonLink href="/contact" variant="primary" size="lg" className="shrink-0">
-            Get in touch
-          </ButtonLink>
-        </div>
-      </Section>
+      {/* CTA (shared closing band) */}
+      <ContactBand className="border-t border-border-default" />
     </>
   );
 }

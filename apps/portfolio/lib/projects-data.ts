@@ -26,7 +26,10 @@ const AUTOSWEEP = img("autosweep-companion-app");
  * the /case-studies filter, and its own /case-studies/[slug] page.
  *
  * COPY RULES (the template constrains length, so respect these):
- * - `summary` renders on a card. Keep it under 25 words.
+ * - `summary` renders on a card and as the case-study intro. Keep it under 25 words.
+ * - `featured: true` puts the project on the home page as a work band (keep it to three);
+ *   it then needs `band`, and `band.highlight` may only restate a fact the study itself makes.
+ * - `contribution` is first-person "What I did" bullets. Omit it rather than guess.
  * - `problem` is an array — each string is its own paragraph. Aim 3 x ~35 words.
  * - `process[].body`, `solution.body` and `outcome.summary` each render as ONE
  *   paragraph and cannot be broken up. Cap them at ~60 words or the page turns
@@ -42,7 +45,7 @@ export const caseStudies: CaseStudy[] = [
     tools: ["Figma", "Heuristic audit", "Design tokens", "Prototyping"],
     platforms: ["iOS", "Responsive web"],
     summary:
-      "A UX audit and mobile-first redesign of the Philippines' Autosweep RFID toll app, built to answer a driver's three real questions on the first screen.",
+      "An independent UX audit and redesign of the Autosweep toll app that puts the balance, charges and reloads on the first screen.",
     coverLabel: "Redesigned Autosweep Home — balance-first vehicle card, sticker status, reload, recent activity",
     coverAspect: "portrait",
     cover: `${AUTOSWEEP}/home-light.png`,
@@ -50,6 +53,21 @@ export const caseStudies: CaseStudy[] = [
     prototypeUrl: "https://www.figma.com/proto/jHxCDpgzI3anYdo2WPsUZH/MT-Case-Study-Autosweep?node-id=1-2&t=Als0dUsa4y9nIk5P-1",
     tone: 0,
     featured: true,
+    tint: "green",
+    band: {
+      media: "phones",
+      images: [
+        { src: `${AUTOSWEEP}/before-home.png`, label: "The original Autosweep Home screen, with no balance shown", tag: "Before" },
+        { src: `${AUTOSWEEP}/home-light.png`, srcDark: `${AUTOSWEEP}/home.png`, label: "The redesigned Home screen, leading with the balance", tag: "After" },
+      ],
+      highlight: { label: "Result, measured in the design files", value: "Balance 2 taps → 0 · Reload 7 decisions → 3 · Contrast failures 31+ → 0" },
+    },
+    contribution: [
+      "Audited all 41 captured screens and wrote up 32 findings, each with severity, evidence and a recommendation.",
+      "Used the app's own Customer Care form as the research: every support reason became a screen to design.",
+      "Designed 29 screens in Light and Dark on a two-mode token collection, with five shared components and a wired prototype.",
+      "Scanned every tappable control for dead ends and built the six screens they pointed to.",
+    ],
     problem: [
       "Autosweep is the prepaid RFID toll system for the Skyway, SLEX, STAR, TPLEX and NAIAX tollways, with over a million registered customers. Its companion app is where drivers check balance, reload, and get help when a sticker fails to read or a charge looks wrong.",
       "Every session starts with one of three questions: do I have enough load, was that charge right, did my money arrive. The app answered none of them on the first screen. The balance was two taps deep, two of four primary tabs did not work, and there was no transaction history at all.",
@@ -132,6 +150,12 @@ export const caseStudies: CaseStudy[] = [
     coverDark: `${EXTRACTLY}/dashboard.png`,
     tone: 3,
     featured: true,
+    tint: "violet",
+    band: {
+      media: "browser",
+      images: [{ src: `${EXTRACTLY}/dashboard-light.png`, srcDark: `${EXTRACTLY}/dashboard.png`, label: "Extractly operations dashboard — queue health, pipeline status, and work that needs attention" }],
+      highlight: { label: "What I designed", value: "The operating queue, the review workspace and shared quality analytics" },
+    },
     problem: [
       "Extractly is a sanitized, NDA-safe reconstruction of a client engagement. Company names, real data, and proprietary flows have been replaced with a fictional stand-in that preserves the design problem and the decisions behind it.",
       "Back-office teams were processing thousands of financial and tax documents a month almost entirely by hand: reading scanned invoices, receipts, purchase orders, and BIR forms, then re-keying every field into downstream systems. It was slow and hard to audit, and one mistyped TIN or amount could cascade into reconciliation and compliance problems.",
@@ -197,6 +221,12 @@ export const caseStudies: CaseStudy[] = [
     coverDark: `${MAYBAHABA}/cover.png`,
     tone: 1,
     featured: true,
+    tint: "blue",
+    band: {
+      media: "image",
+      images: [{ src: `${MAYBAHABA}/cover-light.png`, srcDark: `${MAYBAHABA}/cover.png`, label: "MayBahaBa on a phone — search, the answer card, and the report flow" }],
+      highlight: { label: "Design rule", value: "Absence of data is never shown as safety. A report stops counting as current after 3 hours." },
+    },
     problem: [
       "During heavy rain, picking a route means piecing together Facebook posts, group chats, and radio reports. Scattered, unverifiable, often hours old. The real question is narrower than any of them answer: may baha ba sa dadaanan ko?",
       "The trap in a crowdsourced map is its emptiest state. With nothing reported, the interface is one careless sentence away from implying the road is clear. That is the difference between a useful tool and one that puts someone in chest-deep water at 2am on Katipunan.",
@@ -268,7 +298,7 @@ export const caseStudies: CaseStudy[] = [
     websiteUrl: "https://www.houseofretrieversph.org/",
     cover: `${HOR}/hero.jpg`,
     tone: 2,
-    featured: true,
+    featured: false,
     problem: [
       "House of Retrievers PH turns a furparent community into service: volunteer outreach, practical care learning, and gatherings whose proceeds go to a named beneficiary. The site is its front door.",
       "The hardest thing on the page is the name. It says where the pack came from, and dropping it would throw away what made the community cohere. But the door is open well past goldens, and a breed in the wordmark is the fastest way to make a rescue owner feel uninvited.",
@@ -380,7 +410,7 @@ export const caseStudies: CaseStudy[] = [
     coverAspect: "portrait",
     cover: `${HOR_APP}/app-home.png`,
     tone: 2,
-    featured: true,
+    featured: false,
     problem: [
       "House of Retrievers PH is more than a breed community. It is a group of people who want a better, more generous life with their dogs, and who are willing to turn that care outward through events, learning, and service.",
       "The old experience made those pieces feel scattered. Announcements, events, dog profiles, beneficiary stories, and transparency updates all mattered, but they did not yet feel like one place a furparent would return to every week.",

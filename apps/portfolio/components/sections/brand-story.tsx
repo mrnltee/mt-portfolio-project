@@ -20,7 +20,7 @@ function LetterCube({ letter }: { letter: "M" | "T" }) {
         <line
           key={i}
           x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]}
-          stroke="var(--mt-color-indigo-500)"
+          stroke="var(--mt-color-action-primary)"
           strokeOpacity={0.22}
           strokeWidth={2.5}
           strokeLinecap="round"

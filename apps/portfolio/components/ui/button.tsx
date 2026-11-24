@@ -19,6 +19,8 @@ export const buttonVariants = cva(
         danger: "bg-action-destructive text-action-on-destructive hover:bg-action-destructive-hover",
         ghost: "text-text-primary hover:bg-background-surface-subtle",
         link: "text-action-primary underline-offset-4 hover:underline p-0 h-auto",
+        /** Secondary action on background-inverse (the contact band). */
+        "on-dark": "border border-text-inverse/40 bg-transparent text-text-inverse hover:bg-text-inverse/10",
       },
       size: {
         sm: "h-control-sm px-3.5 text-body-sm",

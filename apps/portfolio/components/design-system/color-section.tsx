@@ -1,5 +1,6 @@
 import metadata from "@mt/tokens/metadata";
 import { hexToHsl } from "@/lib/color";
+import { SITE_ACCENT } from "@/lib/site";
 
 /**
  * Documents the @mt/tokens color system. All names, relationships and resolved
@@ -90,7 +91,7 @@ export function ColorSection() {
 
       <div className="space-y-10">
         <PrimitiveScale title="Neutral" ramp="sand" />
-        <PrimitiveScale title="Accent" ramp="indigo" />
+        <PrimitiveScale title="Accent" ramp={SITE_ACCENT} />
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
           {STATUS.map(([label, ramp]) => (
             <PrimitiveScale key={ramp} title={label} ramp={ramp} compact />
