@@ -63,7 +63,8 @@ function project(p: [number, number, number]): [number, number, number] {
 
 const defaultPts = VERTS.map((v) => project(rotate(v, RX0, RY0)));
 
-export function BrandMark() {
+/** `compact` = smaller mark without its own hover hint (the hero card shows the caption). */
+export function BrandMark({ compact = false }: { compact?: boolean } = {}) {
   const reduce = useReducedMotion() ?? false;
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -143,7 +144,7 @@ export function BrandMark() {
         aria-haspopup="dialog"
         aria-expanded={open}
         aria-label="Open the story behind this brand mark"
-        className="focus-ring brand-glow group relative w-[300px] max-w-full cursor-pointer select-none rounded-card sm:w-[320px]"
+        className={`focus-ring brand-glow group relative max-w-full shrink-0 cursor-pointer select-none rounded-card ${compact ? "w-36 sm:w-40" : "w-[300px] sm:w-[320px]"}`}
         onMouseMove={reduce ? undefined : onMove}
         onMouseEnter={reduce ? undefined : onMove}
         onMouseLeave={reduce ? undefined : onLeave}
@@ -156,13 +157,13 @@ export function BrandMark() {
         }}
       >
         {/* Hover / focus hint, anchored above the top-right corner. */}
-        <div
+        {!compact && <div
           aria-hidden="true"
           className="pointer-events-none absolute right-1 top-1 z-10 -translate-y-full rounded-field border border-border-default bg-background-surface px-3 py-2 text-center opacity-0 shadow-overlay transition-opacity duration-200 delay-500 group-hover:opacity-100 group-hover:delay-0 group-focus:opacity-100 group-focus:delay-0"
         >
           <p className="whitespace-nowrap text-caption text-text-secondary">curious about the box?</p>
           <p className="whitespace-nowrap text-caption text-text-tertiary">(click to find out)</p>
-        </div>
+        </div>}
 
         <svg
           width="100%"
@@ -181,7 +182,7 @@ export function BrandMark() {
               y1={defaultPts[e[0]][1]}
               x2={defaultPts[e[1]][0]}
               y2={defaultPts[e[1]][1]}
-              stroke="var(--mt-color-indigo-500)"
+              stroke="var(--mt-color-action-primary)"
               strokeWidth={STROKE}
               strokeLinecap="round"
               pathLength={150}

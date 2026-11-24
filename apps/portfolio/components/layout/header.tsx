@@ -1,31 +1,41 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Download, Menu, X } from "lucide-react";
 import { motion as mtMotion } from "@mt/tokens/motion";
 import { Container } from "./container";
 import { NavLink } from "@/components/ui/nav-link";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ButtonLink } from "@/components/ui/button";
+import { CV_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { href: "/case-studies", label: "Case Studies & Projects" },
-  { href: "/design-system", label: "Design System" },
+  { href: "/case-studies", label: "Work" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/design-system", label: "Design system" },
 ];
 
+const iconButton =
+  "focus-ring inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-pill border border-border-default bg-background-surface text-text-primary transition-colors duration-normal hover:bg-background-surface-subtle";
+
+/**
+ * Site header. It has its own surface (it is sticky, so without one the name would sit on
+ * top of body text while scrolling). The current page uses text-on-accent-subtle on
+ * accent-subtle (≥7.6:1); Contact is the one primary action, so it is a button, not a
+ * nav item, and never reads as "current page".
+ */
 export function Header() {
   const [open, setOpen] = useState(false);
   const [hoveredHref, setHoveredHref] = useState<string | null>(null);
   const pathname = usePathname();
   const prefersReducedMotion = useReducedMotion();
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
-  const activeItem = NAV_ITEMS.find(
-    ({ href }) => pathname === href || pathname.startsWith(`${href}/`)
-  );
+  const activeItem = NAV_ITEMS.find(({ href }) => pathname === href || pathname.startsWith(`${href}/`));
   const highlightedHref = hoveredHref ?? activeItem?.href;
   const highlightTransition = prefersReducedMotion
     ? { duration: 0 }
@@ -33,24 +43,23 @@ export function Header() {
 
   useEffect(() => setOpen(false), [pathname]);
 
+  // The mobile menu is a disclosure, not a modal: no scroll lock or focus trap.
+  // Escape closes it and returns focus to the toggle.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
     };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40">
+    <header className="sticky top-0 z-40 border-b border-border-subtle bg-background-canvas/90 backdrop-blur-xl">
       <Container className="flex h-16 items-center justify-between gap-3">
-        <Link
-          href="/"
-          className="focus-ring shrink-0 rounded-field font-display text-h4 font-bold text-text-primary"
-        >
+        <Link href="/" className="focus-ring shrink-0 rounded-field font-display text-h4 font-bold text-text-primary">
           Mernel Tusoy
         </Link>
 
@@ -59,17 +68,12 @@ export function Header() {
           onMouseLeave={() => setHoveredHref(null)}
           onBlurCapture={(event) => {
             const nextTarget = event.relatedTarget;
-            if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
-              setHoveredHref(null);
-            }
+            if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) setHoveredHref(null);
           }}
-          className="hidden items-center gap-0.5 rounded-pill border border-border-default/60 bg-background-canvas/70 p-1.5 shadow-raised backdrop-blur-xl md:flex"
+          className="hidden items-center gap-0.5 rounded-pill border border-border-default bg-background-surface p-1 md:flex"
         >
           {NAV_ITEMS.map((item) => {
-            const isActive =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
             const isHighlighted = highlightedHref === item.href;
-
             return (
               <NavLink
                 key={item.href}
@@ -77,10 +81,9 @@ export function Header() {
                 onMouseEnter={() => setHoveredHref(item.href)}
                 onFocus={() => setHoveredHref(item.href)}
                 className={cn(
-                  "relative isolate whitespace-nowrap rounded-pill px-3 py-2 text-caption text-text-secondary transition-colors duration-normal hover:text-action-primary motion-reduce:transition-none",
-                  isActive &&
-                    "text-action-primary after:absolute after:bottom-0.5 after:left-1/2 after:h-0.5 after:w-3 after:-translate-x-1/2 after:rounded-full after:bg-action-primary",
-                  item.href === "/contact" && "text-action-primary hover:text-action-primary"
+                  "relative isolate whitespace-nowrap rounded-pill px-3.5 py-2 text-label text-text-secondary transition-colors duration-normal motion-reduce:transition-none",
+                  isHighlighted && "text-action-on-accent-subtle hover:text-action-on-accent-subtle",
+                  "aria-[current=page]:text-action-on-accent-subtle",
                 )}
               >
                 {isHighlighted && (
@@ -98,18 +101,23 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <ThemeToggle className="hidden border-border-default/60 bg-background-canvas/70 shadow-raised backdrop-blur-xl sm:inline-flex" />
+          <a href={CV_URL} download aria-label="Download CV (PDF)" title="Download CV" className={cn(iconButton, "hidden sm:inline-flex")}>
+            <Download className="h-icon-md w-icon-md" aria-hidden="true" />
+          </a>
+          <ThemeToggle className="hidden sm:inline-flex" />
+          <ButtonLink href="/contact" size="sm">
+            Contact
+          </ButtonLink>
           <button
+            ref={toggleRef}
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-pill border border-border-default/60 bg-background-canvas/70 text-text-primary shadow-raised backdrop-blur-xl md:hidden"
+            className={cn(iconButton, "md:hidden")}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-            </svg>
+            {open ? <X className="h-icon-md w-icon-md" aria-hidden="true" /> : <Menu className="h-icon-md w-icon-md" aria-hidden="true" />}
           </button>
         </div>
       </Container>
@@ -118,30 +126,32 @@ export function Header() {
         {open && (
           <motion.div
             id="mobile-nav"
-            initial={{ height: 0, opacity: 0 }}
+            initial={prefersReducedMotion ? false : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            exit={prefersReducedMotion ? undefined : { height: 0, opacity: 0 }}
             transition={{ duration: mtMotion.duration.normal / 1000, ease: mtMotion.easing.standard }}
-            className="overflow-hidden border-y border-border-default/60 bg-background-canvas/80 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-t border-border-subtle md:hidden"
           >
-            <Container className="flex flex-col gap-1 py-4">
-              {NAV_ITEMS.map((item) => (
-                <NavLink
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "rounded-pill px-3 py-2 text-body-sm aria-[current=page]:bg-action-accent-subtle",
-                    item.href === "/contact" && "text-action-primary hover:text-action-primary"
-                  )}
-                >
-                  {item.label}
-                </NavLink>
-              ))}
-              <div className="mt-2 flex items-center justify-between border-t border-border-default pt-4">
-                <span className="text-caption text-text-secondary">Theme</span>
-                <ThemeToggle className="border-border-default/60 bg-background-canvas/70 shadow-raised backdrop-blur-xl" />
-              </div>
-            </Container>
+            <nav aria-label="Primary (mobile)">
+              <Container className="flex flex-col gap-1 py-4">
+                {NAV_ITEMS.map((item) => (
+                  <NavLink
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-pill px-3 py-2.5 text-body text-text-primary aria-[current=page]:bg-action-accent-subtle aria-[current=page]:text-action-on-accent-subtle"
+                  >
+                    {item.label}
+                  </NavLink>
+                ))}
+                <div className="mt-2 flex items-center justify-between gap-3 border-t border-border-subtle pt-4">
+                  <a href={CV_URL} download className="focus-ring inline-flex items-center gap-2 rounded-field px-3 py-2 text-body-sm font-medium text-text-primary">
+                    <Download className="h-icon-sm w-icon-sm" aria-hidden="true" />
+                    Download CV
+                  </a>
+                  <ThemeToggle />
+                </div>
+              </Container>
+            </nav>
           </motion.div>
         )}
       </AnimatePresence>

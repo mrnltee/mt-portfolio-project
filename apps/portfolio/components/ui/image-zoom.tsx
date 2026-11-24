@@ -48,12 +48,13 @@ export function ZoomableImage({
             priority={priority}
             className="object-cover object-top transition-transform duration-normal ease-standard group-hover:scale-[1.02]"
           />
-          {/* Affordance: only shows on hover/focus, so it never sits over the artwork at rest. */}
+          {/* Affordance: visible at rest (touch has no hover), quiet until hover/focus. */}
           <span
             aria-hidden="true"
-            className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-field bg-background-surface/90 text-text-secondary opacity-0 shadow-raised backdrop-blur transition-opacity duration-normal group-hover:opacity-100 group-focus-visible:opacity-100"
+            className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-pill border border-border-default bg-background-surface/90 px-2.5 py-1 text-caption text-text-primary shadow-raised backdrop-blur transition-colors duration-normal group-hover:bg-background-surface group-focus-visible:bg-background-surface"
           >
-            <Maximize2 className="h-4 w-4" />
+            <Maximize2 className="h-3.5 w-3.5" />
+            Enlarge
           </span>
         </button>
       </DialogTrigger>

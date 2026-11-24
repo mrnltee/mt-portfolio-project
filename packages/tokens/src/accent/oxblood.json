@@ -1,0 +1,49 @@
+{
+  "$description": "Accent overlay 'Oxblood'. Selected at runtime with <html data-accent=\"oxblood\">; re-points ONLY brand.color.accent* (never neutral or feedback). Every overlay must pass the validator's WCAG AA pairs in every brand×theme.",
+  "brand": {
+    "color": {
+      "$type": "color",
+      "accent": {
+        "50": {
+          "$value": "{color.oxblood.50}"
+        },
+        "100": {
+          "$value": "{color.oxblood.100}"
+        },
+        "200": {
+          "$value": "{color.oxblood.200}"
+        },
+        "300": {
+          "$value": "{color.oxblood.300}"
+        },
+        "400": {
+          "$value": "{color.oxblood.400}"
+        },
+        "500": {
+          "$value": "{color.oxblood.500}"
+        },
+        "600": {
+          "$value": "{color.oxblood.600}"
+        },
+        "700": {
+          "$value": "{color.oxblood.700}"
+        },
+        "800": {
+          "$value": "{color.oxblood.800}"
+        },
+        "900": {
+          "$value": "{color.oxblood.900}"
+        }
+      },
+      "accent-strong": {
+        "$value": "{color.oxblood.600}"
+      },
+      "accent-strong-hover": {
+        "$value": "{color.oxblood.hover}"
+      },
+      "accent-strong-pressed": {
+        "$value": "{color.oxblood.700}"
+      }
+    }
+  }
+}

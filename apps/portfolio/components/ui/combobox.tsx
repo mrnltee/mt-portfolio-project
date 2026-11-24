@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import type { AriaAttributes } from "react";
 import { Command } from "cmdk";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { Popover, PopoverTrigger, PopoverContent } from "./popover";
@@ -11,7 +12,13 @@ export interface ComboboxOption {
   value: string;
 }
 
-/** Autocomplete/combobox: Radix Popover + cmdk for accessible type-to-filter. */
+/** Props that let a label name the trigger, e.g. FormField's `{ id, aria-describedby, aria-invalid }`. */
+type TriggerA11yProps = Pick<AriaAttributes, "aria-label" | "aria-labelledby" | "aria-describedby" | "aria-invalid"> & { id?: string };
+
+/**
+ * Autocomplete/combobox: Radix Popover + cmdk for accessible type-to-filter.
+ * The trigger needs an accessible name: wrap it in <FormField> and spread its props, or pass `aria-label`.
+ */
 export function Combobox({
   options,
   value,
@@ -20,7 +27,8 @@ export function Combobox({
   searchPlaceholder = "Search…",
   emptyText = "No results.",
   className,
-}: {
+  ...a11y
+}: TriggerA11yProps & {
   options: ComboboxOption[];
   value?: string;
   onValueChange?: (value: string) => void;
@@ -42,6 +50,7 @@ export function Combobox({
           aria-expanded={open}
           aria-controls={listboxId}
           aria-haspopup="listbox"
+          {...a11y}
           className={cn(
             "focus-ring inline-flex h-control-md w-full items-center justify-between gap-2 rounded-field border border-border-default bg-background-surface px-3.5 text-body transition-colors hover:border-border-strong",
             selected ? "text-text-primary" : "text-text-tertiary",

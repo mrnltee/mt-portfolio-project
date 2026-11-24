@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { PageTransition } from "@/components/motion/page-transition";
 import { Toaster } from "@/components/ui/toast";
 import { Analytics } from "@vercel/analytics/next";
-import { LINKEDIN_URL, SITE_NAME, SITE_URL } from "@/lib/site";
+import { LINKEDIN_URL, SITE_ACCENT, SITE_NAME, SITE_URL } from "@/lib/site";
 // @mt/tokens layered runtime CSS variables (--mt-*). Imported before globals.css.
 // Both stylesheet imports are typed via css.d.ts (no @ts-expect-error needed).
 import "@mt/tokens/css";
@@ -56,15 +56,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-brand="a" className={`${sans.variable} ${display.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" data-brand="a" data-accent={SITE_ACCENT} className={`${sans.variable} ${display.variable} ${mono.variable}`} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col bg-background-canvas font-sans text-text-primary antialiased">
         <script
           type="application/ld+json"
           // Tells search engines this site belongs to a person, and links their other profiles.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
         />
-        {/* Stage 2B: emit BOTH `class` (keeps existing .dark dark mode) and `data-theme`
-            (for @mt/tokens). data-brand="a" selects the initial @mt brand. */}
+        {/* Emit BOTH `class` (Tailwind dark:) and `data-theme` (for @mt/tokens). data-brand="a"
+            selects the @mt brand; data-accent (lib/site.ts SITE_ACCENT) selects the accent. */}
         <ThemeProvider attribute={["class", "data-theme"]} defaultTheme="light" enableSystem={false}>
           <Toaster>
             <a

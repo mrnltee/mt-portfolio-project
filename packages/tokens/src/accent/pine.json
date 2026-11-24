@@ -1,0 +1,49 @@
+{
+  "$description": "Accent overlay 'Pine'. Selected at runtime with <html data-accent=\"pine\">; re-points ONLY brand.color.accent* (never neutral or feedback). Every overlay must pass the validator's WCAG AA pairs in every brand×theme.",
+  "brand": {
+    "color": {
+      "$type": "color",
+      "accent": {
+        "50": {
+          "$value": "{color.pine.50}"
+        },
+        "100": {
+          "$value": "{color.pine.100}"
+        },
+        "200": {
+          "$value": "{color.pine.200}"
+        },
+        "300": {
+          "$value": "{color.pine.300}"
+        },
+        "400": {
+          "$value": "{color.pine.400}"
+        },
+        "500": {
+          "$value": "{color.pine.500}"
+        },
+        "600": {
+          "$value": "{color.pine.600}"
+        },
+        "700": {
+          "$value": "{color.pine.700}"
+        },
+        "800": {
+          "$value": "{color.pine.800}"
+        },
+        "900": {
+          "$value": "{color.pine.900}"
+        }
+      },
+      "accent-strong": {
+        "$value": "{color.pine.600}"
+      },
+      "accent-strong-hover": {
+        "$value": "{color.pine.hover}"
+      },
+      "accent-strong-pressed": {
+        "$value": "{color.pine.700}"
+      }
+    }
+  }
+}

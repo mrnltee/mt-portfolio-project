@@ -1,0 +1,49 @@
+{
+  "$description": "Accent overlay 'Terracotta'. Selected at runtime with <html data-accent=\"terracotta\">; re-points ONLY brand.color.accent* (never neutral or feedback). Every overlay must pass the validator's WCAG AA pairs in every brand×theme.",
+  "brand": {
+    "color": {
+      "$type": "color",
+      "accent": {
+        "50": {
+          "$value": "{color.terracotta.50}"
+        },
+        "100": {
+          "$value": "{color.terracotta.100}"
+        },
+        "200": {
+          "$value": "{color.terracotta.200}"
+        },
+        "300": {
+          "$value": "{color.terracotta.300}"
+        },
+        "400": {
+          "$value": "{color.terracotta.400}"
+        },
+        "500": {
+          "$value": "{color.terracotta.500}"
+        },
+        "600": {
+          "$value": "{color.terracotta.600}"
+        },
+        "700": {
+          "$value": "{color.terracotta.700}"
+        },
+        "800": {
+          "$value": "{color.terracotta.800}"
+        },
+        "900": {
+          "$value": "{color.terracotta.900}"
+        }
+      },
+      "accent-strong": {
+        "$value": "{color.terracotta.600}"
+      },
+      "accent-strong-hover": {
+        "$value": "{color.terracotta.hover}"
+      },
+      "accent-strong-pressed": {
+        "$value": "{color.terracotta.700}"
+      }
+    }
+  }
+}

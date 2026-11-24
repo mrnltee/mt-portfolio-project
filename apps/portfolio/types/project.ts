@@ -32,6 +32,28 @@ export type Category =
   | "Mobile"
   | "Community & Non-profit";
 
+/** Decorative panel tint behind a project's screenshots (maps to background.tint-* tokens). */
+export type Tint = "green" | "blue" | "violet" | "neutral";
+
+/** One screenshot in a home-page work band. */
+export interface BandImage {
+  src: string;
+  srcDark?: string;
+  /** Alt text — what is in the frame. */
+  label: string;
+  /** Short visible tag under a phone, e.g. "Before". */
+  tag?: string;
+}
+
+/** How a featured project is presented on the home page. */
+export interface WorkBand {
+  /** phones = one or more phone screens side by side; browser = desktop screenshot in a window; image = an image that is already composed. */
+  media: "phones" | "browser" | "image";
+  images: BandImage[];
+  /** One fact a reader can evaluate — use only figures the case study itself states. */
+  highlight: { label: string; value: string };
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -55,7 +77,14 @@ export interface CaseStudy {
   /** Optional dark-theme cover screenshot, shown in dark mode. */
   coverDark?: string;
   tone: 0 | 1 | 2 | 3;
+  /** Featured projects get a work band on the home page (keep it to three). */
   featured: boolean;
+  /** Media-panel tint for this project's figures. */
+  tint?: Tint;
+  /** Home-page work band; required when `featured` is true. */
+  band?: WorkBand;
+  /** "What I did" — first-person bullets of the work the owner did. Omit rather than guess. */
+  contribution?: string[];
   problem: string[];
   process: ProcessBlock[];
   /** `gallery` is optional — omit it for a study with no final-design shots. */

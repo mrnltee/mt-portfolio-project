@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mail, Sparkles } from "lucide-react";
 import { LinkedInIcon } from "@/components/ui/icons";
-import { LINKEDIN_URL } from "@/lib/site";
+import { EMAIL, LINKEDIN_URL } from "@/lib/site";
 import { Container } from "./container";
 
 export function Footer() {
@@ -12,11 +12,11 @@ export function Footer() {
 
         <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-6 gap-y-2">
           <a
-            href="mailto:mbtusoy@gmail.com"
+            href={`mailto:${EMAIL}`}
             className="focus-ring inline-flex items-center gap-1.5 rounded-field hover:text-text-primary"
           >
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            Email
+            <Mail className="h-icon-sm w-icon-sm" aria-hidden="true" />
+            {EMAIL}
           </a>
           <a
             href={LINKEDIN_URL}
@@ -24,14 +24,14 @@ export function Footer() {
             rel="noopener noreferrer"
             className="focus-ring inline-flex items-center gap-1.5 rounded-field hover:text-text-primary"
           >
-            <LinkedInIcon className="h-4 w-4" />
+            <LinkedInIcon className="h-icon-sm w-icon-sm" />
             LinkedIn
           </a>
           <Link
             href="/how-this-was-built"
             className="focus-ring inline-flex items-center gap-1.5 rounded-field hover:text-text-primary"
           >
-            <Sparkles className="h-4 w-4" aria-hidden="true" />
+            <Sparkles className="h-icon-sm w-icon-sm" aria-hidden="true" />
             How this was built
           </Link>
         </nav>

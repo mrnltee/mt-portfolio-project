@@ -5,6 +5,7 @@ import { LinkedInIcon } from "@/components/ui/icons";
 import { Section } from "@/components/layout/section";
 import { Card, CardBody } from "@/components/ui/card";
 import { ButtonLink } from "@/components/ui/button";
+import { EMAIL, LINKEDIN_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact — Mernel Tusoy",
@@ -21,8 +22,8 @@ const CONTACT_LINKS: {
 }[] = [
   {
     label: "Email",
-    value: "mbtusoy@gmail.com",
-    href: "mailto:mbtusoy@gmail.com",
+    value: EMAIL,
+    href: `mailto:${EMAIL}`,
     description: "Best for role inquiries and project details.",
     icon: Mail,
     cta: "Send an email",
@@ -30,7 +31,7 @@ const CONTACT_LINKS: {
   {
     label: "LinkedIn",
     value: "linkedin.com/in/merneltusoy",
-    href: "https://www.linkedin.com/in/merneltusoy",
+    href: LINKEDIN_URL,
     description: "Connect or see full work history.",
     icon: LinkedInIcon,
     cta: "View profile",
@@ -55,7 +56,7 @@ export default function ContactPage() {
                   className="grid h-9 w-9 shrink-0 place-items-center rounded-field bg-action-accent-subtle text-action-primary"
                   aria-hidden="true"
                 >
-                  <link.icon className="h-[18px] w-[18px]" />
+                  <link.icon className="h-icon-md w-icon-md" />
                 </span>
                 <p className="text-overline text-action-primary">{link.label}</p>
               </div>

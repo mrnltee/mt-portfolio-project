@@ -52,9 +52,13 @@ export function FileUpload({
           <span className="font-medium text-action-primary">Click to upload</span> or drag and drop
         </span>
       </button>
+      {/* The button above is the control (it opens this picker and takes drops). The native
+          input stays out of the tab order and the accessibility tree so there is one, named control. */}
       <input
         ref={inputRef}
         type="file"
+        tabIndex={-1}
+        aria-hidden="true"
         accept={accept}
         multiple={multiple}
         className="sr-only"

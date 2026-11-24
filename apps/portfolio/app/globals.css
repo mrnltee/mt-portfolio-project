@@ -27,10 +27,10 @@ body {
  * tile; the visible colour comes from --pattern-color, so it adapts to theme.
  */
 :root {
-  --pattern-color: rgb(var(--mt-color-indigo-500-rgb) / 0.03);
+  --pattern-color: rgb(var(--mt-color-action-primary-rgb) / 0.035);
 }
 :root[data-theme="dark"] {
-  --pattern-color: rgb(var(--mt-color-indigo-300-rgb) / 0.05);
+  --pattern-color: rgb(var(--mt-color-action-primary-rgb) / 0.05);
 }
 body::before {
   content: "";
@@ -47,26 +47,27 @@ body::before {
   mask-size: 27.71px 48px;
 }
 
-/* Indigo glow for the hero brand cube; intensifies on hover/focus. */
+/* Accent glow for the hero brand cube; intensifies on hover/focus. Follows the site accent. */
 .brand-glow {
-  filter: drop-shadow(0 0 4px rgb(var(--mt-color-indigo-500-rgb) / 0.45))
-    drop-shadow(0 0 12px rgb(var(--mt-color-indigo-500-rgb) / 0.28));
+  filter: drop-shadow(0 0 4px rgb(var(--mt-color-action-primary-rgb) / 0.45))
+    drop-shadow(0 0 12px rgb(var(--mt-color-action-primary-rgb) / 0.28));
   transition: filter 0.35s ease;
 }
 .brand-glow:hover,
 .brand-glow:focus-within {
-  filter: drop-shadow(0 0 6px rgb(var(--mt-color-indigo-500-rgb) / 0.7))
-    drop-shadow(0 0 22px rgb(var(--mt-color-indigo-500-rgb) / 0.5));
+  filter: drop-shadow(0 0 6px rgb(var(--mt-color-action-primary-rgb) / 0.7))
+    drop-shadow(0 0 22px rgb(var(--mt-color-action-primary-rgb) / 0.5));
 }
 
-/* Shared focus-visible ring, used instead of the browser default outline. */
+/* Shared focus-visible ring, used instead of the browser default outline.
+ * The outline follows the element's own border-radius, so a pill stays a pill and a
+ * card stays a card when focused (no radius override here). */
 .focus-ring {
   outline: none;
 }
 .focus-ring:focus-visible {
   outline: 2px solid var(--mt-color-focus-ring);
   outline-offset: 2px;
-  border-radius: 0.5rem;
 }
 /* Invalid fields keep the error hue when focused, instead of the default ring. */
 .focus-ring[aria-invalid="true"]:focus-visible {

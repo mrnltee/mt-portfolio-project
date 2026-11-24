@@ -23,7 +23,8 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
   // Neighbours follow the authored order in projects-data.ts.
   const index = caseStudies.findIndex((p) => p.slug === project.slug);
   const prev = index > 0 ? caseStudies[index - 1] : null;
-  const next = index < caseStudies.length - 1 ? caseStudies[index + 1] : null;
+  // The last study points back to the first, so every page ends with somewhere to go.
+  const next = caseStudies[(index + 1) % caseStudies.length];
 
   return <CaseStudyTemplate project={project} prev={prev} next={next} />;
 }

@@ -22,6 +22,23 @@ export interface Manifest {
   sets: Record<string, string[]>;
   compose: string[];
   output: { permutationName: string };
+  overlays?: Record<string, Overlay>;
+}
+
+/** A runtime overlay (e.g. accent): a set applied after `after`, switched by an HTML attribute. */
+export interface Overlay {
+  attribute: string;
+  values: string[];
+  default: string;
+  set: string[];
+  after: string;
+  scope: string[];
+}
+
+/** One brand×theme permutation with one overlay value applied (used by the validator). */
+export interface OverlayVariant extends Permutation {
+  overlay: string;
+  value: string;
 }
 
 export interface Permutation {
@@ -54,11 +71,22 @@ export async function loadManifest(): Promise<Manifest> {
   return JSON.parse(await readFile(MANIFEST, 'utf8')) as Manifest;
 }
 
-async function resolvePermutation(m: Manifest, vars: Record<string, string>): Promise<Json> {
+async function resolvePermutation(
+  m: Manifest,
+  vars: Record<string, string>,
+  extra?: { after: string; patterns: string[] },
+): Promise<Json> {
   let merged: Json = {};
   for (const setName of m.compose) {
-    const patterns = (m.sets[setName] ?? []).map((p) => substitute(p, vars));
+    const base = m.sets[setName] ?? [];
+    const withExtra = extra && extra.after === setName ? [...base, ...extra.patterns] : base;
+    const patterns = withExtra.map((p) => substitute(p, vars));
     const files = (await fg(patterns, { cwd: SRC, absolute: true })).sort();
+    // Overlay files come last within their set so they win on conflicts.
+    if (extra && extra.after === setName) {
+      const overlayFiles = new Set((await fg(extra.patterns.map((p) => substitute(p, vars)), { cwd: SRC, absolute: true })));
+      files.sort((a, b) => Number(overlayFiles.has(a)) - Number(overlayFiles.has(b)));
+    }
     for (const file of files) {
       const json = JSON.parse(await readFile(file, 'utf8')) as Json;
       merged = deepMerge(merged, json);
@@ -80,4 +108,23 @@ export async function resolveAllPermutations(): Promise<Permutation[]> {
     }
   }
   return perms;
+}
+
+/** Every brand×theme permutation with every value of every overlay applied. */
+export async function resolveOverlayVariants(): Promise<OverlayVariant[]> {
+  const m = await loadManifest();
+  const out: OverlayVariant[] = [];
+  for (const [overlay, spec] of Object.entries(m.overlays ?? {})) {
+    if (overlay.startsWith('$')) continue;
+    for (const value of spec.values) {
+      for (const brand of m.dimensions.brand ?? []) {
+        for (const theme of m.dimensions.theme ?? []) {
+          const vars = { brand, theme, [overlay]: value };
+          const tokens = await resolvePermutation(m, vars, { after: spec.after, patterns: spec.set });
+          out.push({ brand, theme, overlay, value, name: `${substitute(m.output.permutationName, vars)}+${overlay}-${value}`, tokens });
+        }
+      }
+    }
+  }
+  return out;
 }

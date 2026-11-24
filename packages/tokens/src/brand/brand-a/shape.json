@@ -1,5 +1,5 @@
 {
-  "$description": "Brand A — portfolio radii (control 16 / field 12 / card 20).",
+  "$description": "Brand A — portfolio radii (control 16 / field 12 / card 20 / container & dialog 20, never less round than the card inside).",
   "brand": {
     "radius": {
       "$type": "dimension",
@@ -19,7 +19,7 @@
         "$value": "{radius.2xl}"
       },
       "xl": {
-        "$value": "{radius.xl}"
+        "$value": "{radius.2xl}"
       },
       "2xl": {
         "$value": "{radius.3xl}"

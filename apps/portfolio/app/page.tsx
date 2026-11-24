@@ -1,67 +1,52 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/sections/hero";
-import { ProjectGrid } from "@/components/sections/project-grid";
-import { Section } from "@/components/layout/section";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { Card, CardBody } from "@/components/ui/card";
+import { TeamsStrip } from "@/components/sections/teams-strip";
+import { WorkBand } from "@/components/sections/work-band";
+import { WhatIBring } from "@/components/sections/what-i-bring";
+import { ContactBand } from "@/components/sections/contact-band";
+import { Container } from "@/components/layout/container";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
 import { caseStudies } from "@/lib/projects-data";
 
-const QUICK_NAV = [
-  {
-    href: "/case-studies",
-    title: "Case Studies & Projects",
-    description: "Full write-ups and shipped work — problem, process, solution, and outcome.",
-  },
-  {
-    href: "/design-system",
-    title: "Design System",
-    description: "The live token and component system this site is built on.",
-  },
-  {
-    href: "/contact",
-    title: "Contact",
-    description: "Get in touch about roles, collaborations, or feedback.",
-  },
-];
-
 export default function Home() {
-  const featured = caseStudies.filter((p) => p.featured);
+  const featured = caseStudies.filter((p) => p.featured && p.band);
 
   return (
     <>
       <Hero />
+      <TeamsStrip />
 
-      <Section aria-labelledby="selected-work-heading">
-        <RevealOnScroll>
-          <SectionHeading
-            id="selected-work-heading"
-            eyebrow="Selected work"
-            title="Featured projects"
-            description="Selected product design work — the research that shaped it, the systems behind it, and what shipped."
-            className="mb-10"
-          />
-        </RevealOnScroll>
-        <ProjectGrid projects={featured} />
-      </Section>
+      <section aria-labelledby="selected-work-heading" className="pt-20 sm:pt-28">
+        <Container>
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="mb-3 text-overline uppercase text-text-link">Selected work</p>
+              <h2 id="selected-work-heading" className="text-balance font-display text-h2 font-bold text-text-primary">
+                Three projects, from problem to shipped
+              </h2>
+            </div>
+            <Link href="/case-studies" className="focus-ring inline-flex shrink-0 items-center gap-1.5 rounded-field font-display text-body-sm font-semibold text-text-link underline-offset-4 hover:underline">
+              See all {caseStudies.length} projects <ArrowRight className="h-icon-sm w-icon-sm" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="space-y-6">
+            {featured.map((project) => (
+              <RevealOnScroll key={project.slug}>
+                <WorkBand project={project} />
+              </RevealOnScroll>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-      <Section className="border-t border-border-default bg-background-surface-subtle/40">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {QUICK_NAV.map((item, i) => (
-            <RevealOnScroll key={item.href} delay={i * 0.08}>
-              <Link href={item.href} className="focus-ring group block h-full rounded-card">
-                <Card className="h-full group-hover:shadow-overlay group-hover:border-border-strong">
-                  <CardBody>
-                    <h3 className="font-display text-h4 font-semibold text-text-primary">{item.title}</h3>
-                    <p className="mt-2 text-body-sm text-text-secondary">{item.description}</p>
-                    <span className="mt-4 inline-block text-body-sm font-medium text-action-primary">Explore →</span>
-                  </CardBody>
-                </Card>
-              </Link>
-            </RevealOnScroll>
-          ))}
-        </div>
-      </Section>
+      <section aria-labelledby="what-i-bring-heading" className="pt-20 sm:pt-28">
+        <Container>
+          <WhatIBring />
+        </Container>
+      </section>
+
+      <ContactBand className="pb-16 pt-20 sm:pb-24 sm:pt-28" />
     </>
   );
 }
