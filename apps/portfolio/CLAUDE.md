@@ -101,7 +101,7 @@ components/
                              BrandMark — the interactive 3D Morse-wireframe hero mark)
   design-system/            Sections for the /design-system page (color/type/spacing/component)
   how-it-was-built/         PromptPanel + CopyButton for /how-this-was-built
-  motion/                   PageTransition, RevealOnScroll
+  motion/                   PageTransition, RevealOnScroll, SmoothScroll (Lenis, mounted once in layout)
   theme-provider.tsx        next-themes wrapper
 
 lib/
@@ -150,6 +150,11 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
 - **Motion**: keep it purposeful. Use `RevealOnScroll` sparingly; prefer the `duration-*`/`ease-*`
   tokens; drive Framer Motion from `@mt/tokens/motion`. All motion respects
   `prefers-reduced-motion` (globally in `globals.css` and per-component `useReducedMotion()`).
+- **Smooth scroll**: `components/motion/smooth-scroll.tsx` runs Lenis for wheel and trackpad scrolling (phones keep
+  native touch). It is off under reduced motion, pauses while a Radix dialog locks the page (`body[data-scroll-locked]`),
+  and leaves panels that scroll on their own alone (`allowNestedScroll`). Same-page `#` links glide but still update the
+  URL and move focus; give anchor targets `scroll-mt-*` so they clear the sticky header (Lenis reads it). Scroll
+  positions should come from `window.scrollY`/`useScroll`, which Lenis keeps accurate; don't scroll with CSS smoothing.
 - **Next.js 16 / React 19** (upgraded Nov 2026 for security advisories): route `params` are a Promise, so
   `await params` in pages and `generateMetadata` (a plain `params.slug` is undefined and every case study 404s).
   Lint is `npm run lint` → `eslint .` with `eslint.config.mjs` (flat config; `next lint` no longer exists).
