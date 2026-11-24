@@ -13,7 +13,8 @@
     "clean": "npm run clean -w @mt/tokens",
     "tokens:build": "npm run build -w @mt/tokens",
     "portfolio:dev": "npm run dev -w mernel-portfolio",
-    "portfolio:build": "npm run build -w mernel-portfolio"
+    "portfolio:build": "npm run build -w mernel-portfolio",
+    "portfolio:test:scroll": "npm run test:scroll -w mernel-portfolio"
   },
   "engines": {
     "node": ">=24"

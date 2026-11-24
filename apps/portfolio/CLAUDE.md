@@ -155,6 +155,9 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
   Lint is `npm run lint` → `eslint .` with `eslint.config.mjs` (flat config; `next lint` no longer exists).
   Don't `setState` inside `useEffect` (the React hooks rule fails the lint): for "only after hydration"
   use `useMounted()` from `lib/use-mounted.ts`; to reset state when a value changes, compare it during render.
+- **Scroll restore check**: `npm run test:scroll` (after `npm run build`) runs `scripts/check-scroll-restore.mjs`:
+  scroll `/case-studies`, click a card, press Back, in light/dark with and without reduced motion. It clicks the
+  card by position on purpose; `locator.click()` scrolls the title into view first and fakes a 256 px restore.
 - **Accessibility**: every focusable element uses the shared `.focus-ring` utility (in
   `globals.css`) instead of the browser default outline. The ring follows the element's own radius;
   don't add a `border-radius` to `.focus-ring`.
