@@ -135,6 +135,9 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
   Screenshot framing: `components/sections/project-media.tsx` (`PhoneShot`, `BrowserShot`,
   `MediaPanel`) with a decorative `FrameLabel`. Card-wide links put the link on the title and stretch
   it with `after:absolute after:inset-0` (never an `aria-label` that differs from the visible text).
+- **Book a call**: set `BOOKING_URL` in `lib/site.ts` to the Google Calendar booking page link. It adds a
+  "Video call" card on Contact and a "Book a call" button in `ContactBand` (two rows of buttons on wide
+  screens). Empty hides both. It's a link out to Google's page, not an embed.
 - **Placeholders**: mark anything to be replaced with a visible `[REPLACE]` prefix in the rendered
   text, not just a code comment.
 - **Images**: `components/ui/image-placeholder.tsx` renders a labeled box; swap each

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import type { ComponentType } from "react";
-import { Mail } from "lucide-react";
+import { CalendarDays, Mail } from "lucide-react";
 import { LinkedInIcon } from "@/components/ui/icons";
 import { Section } from "@/components/layout/section";
 import { Card, CardBody } from "@/components/ui/card";
 import { ButtonLink } from "@/components/ui/button";
-import { EMAIL, LINKEDIN_URL } from "@/lib/site";
+import { BOOKING_URL, EMAIL, LINKEDIN_URL } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Contact — Mernel Tusoy",
@@ -28,6 +29,19 @@ const CONTACT_LINKS: {
     icon: Mail,
     cta: "Send an email",
   },
+  // Shown only once BOOKING_URL is set in lib/site.ts.
+  ...(BOOKING_URL
+    ? [
+        {
+          label: "Video call",
+          value: "30 minutes on Google Meet",
+          href: BOOKING_URL,
+          description: "Pick an open time. The Meet link arrives with the booking.",
+          icon: CalendarDays,
+          cta: "Book a call",
+        },
+      ]
+    : []),
   {
     label: "LinkedIn",
     value: "linkedin.com/in/merneltusoy",
@@ -47,7 +61,7 @@ export default function ContactPage() {
         days.
       </p>
 
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:max-w-2xl sm:grid-cols-2">
+      <div className={cn("mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2", CONTACT_LINKS.length > 2 ? "lg:max-w-5xl lg:grid-cols-3" : "sm:max-w-2xl")}>
         {CONTACT_LINKS.map((link) => (
           <Card key={link.label} className="h-full">
             <CardBody className="flex h-full flex-col">
@@ -71,6 +85,7 @@ export default function ContactPage() {
                 className="mt-4 self-start"
               >
                 {link.cta}
+                {link.href.startsWith("http") && <span className="sr-only">(opens in a new tab)</span>}
               </ButtonLink>
             </CardBody>
           </Card>
