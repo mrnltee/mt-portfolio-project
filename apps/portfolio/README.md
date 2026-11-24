@@ -33,14 +33,29 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```bash
 npm run dev      # start the dev server
-npm run build    # production build
-npm run start    # serve the production build locally
+npm run build    # static export to out/
+npx serve out    # preview the exported site locally
 npm run lint     # eslint
 ```
 
 ## Deploying
 
-This is a standard Next.js app — deploy to [Vercel](https://vercel.com/new) by importing the
-repo (zero config needed), or run `npm run build && npm run start` on any Node host.
+The app is a **static export** (`output: "export"` in `next.config.mjs`): `npm run build`
+writes a plain HTML/CSS/JS site to `out/`. It is hosted on **Cloudflare Pages**, connected to
+this GitHub repo, so every push to `main` deploys.
 
-No environment variables, API routes, or database are required.
+Cloudflare Pages build settings (project root = the monorepo root):
+
+| Setting | Value |
+| --- | --- |
+| Framework preset | None |
+| Build command | `npm run portfolio:build` |
+| Build output directory | `apps/portfolio/out` |
+| Root directory | *(leave empty)* |
+| Environment variable | `NODE_VERSION` = `24` |
+
+Analytics: turn on **Web Analytics** in the Pages project (no code needed). Vercel Analytics
+only loads when the site is built on Vercel.
+
+No environment variables, API routes, or database are required. Because nothing runs on a
+server, image optimisation is off: resize screenshots before adding them to `public/`.

@@ -61,7 +61,8 @@ export default function RootLayout({
             <Footer />
           </Toaster>
         </ThemeProvider>
-        <Analytics />
+        {/* Vercel Analytics only works on Vercel; on Cloudflare Pages, Web Analytics is enabled in the dashboard instead. */}
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

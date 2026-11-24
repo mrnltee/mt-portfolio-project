@@ -4,7 +4,7 @@ Reference for future edits to this project — read this before adding pages or 
 
 ## Stack
 
-Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion. Static/Vercel-deployable,
+Next.js 14 (App Router) + TypeScript + Tailwind CSS + Framer Motion. Static export (`out/`), hosted on Cloudflare Pages,
 no backend. This app lives in the **`mt-design-system` monorepo** as `apps/portfolio` and
 consumes the `@mt/tokens` workspace package (`packages/tokens`). Run it with
 `npm run portfolio:dev` from the monorepo root (or `npm run dev` from this folder).
@@ -29,7 +29,7 @@ use a token class or `--mt-*` CSS variable.
   blocks itself.
 - **To change a token value:** edit `packages/tokens/src/**` and rebuild with
   `npm run tokens:build` (monorepo root). The portfolio's `prebuild` script also rebuilds tokens
-  before `next build`, so CI/Vercel always has fresh output.
+  before `next build`, so CI/Cloudflare Pages always has fresh output.
 
 ### Primitive vs. semantic colors
 
