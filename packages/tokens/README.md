@@ -33,6 +33,26 @@ tiers, composed by `resolver/manifest.json`:
 - `brand ∈ {a, b, c}` × `theme ∈ {light, dark}` → 6 permutations.
 - Composition order (`compose`): `primitive → brand → semantic-base → semantic-theme → component`.
 
+### Runtime overlays (accent)
+
+`resolver/manifest.json → overlays` declares sets that switch at runtime by an HTML attribute,
+without new permutations. Today there is one: **accent** (`data-accent`), values `burnt-orange`
+(default; Brand A's own accent), `terracotta`, `pine`, `oxblood`, `ochre`, `ink`, each in
+`src/accent/<value>.json` backed by a primitive ramp in `primitive/color.json`.
+
+- An overlay file may only declare paths in its `scope` (`brand.color.accent*`). Neutral, feedback
+  and everything else stay untouchable.
+- `tokens.css` gets one `[data-accent="<value>"]` block per value, emitted after the brand blocks.
+  Semantic colours alias the brand vars with `var()`, so put the attribute on `<html>` (the same
+  element that declares them) and everything follows.
+- `validate.ts` (check 11) composes every value into every brand×theme and runs the full WCAG pair
+  list: 36 variants. A failing colour or an out-of-scope path fails the build.
+- `@mt/tokens` exports `overlays` with literal types, so an app can type its setting
+  (`(typeof overlays)["accent"]["values"][number]`).
+
+To add an accent: add a 50–900 ramp plus `hover` to `primitive/color.json`, copy an
+`src/accent/*.json`, add the value to `overlays.accent.values`, then `npm run validate`.
+
 ## Commands
 
 ```bash

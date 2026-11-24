@@ -22,5 +22,16 @@
     "$description": "System-level invariants enforced by validate.ts. Brand identity may vary accent/neutral/typographic/shape/scale/elevation foundations. Feedback/status semantics are brand-INVARIANT: brands must not redefine them, and they must resolve to the primitive status ramps. Overriding these requires a deliberate, accessibility-reviewed change here — not an incidental brand addition.",
     "brandInvariantRoles": ["color.feedback"],
     "statusRampRoots": ["green", "amber", "red", "blue"]
+  },
+  "overlays": {
+    "$description": "Runtime overlays: optional sets applied on top of a brand×theme permutation by an HTML attribute, without new permutations. Each overlay value's set is composed right after the named set ('after'), may only declare paths under 'scope', and is validated (WCAG pairs) in every brand×theme.",
+    "accent": {
+      "attribute": "data-accent",
+      "values": ["burnt-orange", "terracotta", "pine", "oxblood", "ochre", "ink"],
+      "default": "burnt-orange",
+      "set": ["accent/{accent}.json"],
+      "after": "brand",
+      "scope": ["brand.color.accent", "brand.color.accent-strong", "brand.color.accent-strong-hover", "brand.color.accent-strong-pressed"]
+    }
   }
 }

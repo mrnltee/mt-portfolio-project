@@ -20,6 +20,22 @@
       },
       "transparent": {
         "$value": "{color.transparent}"
+      },
+      "logo-plate": {
+        "$value": "{brand.color.neutral.800}",
+        "$description": "Dark plate behind white employer/client logos."
+      },
+      "tint-green": {
+        "$value": "{color.green.900}",
+        "$description": "Decorative media-panel tint behind project screenshots (work bands, case-study figures). Never put text on it."
+      },
+      "tint-blue": {
+        "$value": "{color.blue.900}",
+        "$description": "Decorative media-panel tint behind project screenshots (work bands, case-study figures). Never put text on it."
+      },
+      "tint-violet": {
+        "$value": "{color.indigo.900}",
+        "$description": "Decorative media-panel tint behind project screenshots (work bands, case-study figures). Never put text on it."
       }
     },
     "text": {
@@ -46,6 +62,10 @@
       },
       "on-inverse": {
         "$value": "{brand.color.neutral.900}"
+      },
+      "on-logo-plate": {
+        "$value": "{brand.color.neutral.50}",
+        "$description": "Text on background.logo-plate. Stays light in both themes (the plate is dark in both)."
       }
     },
     "border": {
@@ -60,6 +80,10 @@
       },
       "focus": {
         "$value": "{brand.color.accent.400}"
+      },
+      "control": {
+        "$value": "{brand.color.neutral.500}",
+        "$description": "Boundary of inputs, selects and other controls. Must stay ≥3:1 on surface (WCAG 1.4.11)."
       }
     },
     "action": {

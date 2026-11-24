@@ -13,12 +13,14 @@
  *  8. Required roles       — every permutation exposes the required semantic contract.
  *  9. Brand/theme matrix   — all 6 permutations resolve cleanly.
  * 10. WCAG AA contrast     — required text/UI role pairs meet AA in every permutation.
+ * 11. Overlays             — each runtime overlay (accent) only declares its scoped paths, and every
+ *                            overlay value passes check 10 in every brand×theme.
  */
 import fg from 'fast-glob';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { loadManifest, resolveAllPermutations, type Permutation } from '../resolver/resolve.js';
+import { loadManifest, resolveAllPermutations, resolveOverlayVariants, type Permutation } from '../resolver/resolve.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.resolve(here, '../src');
@@ -107,6 +109,16 @@ const CONTRAST: Array<[string, string, number, string]> = [
   ['color.feedback.on-info', 'color.feedback.info-surface', 4.5, 'on-info / info-surface'],
   ['color.focus.ring', 'color.background.surface', 3.0, 'focus ring / surface'],
   ['color.border.focus', 'color.background.canvas', 3.0, 'border focus / canvas'],
+  // Pairs the portfolio renders on tinted fills (added Nov 2026 after an axe audit found an
+  // untested pair failing: accent text on accent-subtle in the active nav).
+  ['color.text.secondary', 'color.background.surface-subtle', 4.5, 'text secondary / surface-subtle'],
+  ['color.text.link', 'color.background.surface', 4.5, 'link / surface'],
+  ['color.text.link', 'color.background.surface-subtle', 4.5, 'link / surface-subtle'],
+  ['color.action.on-primary', 'color.action.primary-pressed', 4.5, 'on-primary / primary-pressed'],
+  ['color.focus.ring', 'color.background.canvas', 3.0, 'focus ring / canvas'],
+  ['color.border.control', 'color.background.surface', 3.0, 'control border / surface (1.4.11)'],
+  ['color.border.control', 'color.background.canvas', 3.0, 'control border / canvas (1.4.11)'],
+  ['color.text.on-logo-plate', 'color.background.logo-plate', 4.5, 'text on logo plate'],
 ];
 
 /* ---- 8: required semantic contract ---- */
@@ -124,7 +136,9 @@ const hasPath = (tokens: Json, p: string) => isToken(p.split('.').reduce<any>((n
 async function main() {
   const files = (await fg('**/*.json', { cwd: SRC })).sort();
   for (const rel of files) {
-    const tier = rel.split('/')[0] as Tier;
+    // Overlay files (accent/) are brand-tier for reference rules; their scope is checked in 11.
+    const folder = rel.split('/')[0];
+    const tier = (folder === 'accent' ? 'brand' : folder) as Tier;
     const json = JSON.parse(await readFile(path.join(SRC, rel), 'utf8')) as Json;
     walk(json, [], tier, rel);
   }
@@ -239,8 +253,37 @@ async function main() {
   }
   if (process.env.MT_CONTRAST) console.log(contrastRows.join('\n'));
 
+  // 11: runtime overlays — scope + contrast for every value in every brand×theme
+  let overlayCount = 0;
+  for (const [name, spec] of Object.entries((manifest as any).overlays ?? {}) as [string, any][]) {
+    if (name.startsWith('$')) continue;
+    if (!spec.values.includes(spec.default)) fail(`[overlay] ${name}: default "${spec.default}" is not one of its values`);
+    for (const value of spec.values) {
+      const rels = spec.set.map((p: string) => p.replace(`{${name}}`, value));
+      for (const rel of rels) {
+        const own = leaves.filter((l) => l.file === rel);
+        if (!own.length) fail(`[overlay] ${name}=${value}: ${rel} is missing or empty`);
+        for (const leaf of own) {
+          const inScope = spec.scope.some((sc: string) => leaf.pathStr === sc || leaf.pathStr.startsWith(sc + '.'));
+          if (!inScope) fail(`[overlay] ${rel}: "${leaf.pathStr}" is outside the ${name} overlay scope (${spec.scope.join(', ')})`);
+        }
+      }
+    }
+  }
+  for (const v of await resolveOverlayVariants()) {
+    overlayCount++;
+    for (const [fgP, bgP, min, label] of CONTRAST) {
+      const f = resolveColor(v.tokens as Json, fgP);
+      const b = resolveColor(v.tokens as Json, bgP);
+      if (!f || !b) { fail(`[contrast] ${v.name}: cannot resolve ${label}`); continue; }
+      const r = ratio(f.components, b.components);
+      if (r < min) fail(`[contrast] ${v.name}: ${label} = ${r.toFixed(2)} < AA ${min}`);
+      if (process.env.MT_CONTRAST && v.brand === 'a') console.log(`${v.name.padEnd(34)} ${label.padEnd(36)} ${r.toFixed(2)} (min ${min})`);
+    }
+  }
+
   // report
-  console.log(`\nChecked ${leaves.length} tokens across ${files.length} files, ${perms.length} permutations.`);
+  console.log(`\nChecked ${leaves.length} tokens across ${files.length} files, ${perms.length} permutations, ${overlayCount} overlay variants.`);
   if (problems.length === 0) {
     console.log('✔ Validation passed — architecture, references, theme symmetry, and WCAG AA all hold.');
     process.exit(0);

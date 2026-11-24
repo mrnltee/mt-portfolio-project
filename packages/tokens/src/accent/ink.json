@@ -1,0 +1,49 @@
+{
+  "$description": "Accent overlay 'Ink (navy)'. Selected at runtime with <html data-accent=\"ink\">; re-points ONLY brand.color.accent* (never neutral or feedback). Every overlay must pass the validator's WCAG AA pairs in every brand×theme.",
+  "brand": {
+    "color": {
+      "$type": "color",
+      "accent": {
+        "50": {
+          "$value": "{color.ink.50}"
+        },
+        "100": {
+          "$value": "{color.ink.100}"
+        },
+        "200": {
+          "$value": "{color.ink.200}"
+        },
+        "300": {
+          "$value": "{color.ink.300}"
+        },
+        "400": {
+          "$value": "{color.ink.400}"
+        },
+        "500": {
+          "$value": "{color.ink.500}"
+        },
+        "600": {
+          "$value": "{color.ink.600}"
+        },
+        "700": {
+          "$value": "{color.ink.700}"
+        },
+        "800": {
+          "$value": "{color.ink.800}"
+        },
+        "900": {
+          "$value": "{color.ink.900}"
+        }
+      },
+      "accent-strong": {
+        "$value": "{color.ink.600}"
+      },
+      "accent-strong-hover": {
+        "$value": "{color.ink.hover}"
+      },
+      "accent-strong-pressed": {
+        "$value": "{color.ink.700}"
+      }
+    }
+  }
+}

@@ -1,48 +1,48 @@
 {
-  "$description": "Brand palette selection — accent=indigo, neutral=sand. accent-strong = the brand's most accurate accent value that still passes white-text AA (referenced by semantic action.primary + text.link).",
+  "$description": "Brand palette selection — accent=burnt orange (default; switchable via src/accent/* overlays), neutral=sand. accent-strong = the brand's most accurate accent value that still passes white-text AA (referenced by semantic action.primary + text.link).",
   "brand": {
     "color": {
       "$type": "color",
       "accent": {
         "50": {
-          "$value": "{color.indigo.50}"
+          "$value": "{color.burnt-orange.50}"
         },
         "100": {
-          "$value": "{color.indigo.100}"
+          "$value": "{color.burnt-orange.100}"
         },
         "200": {
-          "$value": "{color.indigo.200}"
+          "$value": "{color.burnt-orange.200}"
         },
         "300": {
-          "$value": "{color.indigo.300}"
+          "$value": "{color.burnt-orange.300}"
         },
         "400": {
-          "$value": "{color.indigo.400}"
+          "$value": "{color.burnt-orange.400}"
         },
         "500": {
-          "$value": "{color.indigo.500}"
+          "$value": "{color.burnt-orange.500}"
         },
         "600": {
-          "$value": "{color.indigo.600}"
+          "$value": "{color.burnt-orange.600}"
         },
         "700": {
-          "$value": "{color.indigo.700}"
+          "$value": "{color.burnt-orange.700}"
         },
         "800": {
-          "$value": "{color.indigo.800}"
+          "$value": "{color.burnt-orange.800}"
         },
         "900": {
-          "$value": "{color.indigo.900}"
+          "$value": "{color.burnt-orange.900}"
         }
       },
       "accent-strong": {
-        "$value": "{color.indigo.500}"
+        "$value": "{color.burnt-orange.600}"
       },
       "accent-strong-hover": {
-        "$value": "{color.indigo.600}"
+        "$value": "{color.burnt-orange.hover}"
       },
       "accent-strong-pressed": {
-        "$value": "{color.indigo.700}"
+        "$value": "{color.burnt-orange.700}"
       },
       "neutral": {
         "0": {
