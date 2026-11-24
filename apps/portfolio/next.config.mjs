@@ -6,6 +6,8 @@ const nextConfig = {
   // Static hosts can't run Next's on-demand image optimizer, so images are
   // served as-is from /public. Keep screenshots resized before adding them.
   images: { unoptimized: true },
+  // Don't let `next dev` write an AGENTS.md into the app folder.
+  agentRules: false,
 };
 
 export default nextConfig;
