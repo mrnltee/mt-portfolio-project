@@ -276,20 +276,26 @@ export function ComponentLibrary() {
           </Demo>
 
           <Demo title="Select" note="@radix-ui/react-select">
-            <Select defaultValue="figma">
-              <SelectTrigger className="w-56">
-                <SelectValue placeholder="Choose a tool" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="figma">Figma</SelectItem>
-                <SelectItem value="sketch">Sketch</SelectItem>
-                <SelectItem value="framer">Framer</SelectItem>
-              </SelectContent>
-            </Select>
+            <FormField label="Design tool" className="w-56">
+              {(p) => (
+                <Select defaultValue="figma">
+                  <SelectTrigger {...p}>
+                    <SelectValue placeholder="Choose a tool" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="figma">Figma</SelectItem>
+                    <SelectItem value="sketch">Sketch</SelectItem>
+                    <SelectItem value="framer">Framer</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            </FormField>
           </Demo>
 
           <Demo title="Combobox / Autocomplete" note="Radix Popover + cmdk">
-            <Combobox className="w-64" options={TOOLS} value={combo} onValueChange={setCombo} placeholder="Select a tool" />
+            <FormField label="Tool" className="w-64">
+              {(p) => <Combobox {...p} options={TOOLS} value={combo} onValueChange={setCombo} placeholder="Select a tool" />}
+            </FormField>
           </Demo>
 
           <Demo title="Checkbox · Radio · Switch">

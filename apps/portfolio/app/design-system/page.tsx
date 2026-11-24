@@ -178,6 +178,7 @@ export default function DesignSystemPage() {
     <>
       <Section className="border-b border-border-default pb-10 pt-16 sm:pt-20">
         <SectionHeading
+          as="h1"
           eyebrow="Design systems"
           title="Systems that scale with the product"
           description="Compare the live system behind this portfolio with broader libraries designed for product teams. Each version keeps its own purpose, rules, and source of truth."
