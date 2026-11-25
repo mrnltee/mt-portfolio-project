@@ -1,0 +1,43 @@
+# Builds the portfolio's static export and checks that browser Back restores
+# the scroll position on /case-studies (apps/portfolio/scripts/check-scroll-restore.mjs).
+name: Scroll restore check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scroll-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Installs the Chromium build that matches the pinned playwright devDependency.
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Build the static site
+        run: npm run portfolio:build
+
+      - name: Check scroll restore on Back
+        run: npm run portfolio:test:scroll
