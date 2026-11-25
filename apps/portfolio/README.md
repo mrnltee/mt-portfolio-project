@@ -41,6 +41,8 @@ npm run test:scroll  # after build: checks Back restores the scroll on /case-stu
 
 `test:scroll` serves `out/` itself and drives Chromium with Playwright (first time on a machine:
 `npx playwright install chromium`). From the monorepo root it is `npm run portfolio:test:scroll`.
+GitHub Actions runs it on every pull request and push to `main`
+(`.github/workflows/scroll-check.yml`).
 
 ## Deploying
 
