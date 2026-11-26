@@ -220,7 +220,7 @@ export const caseStudies: CaseStudy[] = [
     cover: `${MAYBAHABA}/cover-light.png`,
     coverDark: `${MAYBAHABA}/cover.png`,
     tone: 1,
-    featured: true,
+    featured: false,
     tint: "blue",
     band: {
       media: "image",
@@ -298,7 +298,13 @@ export const caseStudies: CaseStudy[] = [
     websiteUrl: "https://www.houseofretrieversph.org/",
     cover: `${HOR}/hero.jpg`,
     tone: 2,
-    featured: false,
+    featured: true,
+    tint: "blue",
+    band: {
+      media: "image",
+      images: [{ src: `${HOR}/hero.jpg`, label: "House of Retrievers PH hero — \"Good dogs. Good people. Greater Good.\"" }],
+      highlight: { label: "The ask", value: "No donate button. Three ways to join instead: member, volunteer, partner." },
+    },
     problem: [
       "House of Retrievers PH turns a furparent community into service: volunteer outreach, practical care learning, and gatherings whose proceeds go to a named beneficiary. The site is its front door.",
       "The hardest thing on the page is the name. It says where the pack came from, and dropping it would throw away what made the community cohere. But the door is open well past goldens, and a breed in the wordmark is the fastest way to make a rescue owner feel uninvited.",
