@@ -303,7 +303,7 @@ export const caseStudies: CaseStudy[] = [
     band: {
       media: "image",
       images: [{ src: `${HOR}/hero.jpg`, label: "House of Retrievers PH hero — \"Good dogs. Good people. Greater Good.\"" }],
-      highlight: { label: "The ask", value: "No donate button. Three ways to join instead: member, volunteer, partner." },
+      highlight: { label: "The ask", value: "Join first: member, volunteer, partner. Money is the quieter second ask." },
     },
     problem: [
       "House of Retrievers PH turns a furparent community into service: volunteer outreach, practical care learning, and gatherings whose proceeds go to a named beneficiary. The site is its front door.",
@@ -351,11 +351,11 @@ export const caseStudies: CaseStudy[] = [
     ],
     solution: {
       body:
-        "The asks form a ladder: become a member, volunteer together, partner for a cause. There is no donate button; the ask is to join. Behind it, one admin carries every yes through: registrations and payment checks, guest and brand replies per event, a team chat, and a door that greets each guest and their dog by name.",
+        "The asks form a ladder: member, volunteer, partner. Money comes second: \"Support the pack\" funds a community activity and sits below the three ways in. Behind it, one admin carries every yes through: registrations and payment checks, guest and brand replies, a team chat, and a door that greets each guest and their dog by name.",
       gallery: [
         {
           label: "Three ways in",
-          caption: "Member, volunteer, partner — three sizes of yes, so nobody who wants to help leaves empty-handed.",
+          caption: "Member, volunteer, partner — three sizes of yes, so nobody who wants to help leaves empty-handed. Support the pack sits below, as the smaller ask.",
           image: `${HOR}/ways-to-join.jpg`,
         },
         {
