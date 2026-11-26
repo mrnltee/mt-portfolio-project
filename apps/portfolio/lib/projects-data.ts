@@ -321,7 +321,7 @@ export const caseStudies: CaseStudy[] = [
       {
         heading: "Answering \"is this for me?\"",
         body: "\"More than a breed\" sits first after the hero, because that is the question a non-retriever owner is already holding. The three pillars under it, outreach, better care, and gatherings that give back, are none of them breed-gated. The logo helps too: two dogs, one golden, one black.",
-        imageLabel: "\"More than a breed. A way to give back.\" with the three purpose pillars",
+        imageLabel: "\"More than a breed. A way to give back.\" above the first of three purpose pillars",
         image: `${HOR}/purpose-pillars.jpg`,
       },
       {
@@ -360,7 +360,7 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           label: "The closing invitation",
-          caption: "The last frame, in one line: \"There is always room for one more good human.\" Not one more retriever.",
+          caption: "The last frame, in one line: \"There’s always room for one more pawsome pawmily.\" Not one more retriever.",
           image: `${HOR}/closing-invite.jpg`,
         },
         {
