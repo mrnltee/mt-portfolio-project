@@ -126,11 +126,17 @@ Tailwind alpha).
 
 ## Phase status
 
-**Phase 1 (token architecture).** Complete and committed (`0e437fc`).
+**Phase 1 (token architecture).** Complete. The DTCG source and resolver/build pipeline are in place.
 
-**Phase 2A (consumer infrastructure).** Clean package exports, `prepare` build, layered runtime
-CSS, and a var-based Tailwind preset are in place; Tailwind alpha-modifier behavior verified.
-The portfolio is not yet wired (Stage 2B). Not yet in Figma (Phase 3).
+**Phase 2A (consumer infrastructure).** Complete. Stable package exports, the `prepare` build,
+layered runtime CSS, and the variable-based Tailwind preset are implemented; Tailwind alpha-modifier
+behavior is verified.
+
+**Phase 2B (portfolio integration).** Complete. The portfolio at `apps/portfolio` consumes
+`@mt/tokens` through the npm workspace. See [`apps/portfolio/CLAUDE.md`](../../apps/portfolio/CLAUDE.md)
+for the app's token integration conventions.
+
+**Phase 3 (Figma integration).** Not started. No Figma file or components have been created.
 
 ## Figma target (Phase 3)
 
