@@ -1,6 +1,6 @@
 # Handover — for the next AI agent (any platform)
 
-Written 26 Nov 2026 so another AI agent (or person) can review this repo and carry on with a
+Written 26 Nov 2026 (last updated 27 Nov 2026) so another AI agent (or person) can review this repo and carry on with a
 **refactor**. The owner is a product designer; work with them through plain-language summaries
 and screenshots, not only diffs.
 
@@ -93,7 +93,7 @@ code.** These are what a quick review found, from most to least likely to be wor
 2. **`lib/projects-data.ts` (475 lines)** holds all the case-study content in one array. It could be
    split into one file per study (e.g. `lib/projects/<slug>.ts`) with an index that keeps the order.
    The `CaseStudy` type in `types/project.ts` must stay the contract.
-3. **`components/sections/case-study-template.tsx` (270 lines)** could be broken into smaller
+3. **`components/sections/case-study-template.tsx` (~280 lines)** could be broken into smaller
    section components.
 4. **Bracketed one-off sizes** that may deserve tokens or a documented exception:
    - `backdrop-blur-[2px]` and `bg-black/50` in `components/ui/dialog.tsx`; an overlay token exists
@@ -126,6 +126,14 @@ code.** These are what a quick review found, from most to least likely to be wor
   featured, `SITE_ACCENT`, `BOOKING_URL`, and the Figma target (Phase 3 in the root README).
 
 ## 7. Recent history (newest first)
+
+- Per-image **System / Light / Dark switch** on case-study screenshots that have both a light and a dark file
+  (cover, Process figures, Solution gallery; the enlarged view follows it). System = the browser/OS colour scheme.
+  Files: `lib/image-mode.tsx`, `components/ui/image-mode-toggle.tsx`, `components/ui/themed-image.tsx`,
+  `components/sections/case-study-template.tsx`; `FrameLabel` now truncates beside the switch. Open question for the
+  owner: should "System" follow the site's header toggle instead of the browser? It's one line in `ThemedImage`.
+  Today Autosweep shows 2 switches and Extractly 6; screenshots with no dark file (e.g. Autosweep's low-balance Home)
+  show none. Add an `imageDark`/`coverDark` file to give them one.
 
 - #13 Refreshed the House of Retrievers screenshots from the live site
 - #12 House of Retrievers PH featured on the home page, replacing MayBahaBa

@@ -55,7 +55,12 @@ export function BrowserShot({ shot, className, zoomable = false, aspect = "aspec
 export function MediaPanel({ tint = "neutral", label, className, children }: { tint?: Tint; label?: ReactNode; className?: string; children: ReactNode }) {
   return (
     <div className={cn("relative flex items-center justify-center overflow-hidden", TINT[tint], className)}>
-      {label ? <div className="absolute left-4 top-4 z-10">{label}</div> : null}
+      {/* Inside an ImageModeScope the label leaves room for the theme switch on the right (and truncates). */}
+      {label ? (
+        <div className="absolute left-4 top-4 z-10 flex max-w-[calc(100%-2rem)] group-data-[image-mode]/image-mode:max-w-[calc(100%-9.5rem)]">
+          {label}
+        </div>
+      ) : null}
       {children}
     </div>
   );

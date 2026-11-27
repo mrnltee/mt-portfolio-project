@@ -8,6 +8,7 @@ import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
 import { BrowserShot, MediaPanel, PhoneShot } from "@/components/sections/project-media";
 import { ContactBand } from "@/components/sections/contact-band";
+import { ImageModeScope } from "@/components/ui/image-mode-toggle";
 import { cn } from "@/lib/utils";
 import type { CaseStudy } from "@/types/project";
 
@@ -24,17 +25,19 @@ function Figure({ project, src, srcDark, label, aspect, caption }: { project: Ca
   const portrait = aspect === "portrait";
   return (
     <figure>
-      <MediaPanel
-        tint={project.tint}
-        label={src ? <FrameLabel>{frameName(short, src)}</FrameLabel> : undefined}
-        className={cn("rounded-card", portrait ? "px-6 pb-6 pt-14 sm:pb-10" : "p-4 pt-14 sm:p-8 sm:pt-14")}
-      >
-        {portrait && src ? (
-          <PhoneShot shot={{ src, srcDark, label }} zoomable className="w-48 sm:w-56" sizes="240px" />
-        ) : (
-          <ImagePlaceholder label={label} src={src} srcDark={srcDark} aspect={aspect ?? "video"} zoomable sizes="(max-width: 768px) 100vw, 1152px" className="w-full shadow-overlay" />
-        )}
-      </MediaPanel>
+      <ImageModeScope enabled={Boolean(src && srcDark)}>
+        <MediaPanel
+          tint={project.tint}
+          label={src ? <FrameLabel>{frameName(short, src)}</FrameLabel> : undefined}
+          className={cn("rounded-card", portrait ? "px-6 pb-6 pt-14 sm:pb-10" : "p-4 pt-14 sm:p-8 sm:pt-14")}
+        >
+          {portrait && src ? (
+            <PhoneShot shot={{ src, srcDark, label }} zoomable className="w-48 sm:w-56" sizes="240px" />
+          ) : (
+            <ImagePlaceholder label={label} src={src} srcDark={srcDark} aspect={aspect ?? "video"} zoomable sizes="(max-width: 768px) 100vw, 1152px" className="w-full shadow-overlay" />
+          )}
+        </MediaPanel>
+      </ImageModeScope>
       <figcaption className="mt-2 text-caption text-text-tertiary">{caption ?? label}</figcaption>
     </figure>
   );
@@ -70,17 +73,19 @@ export function CaseStudyTemplate({ project, next }: { project: CaseStudy; prev?
             </div>
             <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-center">
               {project.cover && (
-                <MediaPanel
-                  tint={project.tint}
-                  label={<FrameLabel>{frameName(project.title.split(" —")[0].split(":")[0], project.cover)}</FrameLabel>}
-                  className={cn("rounded-card", coverPortrait ? "min-h-[22rem] px-6 pb-8 pt-14 lg:min-h-[35rem]" : "p-4 pt-14 sm:p-8 sm:pt-14")}
-                >
-                  {coverPortrait ? (
-                    <PhoneShot shot={{ src: project.cover, srcDark: project.coverDark, label: project.coverLabel }} className="w-40 sm:w-56" sizes="240px" />
-                  ) : (
-                    <BrowserShot shot={{ src: project.cover, srcDark: project.coverDark, label: project.coverLabel }} aspect="aspect-video" className="w-full" />
-                  )}
-                </MediaPanel>
+                <ImageModeScope enabled={Boolean(project.coverDark)}>
+                  <MediaPanel
+                    tint={project.tint}
+                    label={<FrameLabel>{frameName(project.title.split(" —")[0].split(":")[0], project.cover)}</FrameLabel>}
+                    className={cn("rounded-card", coverPortrait ? "min-h-[22rem] px-6 pb-8 pt-14 lg:min-h-[35rem]" : "p-4 pt-14 sm:p-8 sm:pt-14")}
+                  >
+                    {coverPortrait ? (
+                      <PhoneShot shot={{ src: project.cover, srcDark: project.coverDark, label: project.coverLabel }} className="w-40 sm:w-56" sizes="240px" />
+                    ) : (
+                      <BrowserShot shot={{ src: project.cover, srcDark: project.coverDark, label: project.coverLabel }} aspect="aspect-video" className="w-full" />
+                    )}
+                  </MediaPanel>
+                </ImageModeScope>
               )}
             </div>
             <div className="flex flex-col gap-5 lg:self-start">
@@ -198,13 +203,15 @@ export function CaseStudyTemplate({ project, next }: { project: CaseStudy; prev?
               {gallery.map((item) => (
                 <li key={item.label}>
                   <figure>
-                    {item.aspect === "portrait" && item.image ? (
-                      <MediaPanel tint="neutral" className="rounded-card px-6 py-8">
-                        <PhoneShot shot={{ src: item.image, srcDark: item.imageDark, label: item.label }} zoomable className="w-36 sm:w-40" sizes="180px" />
-                      </MediaPanel>
-                    ) : (
-                      <ImagePlaceholder label={item.label} src={item.image} srcDark={item.imageDark} aspect={item.aspect ?? "video"} zoomable sizes="(max-width: 768px) 100vw, 560px" />
-                    )}
+                    <ImageModeScope enabled={Boolean(item.image && item.imageDark)} toggleClassName="right-3 top-3">
+                      {item.aspect === "portrait" && item.image ? (
+                        <MediaPanel tint="neutral" className="rounded-card px-6 py-8">
+                          <PhoneShot shot={{ src: item.image, srcDark: item.imageDark, label: item.label }} zoomable className="w-36 sm:w-40" sizes="180px" />
+                        </MediaPanel>
+                      ) : (
+                        <ImagePlaceholder label={item.label} src={item.image} srcDark={item.imageDark} aspect={item.aspect ?? "video"} zoomable sizes="(max-width: 768px) 100vw, 560px" />
+                      )}
+                    </ImageModeScope>
                     <figcaption className="mt-2">
                       <span className="block text-label text-text-primary">{item.label}</span>
                       <span className="mt-0.5 block text-caption text-text-tertiary">{item.caption}</span>

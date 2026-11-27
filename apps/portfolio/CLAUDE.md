@@ -110,6 +110,7 @@ lib/
   projects-data.ts          All case study content — the single place to edit project copy
   content.ts                Copy shared by pages (What I bring, employers, About tools + skills)
   site.ts                   Site settings: URL, email, CV path, time zone, SITE_ACCENT
+  image-mode.tsx            Per-image System/Light/Dark context for case-study screenshots + usePrefersDark()
   use-mounted.ts            useMounted(): false on the server/hydration, true after (theme-dependent UI)
   original-prompt.ts        Verbatim scaffolding prompt shown on /how-this-was-built
 
@@ -135,6 +136,13 @@ Design tokens live **outside** this app, in `packages/tokens` (`@mt/tokens`).
   Screenshot framing: `components/sections/project-media.tsx` (`PhoneShot`, `BrowserShot`,
   `MediaPanel`) with a decorative `FrameLabel`. Card-wide links put the link on the title and stretch
   it with `after:absolute after:inset-0` (never an `aria-label` that differs from the visible text).
+- **Screenshot theme switch (case studies)**: any case-study image with both a light and a dark file (`cover`+`coverDark`,
+  `image`+`imageDark`) gets its own System / Light / Dark switch in the top-right corner (`ImageModeScope` in
+  `components/ui/image-mode-toggle.tsx`, wired in `case-study-template.tsx`). An image with only one file gets no switch.
+  **System follows the browser/OS colour scheme** (`prefers-color-scheme`), not the site's header toggle; the default is
+  `DEFAULT_IMAGE_MODE` in `lib/image-mode.tsx`. The enlarged view follows the same choice. The choice is per image and
+  isn't saved. Outside a scope (home page, cards), `ThemedImage` still follows the site theme. A `FrameLabel` beside the
+  switch truncates with "…" so they never overlap.
 - **Book a call**: set `BOOKING_URL` in `lib/site.ts` to the Google Calendar booking page link. It adds a
   "Video call" card on Contact and a "Book a call" button in `ContactBand` (two rows of buttons on wide
   screens). Empty hides both. It's a link out to Google's page, not an embed.
