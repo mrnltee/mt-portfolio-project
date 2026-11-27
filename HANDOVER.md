@@ -83,8 +83,10 @@ apps/portfolio/
 
 ## 5. Refactor candidates (observations, not decisions)
 
-The owner has not yet set the scope of the refactor. **Agree the goal with them before you change
-code.** These are what a quick review found, from most to least likely to be worth it:
+The owner wants a maintainability refactor across the whole portfolio website. Use the
+[refactor guide](docs/refactor-guide.md) as the single phased plan; this section records
+exploratory candidates, not a competing sequence. Confirm detailed priorities with the owner
+before broad structural changes. These are observations from a quick review, not approved tasks:
 
 1. **`components/design-system/component-library.tsx` (662 lines)** is the biggest file. It holds
    every demo for `/design-system` in one component, with local helpers (`Category`, `Demo`, `Field`,

@@ -46,6 +46,9 @@ No Figma file is created until Phase 3.
 
 ## Status
 
-**Phase 0 — scaffolding.** Repository, workspace, Style Dictionary pipeline, DTCG directory
-structure, resolver/manifest, and validation tooling are in place. Token *values* are added in
-Phase 1. See [`packages/tokens/README.md`](packages/tokens/README.md) for the pipeline detail.
+**Token system and portfolio integration are implemented.** The DTCG source currently contains 907
+tokens. The token package builds CSS, TypeScript, Tailwind, Figma importer payloads, and metadata.
+The portfolio consumes `@mt/tokens` through the workspace, including its CSS and Tailwind preset.
+See [`packages/tokens/README.md`](packages/tokens/README.md) for the pipeline and
+[`apps/portfolio/CLAUDE.md`](apps/portfolio/CLAUDE.md) for the app integration conventions. Figma
+file/component integration remains Phase 3; no Figma file has been created.
