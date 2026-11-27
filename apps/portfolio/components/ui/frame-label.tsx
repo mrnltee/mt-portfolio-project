@@ -9,12 +9,12 @@ export function FrameLabel({ children, className }: { children: string; classNam
     <span
       aria-hidden="true"
       className={cn(
-        "pointer-events-none inline-flex items-center gap-1.5 rounded-pill border border-border-default bg-background-surface px-2 py-1 font-mono text-caption text-text-secondary",
+        "pointer-events-none inline-flex min-w-0 max-w-full items-center gap-1.5 rounded-pill border border-border-default bg-background-surface px-2 py-1 font-mono text-caption text-text-secondary",
         className,
       )}
     >
-      <span className="h-2 w-2 rounded-sm bg-action-primary" />
-      {children}
+      <span className="h-2 w-2 shrink-0 rounded-sm bg-action-primary" />
+      <span className="truncate">{children}</span>
     </span>
   );
 }
