@@ -20,6 +20,7 @@ const MAYBAHABA = img("maybahaba-flood-reports");
 const HOR = img("house-of-retrievers-ph");
 const HOR_APP = img("house-of-retrievers-ph-app");
 const AUTOSWEEP = img("autosweep-companion-app");
+const SWIRL = img("coffee-bean-swirl-rewards");
 
 /**
  * LIVE projects — everything exported as `caseStudies` renders on the home grid,
@@ -134,6 +135,90 @@ export const caseStudies: CaseStudy[] = [
         { label: "Decisions to complete a reload", value: "7 → 3" },
         { label: "WCAG AA contrast failures", value: "31+ → 0" },
       ],
+    },
+  },
+  {
+    slug: "coffee-bean-swirl-rewards",
+    title: "The Coffee Bean & Tea Leaf — Swirl Rewards App",
+    role: "Product Designer (independent concept)",
+    timeframe: "2026",
+    category: "Mobile",
+    tools: ["Figma", "Benchmarking", "Design tokens", "Material 3"],
+    platforms: ["iOS", "Android"],
+    summary:
+      "A concept app that moves CBTL Philippines' Swirl Rewards card off a desktop web form and onto the phone: points, pay, order ahead and holiday e-stamps.",
+    coverLabel: "Swirl Rewards Home — points balance with its peso value, quick actions, e-stamp tracker and a floating dock with Pay",
+    coverAspect: "portrait",
+    cover: `${SWIRL}/home.png`,
+    tone: 3,
+    featured: false,
+    tint: "violet",
+    contribution: [
+      "Turned the published program rules (₱195 card, 5 points per ₱100, 1 point = ₱1, 16 + 4 holiday stamps) into the screens that show each one.",
+      "Benchmarked the Starbucks® PH app and kept its structure, changing only what Swirl's program does differently.",
+      "Designed 15 iOS screens, an Android set in Material 3 and a floating-dock navigation, on a small token and component library.",
+      "Built the order flow from the real 2026 CBTL menu, with its sizes, milk swaps and add-ons.",
+    ],
+    problem: [
+      "A Swirl Rewards Card is a ₱195 plastic card bought at the counter. To earn and track points, members register it on a desktop web portal with the 16-digit card number and a password.",
+      "That leaves points out of sight. Checking a balance means opening a website, sign-up is a 20-field form, and the card can't reload, pay or order. Holiday promos like The Giving Collection, 20 stamps for a tumbler or tote, run on paper beside it.",
+      "Many members also carry the Starbucks® PH app, so the bar is set. This is an independent concept, not client work; balances, cards and stores are sample data.",
+    ],
+    process: [
+      {
+        heading: "Starting from the web portal",
+        body: "The current experience is a login form and a long registration page. Instead of redesigning the form, the app replaces it: linking a card takes the card number and a PIN, because the member already has an app account. Every program rule then gets one clear home on screen.",
+        imageLabel: "Simplified redraw of the current Swirl Rewards web portal login",
+        aspect: "video",
+        image: `${SWIRL}/before-web-portal.png`,
+      },
+      {
+        heading: "Points with a peso value, rewards with progress",
+        body: "Because 1 point equals ₱1, the balance always shows its peso value: 148 pts = ₱148. Rewards follow the Starbucks® card pattern of Details and Use, but a reward you can't afford yet shows how many points are left instead of a dead, greyed-out button.",
+        imageLabel: "Rewards screen — points card and reward cards with Use buttons",
+        aspect: "portrait",
+        image: `${SWIRL}/rewards.png`,
+      },
+      {
+        heading: "Holiday stamps, finally visible",
+        body: "The Giving Collection asks for 16 stamps from regular drinks and 4 from Holiday drinks before January 10. The tracker shows both counts, a countdown, and the four rewards with product photos, so members can see which one they're working toward.",
+        imageLabel: "The Giving Collection e-stamp tracker with progress, stamp grid and countdown",
+        aspect: "portrait",
+        image: `${SWIRL}/e-stamps.png`,
+      },
+    ],
+    solution: {
+      body: "Fifteen iOS screens and an Android set adapted to Material 3, sharing one plum-and-cream system taken from the CBTL website. Ordering uses the real menu and shows the points and stamps each drink earns before you pay. Navigation is a floating dock with Pay as its own button, one tap from any screen, with the classic tab bar kept as a tested fallback.",
+      gallery: [
+        {
+          label: "Order ahead",
+          caption: "The 2026 menu by category, pickup store up top, and a bag that follows you down the list.",
+          aspect: "portrait",
+          image: `${SWIRL}/order-menu.png`,
+        },
+        {
+          label: "Drink detail",
+          caption: "Real sizes and prices, milk swaps and add-ons, with the points and stamp it earns.",
+          aspect: "portrait",
+          image: `${SWIRL}/product.png`,
+        },
+        {
+          label: "Pay with your Swirl card",
+          caption: "Card, balance and barcode on one screen, with Manage and Top Up underneath.",
+          aspect: "portrait",
+          image: `${SWIRL}/pay.png`,
+        },
+        {
+          label: "Android",
+          caption: "The same system in Material 3: a tonal floating toolbar and Pay as a docked button.",
+          aspect: "portrait",
+          image: `${SWIRL}/android-home.png`,
+        },
+      ],
+    },
+    outcome: {
+      summary:
+        "A concept, not a shipped product, so there are no usage numbers yet. What it shows is that every rule of the program has a place on screen, and that a member can check, pay, order and track stamps without the web portal. Next comes a moderated test with Swirl members, measuring card-linking time and time to barcode at the counter.",
     },
   },
   {
