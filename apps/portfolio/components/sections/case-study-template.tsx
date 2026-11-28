@@ -8,6 +8,7 @@ import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
 import { BrowserShot, MediaPanel, PhoneShot } from "@/components/sections/project-media";
 import { ContactBand } from "@/components/sections/contact-band";
+import { PrototypeEmbed } from "@/components/sections/prototype-embed";
 import { ImageModeScope } from "@/components/ui/image-mode-toggle";
 import { cn } from "@/lib/utils";
 import type { CaseStudy } from "@/types/project";
@@ -223,6 +224,30 @@ export function CaseStudyTemplate({ project, next }: { project: CaseStudy; prev?
           )}
         </Container>
       </section>
+
+      {/* Interactive prototype */}
+      {project.prototypeEmbedUrl && (
+        <section aria-labelledby="prototype-heading" className="pt-16 sm:pt-24">
+          <Container>
+            <div className={PROSE}>
+              <p className={eyebrow}>Try it</p>
+              <h2 id="prototype-heading" className={h2}>
+                Interactive prototype
+              </h2>
+            </div>
+            <div className="mt-10">
+              <PrototypeEmbed
+                embedUrl={project.prototypeEmbedUrl}
+                openUrl={project.prototypeUrl}
+                title={`${project.title} — interactive Figma prototype`}
+                poster={project.cover}
+                posterDark={project.coverDark}
+                tint={project.tint}
+              />
+            </div>
+          </Container>
+        </section>
+      )}
 
       {/* Outcome */}
       <section aria-labelledby="outcome-heading" className="pt-16 sm:pt-24">

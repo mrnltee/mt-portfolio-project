@@ -151,6 +151,8 @@ export const caseStudies: CaseStudy[] = [
     coverAspect: "portrait",
     cover: `${SWIRL}/home.png`,
     coverDark: `${SWIRL}/home-dark.png`,
+    prototypeUrl: "https://www.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=70-3128&starting-point-node-id=70%3A3128&scaling=scale-down&content-scaling=fixed",
+    prototypeEmbedUrl: "https://embed.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=70-3128&starting-point-node-id=70%3A3128&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share",
     tone: 3,
     featured: false,
     tint: "violet",
@@ -188,6 +190,14 @@ export const caseStudies: CaseStudy[] = [
         aspect: "portrait",
         image: `${SWIRL}/e-stamps.png`,
         imageDark: `${SWIRL}/e-stamps-dark.png`,
+      },
+      {
+        heading: "Same drink, different ways",
+        body: "Ordering for two is common at a café: one Mocha with oat milk, one with soy. A single quantity stepper can't express that, so every distinct customization gets its own bag line with a short summary, a stepper for identical copies, and Edit. After adding a drink, a prompt offers to customize another.",
+        imageLabel: "Bag with two Mocha Ice Blended lines, one with oat milk and one with soy, each with Edit and a quantity stepper",
+        aspect: "portrait",
+        image: `${SWIRL}/bag-multi.png`,
+        imageDark: `${SWIRL}/bag-multi-dark.png`,
       },
     ],
     solution: {
