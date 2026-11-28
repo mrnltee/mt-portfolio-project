@@ -71,6 +71,8 @@ export interface CaseStudy {
   websiteUrl?: string;
   /** Optional Figma file / prototype URL shown in the case-study footer. */
   prototypeUrl?: string;
+  /** Optional Figma prototype embed URL (embed.figma.com/proto/…). Renders a click-to-load phone frame after the solution. */
+  prototypeEmbedUrl?: string;
   coverAspect?: "video" | "square" | "portrait" | "wide";
   /** Real cover screenshot path (in /public), light theme. When set, replaces the placeholder. */
   cover?: string;

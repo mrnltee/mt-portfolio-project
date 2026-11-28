@@ -151,6 +151,8 @@ export const caseStudies: CaseStudy[] = [
     coverAspect: "portrait",
     cover: `${SWIRL}/home.png`,
     coverDark: `${SWIRL}/home-dark.png`,
+    prototypeUrl: "https://www.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=70-3128&starting-point-node-id=70%3A3128&scaling=scale-down&content-scaling=fixed",
+    prototypeEmbedUrl: "https://embed.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=70-3128&starting-point-node-id=70%3A3128&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share",
     tone: 3,
     featured: false,
     tint: "violet",
