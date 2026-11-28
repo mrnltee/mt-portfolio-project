@@ -9,10 +9,14 @@ import { MediaPanel } from "@/components/sections/project-media";
 import { cn } from "@/lib/utils";
 import type { PrototypeFlow, PrototypePlatform, Tint } from "@/types/project";
 
-/** Screen proportions per platform: iPhone 390×844, Pixel 412×915. */
-const SCREEN: Record<PrototypePlatform["platform"], string> = {
-  ios: "aspect-[390/844]",
-  android: "aspect-[412/915]",
+/**
+ * Device geometry per platform, as proportions of the screen width so it holds at any frame size:
+ * iPhone 390×844 with ~55pt corners (14.1%), Pixel 412×915 with ~28dp corners (6.8%).
+ * `--screen-r` is the screen corner; the bezel adds its padding so the two curves are concentric.
+ */
+const DEVICE: Record<PrototypePlatform["platform"], { aspect: string; radius: string }> = {
+  ios: { aspect: "aspect-[390/844]", radius: "[--screen-r:14.1cqw]" },
+  android: { aspect: "aspect-[412/915]", radius: "[--screen-r:6.8cqw]" },
 };
 const LABEL: Record<PrototypePlatform["platform"], string> = { ios: "iOS", android: "Android" };
 
@@ -30,7 +34,7 @@ export function PrototypeEmbed({ platforms, flows = [], title, tint }: { platfor
   const current = platforms.find((p) => p.platform === platform) ?? platforms[0];
   const flow = flows.find((f) => f.label === flowLabel);
   const link = flow?.links[current.platform] ?? { url: current.url, embedUrl: current.embedUrl };
-  const screen = cn("relative w-full overflow-hidden rounded-field bg-background-surface", SCREEN[current.platform]);
+  const screen = cn("relative w-full overflow-hidden rounded-[var(--screen-r)] bg-background-surface", DEVICE[current.platform].aspect);
 
   return (
     <figure>
@@ -56,7 +60,8 @@ export function PrototypeEmbed({ platforms, flows = [], title, tint }: { platfor
             )}
           </div>
         )}
-        <div className="w-72 rounded-container bg-background-inverse p-1.5 shadow-overlay sm:w-80">
+        <div className={cn("w-72 [container-type:inline-size] sm:w-80", DEVICE[current.platform].radius)}>
+        <div className="rounded-[calc(var(--screen-r)+theme(spacing.75))] bg-background-inverse p-75 shadow-overlay">
           {loaded ? (
             <iframe key={link.embedUrl} src={link.embedUrl} title={`${title} (${LABEL[current.platform]}${flow ? `, ${flow.label}` : ""})`} className={screen} allow="fullscreen" />
           ) : (
@@ -70,6 +75,7 @@ export function PrototypeEmbed({ platforms, flows = [], title, tint }: { platfor
               </div>
             </div>
           )}
+        </div>
         </div>
       </MediaPanel>
       <figcaption className="mt-2 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
