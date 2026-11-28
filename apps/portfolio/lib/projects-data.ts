@@ -191,6 +191,14 @@ export const caseStudies: CaseStudy[] = [
         image: `${SWIRL}/e-stamps.png`,
         imageDark: `${SWIRL}/e-stamps-dark.png`,
       },
+      {
+        heading: "Same drink, different ways",
+        body: "Ordering for two is common at a café: one Mocha with oat milk, one with soy. A single quantity stepper can't express that, so every distinct customization gets its own bag line with a short summary, a stepper for identical copies, and Edit. After adding a drink, a prompt offers to customize another.",
+        imageLabel: "Bag with two Mocha Ice Blended lines, one with oat milk and one with soy, each with Edit and a quantity stepper",
+        aspect: "portrait",
+        image: `${SWIRL}/bag-multi.png`,
+        imageDark: `${SWIRL}/bag-multi-dark.png`,
+      },
     ],
     solution: {
       body: "Fifteen iOS screens and an Android set adapted to Material 3, sharing one plum-and-cream system taken from the CBTL website. Ordering uses the real menu and shows the points and stamps each drink earns before you pay. Navigation is a floating dock with Pay as its own button, one tap from any screen, with the classic tab bar kept as a tested fallback.",
