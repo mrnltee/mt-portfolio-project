@@ -12,20 +12,44 @@ export const TINT: Record<Tint, string> = {
   neutral: "bg-background-surface-subtle",
 };
 
-type Shot = { src: string; srcDark?: string; label: string };
+/** Which phone a screenshot comes from; decides the frame's corner radius. */
+export type Device = "ios" | "android";
 
-/** A phone screenshot in a dark device bezel. Width comes from the parent (className). */
+/**
+ * Device geometry, as proportions of the screen width so it holds at any frame size:
+ * iPhone 390×844 with ~55pt screen corners (14.1%), Pixel 412×915 with ~28dp corners (6.8%).
+ * `radius` sets `--screen-r` on a container-query parent; the bezel adds its padding to it so the
+ * screen and bezel curves are concentric.
+ */
+export const DEVICE: Record<Device, { aspect: string; radius: string }> = {
+  ios: { aspect: "aspect-[390/844]", radius: "[--screen-r:14.1cqw]" },
+  android: { aspect: "aspect-[412/915]", radius: "[--screen-r:6.8cqw]" },
+};
+
+/** Outer frame (width + radius variable) and bezel classes shared by every phone frame. */
+export const phoneFrame = (device: Device) => cn("[container-type:inline-size]", DEVICE[device].radius);
+export const PHONE_BEZEL = "rounded-[calc(var(--screen-r)+theme(spacing.75))] bg-background-inverse p-75 shadow-overlay";
+export const PHONE_SCREEN = "relative w-full overflow-hidden rounded-[var(--screen-r)] bg-background-surface";
+
+type Shot = { src: string; srcDark?: string; label: string; device?: Device };
+
+/**
+ * A phone screenshot in a dark device bezel. Width comes from the parent (className). The screen keeps
+ * the 390×844 proportion of the exports; `shot.device` only changes the corner radius.
+ */
 export function PhoneShot({ shot, className, zoomable = false, sizes = "240px" }: { shot: Shot; className?: string; zoomable?: boolean; sizes?: string }) {
-  const screen = "relative aspect-[390/844] w-full overflow-hidden rounded-field bg-background-surface";
+  const screen = cn(PHONE_SCREEN, "aspect-[390/844]");
   return (
-    <div className={cn("rounded-container bg-background-inverse p-1.5 shadow-overlay", className)}>
-      {zoomable ? (
-        <ZoomableImage src={shot.src} srcDark={shot.srcDark} label={shot.label} sizes={sizes} className={screen} />
-      ) : (
-        <div className={screen}>
-          <ThemedImage src={shot.src} srcDark={shot.srcDark} alt={shot.label} sizes={sizes} className="object-cover object-top" />
-        </div>
-      )}
+    <div className={cn(phoneFrame(shot.device ?? "ios"), className)}>
+      <div className={PHONE_BEZEL}>
+        {zoomable ? (
+          <ZoomableImage src={shot.src} srcDark={shot.srcDark} label={shot.label} sizes={sizes} className={screen} />
+        ) : (
+          <div className={screen}>
+            <ThemedImage src={shot.src} srcDark={shot.srcDark} alt={shot.label} sizes={sizes} className="object-cover object-top" />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
