@@ -237,11 +237,11 @@ export function CaseStudyTemplate({ project, next }: { project: CaseStudy; prev?
             </div>
             <div className="mt-10">
               <PrototypeEmbed
-                embedUrl={project.prototypeEmbedUrl}
-                openUrl={project.prototypeUrl}
+                platforms={[
+                  { platform: "ios", embedUrl: project.prototypeEmbedUrl, url: project.prototypeUrl, poster: project.cover, posterDark: project.coverDark },
+                  ...(project.prototypeAndroid ? [{ platform: "android" as const, ...project.prototypeAndroid }] : []),
+                ]}
                 title={`${project.title} — interactive Figma prototype`}
-                poster={project.cover}
-                posterDark={project.coverDark}
                 tint={project.tint}
               />
             </div>

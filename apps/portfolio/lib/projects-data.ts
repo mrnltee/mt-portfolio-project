@@ -153,6 +153,12 @@ export const caseStudies: CaseStudy[] = [
     coverDark: `${SWIRL}/home-dark.png`,
     prototypeUrl: "https://www.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=87-4967&starting-point-node-id=87%3A4967&scaling=scale-down&content-scaling=fixed",
     prototypeEmbedUrl: "https://embed.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=87-4967&starting-point-node-id=87%3A4967&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share",
+    prototypeAndroid: {
+      url: "https://www.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=105-5490&starting-point-node-id=105%3A5490&scaling=scale-down&content-scaling=fixed",
+      embedUrl: "https://embed.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=105-5490&starting-point-node-id=105%3A5490&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share",
+      poster: `${SWIRL}/android-home.png`,
+      posterDark: `${SWIRL}/android-home-dark.png`,
+    },
     tone: 3,
     featured: false,
     tint: "violet",

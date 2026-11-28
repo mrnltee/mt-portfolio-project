@@ -54,6 +54,16 @@ export interface WorkBand {
   highlight: { label: string; value: string };
 }
 
+/** One platform's prototype inside the interactive-prototype embed. */
+export interface PrototypePlatform {
+  platform: "ios" | "android";
+  embedUrl: string;
+  /** Full-screen prototype link for this platform. */
+  url?: string;
+  poster?: string;
+  posterDark?: string;
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -73,6 +83,8 @@ export interface CaseStudy {
   prototypeUrl?: string;
   /** Optional Figma prototype embed URL (embed.figma.com/proto/…). Renders a click-to-load phone frame after the solution. */
   prototypeEmbedUrl?: string;
+  /** Optional Android version of the prototype. When set, an iOS / Android switch appears above the embed. */
+  prototypeAndroid?: { url: string; embedUrl: string; poster?: string; posterDark?: string };
   coverAspect?: "video" | "square" | "portrait" | "wide";
   /** Real cover screenshot path (in /public), light theme. When set, replaces the placeholder. */
   cover?: string;
