@@ -241,6 +241,7 @@ export function CaseStudyTemplate({ project, next }: { project: CaseStudy; prev?
                   { platform: "ios", embedUrl: project.prototypeEmbedUrl, url: project.prototypeUrl, poster: project.cover, posterDark: project.coverDark },
                   ...(project.prototypeAndroid ? [{ platform: "android" as const, ...project.prototypeAndroid }] : []),
                 ]}
+                flows={project.prototypeFlows}
                 title={`${project.title} — interactive Figma prototype`}
                 tint={project.tint}
               />

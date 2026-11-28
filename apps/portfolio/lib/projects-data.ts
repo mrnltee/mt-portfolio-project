@@ -22,6 +22,16 @@ const HOR_APP = img("house-of-retrievers-ph-app");
 const AUTOSWEEP = img("autosweep-companion-app");
 const SWIRL = img("coffee-bean-swirl-rewards");
 
+/** Full-screen and embed links that open the Swirl Rewards Figma prototype on a given start screen. */
+const swirlProto = (nodeId: string) => {
+  const base = "xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards";
+  const node = `node-id=${nodeId.replace(":", "-")}&starting-point-node-id=${encodeURIComponent(nodeId)}&content-scaling=fixed`;
+  return {
+    url: `https://www.figma.com/proto/${base}?${node}&scaling=scale-down`,
+    embedUrl: `https://embed.figma.com/proto/${base}?${node}&scaling=scale-down-width&hide-ui=1&embed-host=share`,
+  };
+};
+
 /**
  * LIVE projects — everything exported as `caseStudies` renders on the home grid,
  * the /case-studies filter, and its own /case-studies/[slug] page.
@@ -151,14 +161,19 @@ export const caseStudies: CaseStudy[] = [
     coverAspect: "portrait",
     cover: `${SWIRL}/home.png`,
     coverDark: `${SWIRL}/home-dark.png`,
-    prototypeUrl: "https://www.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=87-4967&starting-point-node-id=87%3A4967&scaling=scale-down&content-scaling=fixed",
-    prototypeEmbedUrl: "https://embed.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=87-4967&starting-point-node-id=87%3A4967&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share",
+    prototypeUrl: swirlProto("87:4967").url,
+    prototypeEmbedUrl: swirlProto("87:4967").embedUrl,
     prototypeAndroid: {
-      url: "https://www.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=105-5490&starting-point-node-id=105%3A5490&scaling=scale-down&content-scaling=fixed",
-      embedUrl: "https://embed.figma.com/proto/xm0dwqcjj0cXG9RToRlN2q/Coffee-Bean-Swirl-Rewards?node-id=105-5490&starting-point-node-id=105%3A5490&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&embed-host=share",
+      ...swirlProto("105:5490"),
       poster: `${SWIRL}/android-home.png`,
       posterDark: `${SWIRL}/android-home-dark.png`,
     },
+    prototypeFlows: [
+      { label: "First visit", links: { ios: swirlProto("87:4967"), android: swirlProto("105:5490") } },
+      { label: "Pay & redeem", links: { ios: swirlProto("92:5407"), android: swirlProto("105:5904") } },
+      { label: "Giving finale", links: { ios: swirlProto("113:6570"), android: swirlProto("117:7298") } },
+      { label: "Edge states", links: { ios: swirlProto("114:6795"), android: swirlProto("117:7807") } },
+    ],
     tone: 3,
     featured: false,
     tint: "violet",

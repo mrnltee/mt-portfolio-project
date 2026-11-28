@@ -64,6 +64,12 @@ export interface PrototypePlatform {
   posterDark?: string;
 }
 
+/** A named flow (story) inside a Figma prototype, with its start link per platform. */
+export interface PrototypeFlow {
+  label: string;
+  links: Partial<Record<PrototypePlatform["platform"], { url: string; embedUrl: string }>>;
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -85,6 +91,8 @@ export interface CaseStudy {
   prototypeEmbedUrl?: string;
   /** Optional Android version of the prototype. When set, an iOS / Android switch appears above the embed. */
   prototypeAndroid?: { url: string; embedUrl: string; poster?: string; posterDark?: string };
+  /** Optional named flows in the prototype. When set, a flow picker appears above the embed; each flow gives its start link per platform. */
+  prototypeFlows?: PrototypeFlow[];
   coverAspect?: "video" | "square" | "portrait" | "wide";
   /** Real cover screenshot path (in /public), light theme. When set, replaces the placeholder. */
   cover?: string;
