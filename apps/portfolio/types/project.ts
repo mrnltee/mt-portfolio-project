@@ -7,6 +7,8 @@ export interface ProcessBlock {
   image?: string;
   /** Optional dark-theme screenshot, shown in dark mode. */
   imageDark?: string;
+  /** Phone the screenshot comes from (portrait only); changes the frame's corner radius. Defaults to iOS. */
+  device?: "ios" | "android";
 }
 
 export interface GalleryItem {
@@ -17,6 +19,8 @@ export interface GalleryItem {
   image?: string;
   /** Optional dark-theme screenshot, shown in dark mode. */
   imageDark?: string;
+  /** Phone the screenshot comes from (portrait only); changes the frame's corner radius. Defaults to iOS. */
+  device?: "ios" | "android";
 }
 
 export interface OutcomeMetric {
@@ -43,6 +47,8 @@ export interface BandImage {
   label: string;
   /** Short visible tag under a phone, e.g. "Before". */
   tag?: string;
+  /** Phone the screenshot comes from; changes the frame's corner radius. Defaults to iOS. */
+  device?: "ios" | "android";
 }
 
 /** How a featured project is presented on the home page. */

@@ -6,7 +6,7 @@ import { Tag } from "@/components/ui/tag";
 import { FrameLabel, frameName } from "@/components/ui/frame-label";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { RevealOnScroll } from "@/components/motion/reveal-on-scroll";
-import { BrowserShot, MediaPanel, PhoneShot } from "@/components/sections/project-media";
+import { BrowserShot, MediaPanel, PhoneShot, type Device } from "@/components/sections/project-media";
 import { ContactBand } from "@/components/sections/contact-band";
 import { PrototypeEmbed } from "@/components/sections/prototype-embed";
 import { ImageModeScope } from "@/components/ui/image-mode-toggle";
@@ -21,7 +21,7 @@ const eyebrow = "text-overline uppercase text-text-link";
 const h2 = "mt-2 font-display text-h2 font-bold text-text-primary";
 
 /** Spacing rule: a caption sits 8px under its own figure; the next item is ≥24px away. */
-function Figure({ project, src, srcDark, label, aspect, caption }: { project: CaseStudy; src?: string; srcDark?: string; label: string; aspect?: CaseStudy["coverAspect"]; caption?: string }) {
+function Figure({ project, src, srcDark, label, aspect, caption, device }: { project: CaseStudy; src?: string; srcDark?: string; label: string; aspect?: CaseStudy["coverAspect"]; caption?: string; device?: Device }) {
   const short = project.title.split(" —")[0].split(":")[0];
   const portrait = aspect === "portrait";
   return (
@@ -33,7 +33,7 @@ function Figure({ project, src, srcDark, label, aspect, caption }: { project: Ca
           className={cn("rounded-card", portrait ? "px-6 pb-6 pt-14 sm:pb-10" : "p-4 pt-14 sm:p-8 sm:pt-14")}
         >
           {portrait && src ? (
-            <PhoneShot shot={{ src, srcDark, label }} zoomable className="w-48 sm:w-56" sizes="240px" />
+            <PhoneShot shot={{ src, srcDark, label, device }} zoomable className="w-48 sm:w-56" sizes="240px" />
           ) : (
             <ImagePlaceholder label={label} src={src} srcDark={srcDark} aspect={aspect ?? "video"} zoomable sizes="(max-width: 768px) 100vw, 1152px" className="w-full shadow-overlay" />
           )}
@@ -180,7 +180,7 @@ export function CaseStudyTemplate({ project, next }: { project: CaseStudy; prev?
                       <h3 className="mt-2 text-balance font-display text-h3 font-semibold text-text-primary">{block.heading}</h3>
                       <p className="mt-3 text-body text-text-secondary">{block.body}</p>
                     </div>
-                    <Figure project={project} src={block.image} srcDark={block.imageDark} label={block.imageLabel} aspect={block.aspect} />
+                    <Figure project={project} src={block.image} srcDark={block.imageDark} label={block.imageLabel} aspect={block.aspect} device={block.device} />
                   </RevealOnScroll>
                 </li>
               );
@@ -207,7 +207,7 @@ export function CaseStudyTemplate({ project, next }: { project: CaseStudy; prev?
                     <ImageModeScope enabled={Boolean(item.image && item.imageDark)} toggleClassName="right-3 top-3">
                       {item.aspect === "portrait" && item.image ? (
                         <MediaPanel tint="neutral" className="rounded-card px-6 py-8">
-                          <PhoneShot shot={{ src: item.image, srcDark: item.imageDark, label: item.label }} zoomable className="w-36 sm:w-40" sizes="180px" />
+                          <PhoneShot shot={{ src: item.image, srcDark: item.imageDark, label: item.label, device: item.device }} zoomable className="w-36 sm:w-40" sizes="180px" />
                         </MediaPanel>
                       ) : (
                         <ImagePlaceholder label={item.label} src={item.image} srcDark={item.imageDark} aspect={item.aspect ?? "video"} zoomable sizes="(max-width: 768px) 100vw, 560px" />

@@ -251,6 +251,7 @@ export const caseStudies: CaseStudy[] = [
           aspect: "portrait",
           image: `${SWIRL}/android-home.png`,
           imageDark: `${SWIRL}/android-home-dark.png`,
+          device: "android",
         },
       ],
     },

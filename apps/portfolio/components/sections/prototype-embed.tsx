@@ -5,19 +5,10 @@ import { ArrowUpRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SegmentedControl } from "@/components/ui/segmented-control";
 import { ThemedImage } from "@/components/ui/themed-image";
-import { MediaPanel } from "@/components/sections/project-media";
+import { DEVICE, MediaPanel, PHONE_BEZEL, PHONE_SCREEN, phoneFrame } from "@/components/sections/project-media";
 import { cn } from "@/lib/utils";
 import type { PrototypeFlow, PrototypePlatform, Tint } from "@/types/project";
 
-/**
- * Device geometry per platform, as proportions of the screen width so it holds at any frame size:
- * iPhone 390×844 with ~55pt corners (14.1%), Pixel 412×915 with ~28dp corners (6.8%).
- * `--screen-r` is the screen corner; the bezel adds its padding so the two curves are concentric.
- */
-const DEVICE: Record<PrototypePlatform["platform"], { aspect: string; radius: string }> = {
-  ios: { aspect: "aspect-[390/844]", radius: "[--screen-r:14.1cqw]" },
-  android: { aspect: "aspect-[412/915]", radius: "[--screen-r:6.8cqw]" },
-};
 const LABEL: Record<PrototypePlatform["platform"], string> = { ios: "iOS", android: "Android" };
 
 /**
@@ -34,7 +25,7 @@ export function PrototypeEmbed({ platforms, flows = [], title, tint }: { platfor
   const current = platforms.find((p) => p.platform === platform) ?? platforms[0];
   const flow = flows.find((f) => f.label === flowLabel);
   const link = flow?.links[current.platform] ?? { url: current.url, embedUrl: current.embedUrl };
-  const screen = cn("relative w-full overflow-hidden rounded-[var(--screen-r)] bg-background-surface", DEVICE[current.platform].aspect);
+  const screen = cn(PHONE_SCREEN, DEVICE[current.platform].aspect);
 
   return (
     <figure>
@@ -60,8 +51,8 @@ export function PrototypeEmbed({ platforms, flows = [], title, tint }: { platfor
             )}
           </div>
         )}
-        <div className={cn("w-72 [container-type:inline-size] sm:w-80", DEVICE[current.platform].radius)}>
-        <div className="rounded-[calc(var(--screen-r)+theme(spacing.75))] bg-background-inverse p-75 shadow-overlay">
+        <div className={cn("w-72 sm:w-80", phoneFrame(current.platform))}>
+        <div className={PHONE_BEZEL}>
           {loaded ? (
             <iframe key={link.embedUrl} src={link.embedUrl} title={`${title} (${LABEL[current.platform]}${flow ? `, ${flow.label}` : ""})`} className={screen} allow="fullscreen" />
           ) : (
